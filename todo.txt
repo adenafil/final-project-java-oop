@@ -1,0 +1,7 @@
+# TODO :
+the following text is what i have to do in my project;
+- API (DONE);
+- Test API(DONE);
+- Design a database
+- Make a database;
+- Write Some Unit Test For Entity And Database;
