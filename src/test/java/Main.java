@@ -1,12 +1,10 @@
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanQueryException;
-import net.sandrohc.jikan.model.anime.Anime;
-import net.sandrohc.jikan.model.character.Character;
-import net.sandrohc.jikan.model.character.CharacterAnime;
+import net.sandrohc.jikan.model.anime.Anime;;
 import net.sandrohc.jikan.model.character.CharacterBasic;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public class Main {
@@ -37,6 +35,14 @@ public class Main {
             System.out.println(anime.studios);
             System.out.println(anime.aired);
             System.out.println(anime.rating);
+            System.out.println(anime.demographics.toString());
+
+            anime.genres.forEach(e -> System.out.println(e.name));
+            anime.genres.forEach(e -> System.out.println(e.malId));
+            System.out.println(anime.rating.name());
+            anime.studios.forEach(e -> System.out.println(e.name));
+            OffsetDateTime tesLagi = anime.aired.from;
+            System.out.println(tesLagi);
         }
     }
 
