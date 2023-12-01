@@ -2,10 +2,11 @@ package ade.myanimelist.anime.gui;
 
 import javax.sound.sampled.FloatControl;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class AnimeListSwing extends JFrame {
     private static ImageIcon profileImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png");
@@ -102,6 +103,67 @@ public class AnimeListSwing extends JFrame {
         panelLeft.setBounds(0, 0, 380, 1080);
         panelLeft.setLayout(null);
 
+        JScrollPane rightPanel = new JScrollPane();
+        rightPanel.setBackground(Color.yellow);
+        rightPanel.setBounds(420, 100, 1450, 900);
+        rightPanel.setOpaque(true);
+//        rightPanel.setLayout(null);
+
+        // make table
+        Object[][] data = {
+                {"John Doe", 25, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"Jane Smith", 30, "Female", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"Bob Johnson", 22, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"John Doe", 25, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"Jane Smith", 30, "Female", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"Bob Johnson", 22, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"John Doe", 25, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"Jane Smith", 30, "Female", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"Bob Johnson", 22, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"John Doe", 25, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"Jane Smith", 30, "Female", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
+                {"Bob Johnson", 22, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")}
+        };
+
+        String[] columnNames = {"Name", "Age", "Gender", "Image"};
+
+        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+          @Override
+          public boolean isCellEditable(int row, int column) {
+              return  false;
+          }
+        };
+
+        JTable table = new JTable(model);
+        table.setRowHeight(100);
+        table.setLayout(null);
+        table.setBounds(500, 100, 500, 500);
+        table.setOpaque(true);
+
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = table.rowAtPoint(e.getPoint());
+                int col = table.columnAtPoint(e.getPoint());
+
+                if (row >= 0 && col >= 0) {
+                    Object value = table.getValueAt(row, col);
+                    System.out.println("Clicked on row  " + row + " adn column "
+                    + col + ". Value : " + value
+                    );
+                }
+            }
+        });
+
+        table.getColumnModel().getColumn(3).setCellRenderer(new ImageRenderer());
+
+        table.getColumnModel().getColumn(1).setPreferredWidth(20);
+
+        rightPanel.add(table);
+        rightPanel.setViewportView(table);
+
+        // end table
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setSize(1920, 1080);
@@ -111,6 +173,7 @@ public class AnimeListSwing extends JFrame {
         panelLeft.add(list);
         panelLeft.add(search);
         this.add(panelLeft);
+        this.add(rightPanel);
         this.setVisible(true);
     }
 
@@ -119,6 +182,19 @@ public class AnimeListSwing extends JFrame {
             new AnimeListSwing();
         });
     }
+
+    static class ImageRenderer extends DefaultTableCellRenderer {
+        @Override
+        protected void setValue(Object value) {
+            if (value instanceof ImageIcon) {
+                setIcon((ImageIcon) value);
+                setText(null);  // Clear text when displaying an icon
+            } else {
+                super.setValue(value);
+            }
+        }
+    }
+
 
 
 }
