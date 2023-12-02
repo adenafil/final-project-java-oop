@@ -4,11 +4,13 @@ import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class AnimeListSwing extends JFrame {
+//    private static ImageIcon dummyData = new ImageIcon(ResizeImageIcon.setImageIconSize(new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"), 200, 200).getImage());
     private static ImageIcon profileImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png");
     private static ImageIcon listImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/list.png");
     private static ImageIcon searchImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/search.png");
@@ -109,23 +111,29 @@ public class AnimeListSwing extends JFrame {
         rightPanel.setOpaque(true);
 //        rightPanel.setLayout(null);
 
-        // make table
+        // make table and dummy data for a developing need
         Object[][] data = {
-                {"John Doe", 25, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"Jane Smith", 30, "Female", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"Bob Johnson", 22, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"John Doe", 25, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"Jane Smith", 30, "Female", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"Bob Johnson", 22, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"John Doe", 25, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"Jane Smith", 30, "Female", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"Bob Johnson", 22, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"John Doe", 25, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"Jane Smith", 30, "Female", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")},
-                {"Bob Johnson", 22, "Male", new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png")}
+                {1, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                       "Sousou No Frieren", 9.12, "PG13", "10/28"
+                },
+                {2, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                        "Sousou No Frieren", 9.12, "PG13", "10/28"
+                },
+                {3, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                        "Sousou No Frieren", 9.12, "PG13", "10/28"
+                },
+                {4, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                        "Sousou No Frieren", 9.12, "PG13", "10/28"
+                },
+                {5, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                        "Sousou No Frieren", 9.12, "PG13", "10/28"
+                },
+                {6, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                        "Sousou No Frieren", 9.12, "PG13", "10/28"
+                },
         };
 
-        String[] columnNames = {"Name", "Age", "Gender", "Image"};
+        String[] columnNames = {"#", "Image", "Anime Title", "Score", "Type", "Progress"};
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames) {
           @Override
@@ -135,10 +143,18 @@ public class AnimeListSwing extends JFrame {
         };
 
         JTable table = new JTable(model);
-        table.setRowHeight(100);
-        table.setLayout(null);
-        table.setBounds(500, 100, 500, 500);
-        table.setOpaque(true);
+        table.setRowHeight(150);
+//        table.setLayout(null);
+//        table.setBounds(500, 100, 500, 500);
+//        table.setOpaque(true);
+        table.setDefaultRenderer(Object.class, new ImageRenderer());
+
+        // set the hight of header
+
+        JTableHeader header = table.getTableHeader();
+        header.setPreferredSize(new Dimension(header.getWidth(), 60));
+
+        // Color rendering table
 
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -155,9 +171,15 @@ public class AnimeListSwing extends JFrame {
             }
         });
 
-        table.getColumnModel().getColumn(3).setCellRenderer(new ImageRenderer());
+        table.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
 
-        table.getColumnModel().getColumn(1).setPreferredWidth(20);
+        // set width table by column index
+        table.getColumnModel().getColumn(0).setPreferredWidth(1);
+        table.getColumnModel().getColumn(1).setPreferredWidth(40);
+        table.getColumnModel().getColumn(3).setPreferredWidth(1);
+        table.getColumnModel().getColumn(4).setPreferredWidth(1);
+        table.getColumnModel().getColumn(5).setPreferredWidth(1);
+
 
         rightPanel.add(table);
         rightPanel.setViewportView(table);
@@ -168,11 +190,12 @@ public class AnimeListSwing extends JFrame {
         this.setLayout(null);
         this.setSize(1920, 1080);
         this.setResizable(false);
-        panelLeft.add(logo());
-        panelLeft.add(profile);
-        panelLeft.add(list);
-        panelLeft.add(search);
-        this.add(panelLeft);
+//        panelLeft.add(logo());
+//        panelLeft.add(profile);
+//        panelLeft.add(list);
+//        panelLeft.add(search);
+        PanelLeft tes = new PanelLeft();
+        this.add(tes.getPanelLeft());
         this.add(rightPanel);
         this.setVisible(true);
     }
@@ -187,12 +210,32 @@ public class AnimeListSwing extends JFrame {
         @Override
         protected void setValue(Object value) {
             if (value instanceof ImageIcon) {
-                setIcon((ImageIcon) value);
+                ImageIcon original = (ImageIcon) value;
+                ImageIcon resizedImg = ResizeImageIcon.setImageIconSize(original, 300, 300);
+                setIcon(resizedImg);
                 setText(null);  // Clear text when displaying an icon
             } else {
                 super.setValue(value);
             }
         }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+            // set the bg by odd or even
+            if (row % 2 == 0) {
+                renderer.setBackground(Color.WHITE);
+            } else {
+                renderer.setBackground(Color.decode("#f6f6f6"));
+            }
+
+            setHorizontalAlignment(SwingConstants.CENTER);
+
+            return renderer;
+        }
+
+
     }
 
 
