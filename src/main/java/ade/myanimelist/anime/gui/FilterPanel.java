@@ -17,7 +17,7 @@ public class FilterPanel {
         filter = new JComboBox(filterList);
 
         selectFilter = new Button("Select Filter");
-        selectFilter.setBounds(420, 20, 100, 100);
+//        selectFilter.setBounds(420, 20, 100, 100);
 
         filterPanel = new JPanel();
         filterPanel.setBounds(400, 20, 400, 80);

@@ -1,7 +1,6 @@
 package ade.myanimelist.anime.gui;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class AnimeListSwing extends JFrame {
 
