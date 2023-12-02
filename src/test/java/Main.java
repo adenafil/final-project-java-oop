@@ -1,3 +1,4 @@
+import ade.myanimelist.anime.api.JikanAPI;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.model.anime.Anime;;
@@ -8,6 +9,20 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 public class Main {
+    @Test
+    void testAPI() {
+        Jikan jikan = new Jikan();
+    }
+
+    @Test
+    void testSearchAnime() throws JikanQueryException {
+        List<Anime> anime = JikanAPI.searchAnimeByTitle("Mushoko Tensai");
+
+        for (Anime isi : anime) {
+            System.out.println(isi.titleEnglish);
+        }
+    }
+
     @Test
     void testGetPopulerAnime() throws JikanQueryException {
         Jikan jikan = new Jikan();
