@@ -5,21 +5,28 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PanelLeft {
+public class LeftPanel {
     private JLabel profile;
     private JLabel list;
     private JLabel search;
+    private RightPanel rightPanel;
+    private JScrollPane rightPanelScroll;
     private static ImageIcon profileImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png");
     private static ImageIcon listImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/list.png");
     private static ImageIcon searchImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/search.png");
 
-    public JPanel getPanelLeft() {
+    public JPanel getPanelLeft(JFrame frame) {
+        rightPanel = new RightPanel();
+        rightPanelScroll = rightPanel.getRightPanel();
         profile = subProfile("PROFILE", profileImg, 0, 80);
         profile.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("okay");
+                frame.remove(rightPanelScroll);
+                frame.revalidate();
+                frame.repaint();
             }
 
             @Override
@@ -37,7 +44,9 @@ public class PanelLeft {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-//                frame.add(new JPanel());
+                frame.add(rightPanelScroll);
+                frame.revalidate();
+                frame.repaint();
             }
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -56,6 +65,9 @@ public class PanelLeft {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         super.mouseClicked(e);
+                        frame.remove(rightPanelScroll);
+                        frame.revalidate();
+                        frame.repaint();
                     }
 
                     @Override
