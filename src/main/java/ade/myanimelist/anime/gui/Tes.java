@@ -2,44 +2,49 @@ package ade.myanimelist.anime.gui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import java.awt.*;
+import java.util.Vector;
 
 public class Tes {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Immutable Table Example");
+            JFrame frame = new JFrame("JComboBox in JTable Example");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            // Sample data for the table
-            Object[][] data = {
-                    {"John Doe", 25, "Male"},
-                    {"Jane Smith", 30, "Female"},
-                    {"Bob Johnson", 22, "Male"}
-            };
+            // Sample data
+            Vector<Vector<Object>> data = new Vector<>();
+            Vector<Object> row1 = new Vector<>();
+            row1.add("Item 1");
+            data.add(row1);
+            Vector<Object> row2 = new Vector<>();
+            row2.add("Item 2");
+            data.add(row2);
 
             // Column names
-            String[] columnNames = {"Name", "Age", "Gender"};
+            Vector<String> columnNames = new Vector<>();
+            columnNames.add("Column 1");
 
-            // Create DefaultTableModel with sample data
-            DefaultTableModel model = new DefaultTableModel(data, columnNames) {
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    // Make all cells non-editable
-                    return false;
-                }
-            };
-
-            // Create JTable with the custom table model
+            DefaultTableModel model = new DefaultTableModel(data, columnNames);
             JTable table = new JTable(model);
 
-            // Add JTable to a JScrollPane for scrolling
-            JScrollPane scrollPane = new JScrollPane(table);
+            // Set the editor for the cells in column 1
+            table.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(createComboBox()));
 
-            // Set up the frame
-            frame.setLayout(new BorderLayout());
+            JScrollPane scrollPane = new JScrollPane(table);
             frame.add(scrollPane, BorderLayout.CENTER);
-            frame.setSize(400, 300);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            frame.setSize(300, 200);
+            frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         });
+    }
+
+    private static JComboBox<String> createComboBox() {
+        JComboBox<String> comboBox = new JComboBox<>();
+        comboBox.addItem("Item 1");
+        comboBox.addItem("Item 2");
+        comboBox.addItem("Item 3");
+        return comboBox;
     }
 }
