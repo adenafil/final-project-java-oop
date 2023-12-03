@@ -1,7 +1,7 @@
-package ade.myanimelist.anime.entity;
+package ade.myanimelist.anime.database.entity;
 
-public class Genre {
-    private String name;
+public class Demographics {
+    String name;
 
     public String getName() {
         return name;

@@ -38,6 +38,12 @@ public class LoginMAL extends JFrame {
         JButton signUpBtn = new JButton("Sing Up");
         signUpBtn.setBounds(400, 390, 200, 50);
 
+        signUpBtn.addActionListener(e -> {
+            System.out.println("mama aku takut");
+            dispose();
+            new SignUpMAL();
+        });
+
         JPanel divContainer = new JPanel();
         divContainer.setBounds(0, 250 ,1000, 1080);
         divContainer.setLayout(null);

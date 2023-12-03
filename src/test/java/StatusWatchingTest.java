@@ -1,4 +1,4 @@
-import ade.myanimelist.anime.entity.StatusWatching;
+import ade.myanimelist.anime.database.entity.StatusWatching;
 import org.junit.jupiter.api.Test;
 
 public class StatusWatchingTest {

@@ -49,6 +49,12 @@ public class SignUpMAL extends JFrame {
         JButton loginBtn = new JButton("Login");
         loginBtn.setBounds(400, 600, 200, 50);
 
+        loginBtn.addActionListener(e -> {
+            System.out.println("mama aku takut");
+            dispose();
+            new LoginMAL();
+        });
+
         JLabel hasAccount = new JLabel("Already have an account ?");
         hasAccount.setBounds(420, 570, 200, 20);
         hasAccount.setBackground(Color.YELLOW);

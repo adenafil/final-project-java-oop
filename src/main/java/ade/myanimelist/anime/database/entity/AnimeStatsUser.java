@@ -1,4 +1,4 @@
-package ade.myanimelist.anime.entity;
+package ade.myanimelist.anime.database.entity;
 
 public class AnimeStatsUser {
     private Anime anime;

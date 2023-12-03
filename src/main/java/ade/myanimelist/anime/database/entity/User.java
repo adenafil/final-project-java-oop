@@ -1,4 +1,4 @@
-package ade.myanimelist.anime.entity;
+package ade.myanimelist.anime.database.entity;
 
 import java.util.Date;
 import java.util.List;
