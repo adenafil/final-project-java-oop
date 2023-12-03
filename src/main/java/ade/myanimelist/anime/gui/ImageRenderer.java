@@ -9,7 +9,7 @@ public class ImageRenderer extends DefaultTableCellRenderer {
     protected void setValue(Object value) {
         if (value instanceof ImageIcon) {
             ImageIcon original = (ImageIcon) value;
-            ImageIcon resizedImg = ResizeImageIcon.setImageIconSize(original, 300, 300);
+            ImageIcon resizedImg = ResizeImageIcon.setImageIconSize(original, 200, 200);
             setIcon(resizedImg);
             setText(null);  // Clear text when displaying an icon
         } else {

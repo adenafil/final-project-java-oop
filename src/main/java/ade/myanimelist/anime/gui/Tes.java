@@ -1,50 +1,38 @@
 package ade.myanimelist.anime.gui;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import java.awt.*;
-import java.util.Vector;
+import java.awt.geom.RoundRectangle2D;
+
+class RoundedPanel extends JPanel {
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g.create();
+
+        int width = getWidth();
+        int height = getHeight();
+        int arc = 20; // radius sudut melingkar
+
+        RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, arc, arc);
+        g2d.setColor(Color.BLUE); // warna panel
+        g2d.fill(roundedRectangle);
+
+        g2d.dispose();
+    }
+}
 
 public class Tes {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("JComboBox in JTable Example");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame("Rounded Panel Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            // Sample data
-            Vector<Vector<Object>> data = new Vector<>();
-            Vector<Object> row1 = new Vector<>();
-            row1.add("Item 1");
-            data.add(row1);
-            Vector<Object> row2 = new Vector<>();
-            row2.add("Item 2");
-            data.add(row2);
+        RoundedPanel roundedPanel = new RoundedPanel();
+        roundedPanel.setPreferredSize(new Dimension(200, 200));
 
-            // Column names
-            Vector<String> columnNames = new Vector<>();
-            columnNames.add("Column 1");
-
-            DefaultTableModel model = new DefaultTableModel(data, columnNames);
-            JTable table = new JTable(model);
-
-            // Set the editor for the cells in column 1
-            table.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(createComboBox()));
-
-            JScrollPane scrollPane = new JScrollPane(table);
-            frame.add(scrollPane, BorderLayout.CENTER);
-
-            frame.setSize(300, 200);
-            frame.setLocationRelativeTo(null);
-            frame.setVisible(true);
-        });
-    }
-
-    private static JComboBox<String> createComboBox() {
-        JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.addItem("Item 1");
-        comboBox.addItem("Item 2");
-        comboBox.addItem("Item 3");
-        return comboBox;
+        frame.getContentPane().add(roundedPanel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

@@ -16,10 +16,13 @@ public class Main {
 
     @Test
     void testSearchAnime() throws JikanQueryException {
-        List<Anime> anime = JikanAPI.searchAnimeByTitle("Mushoko Tensai");
+        int index = 1;
+        List<Anime> anime = JikanAPI.searchAnimeByTitle("Naruto");
 
         for (Anime isi : anime) {
             System.out.println(isi.titleEnglish);
+            System.out.println(isi.images.getJpg().imageUrl);
+            System.out.println(index++);
         }
     }
 

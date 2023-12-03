@@ -14,6 +14,8 @@ public class RightPanel {
         rightPanel.setBounds(420, 100, 1450, 900);
         rightPanel.setOpaque(true);
 
+
+
         rightPanel.add(tableListAnime.getTableAnimeList());
         rightPanel.setViewportView(tableListAnime.getTableAnimeList());
 

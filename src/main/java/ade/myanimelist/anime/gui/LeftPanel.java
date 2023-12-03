@@ -13,16 +13,16 @@ public class LeftPanel {
     private JScrollPane rightPanelScroll;
     private FilterPanel filterPanel;
     private JPanel filterPanelComboBox;
-    private SearchPanel searchPanel;
+    private RightSearchPanel rightSearchPanel;
     private JPanel searchAnime;
     private static ImageIcon profileImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png");
     private static ImageIcon listImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/list.png");
     private static ImageIcon searchImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/search.png");
 
     public JPanel getPanelLeft(JFrame frame) {
-        searchPanel = new SearchPanel();
+        rightSearchPanel = new RightSearchPanel();
         filterPanel = new FilterPanel();
-        searchAnime = searchPanel.getSaarchPanel();
+        searchAnime = rightSearchPanel.getRIghtSearchPanel();
         filterPanelComboBox = new FilterPanel().getFilterPanel();
         rightPanel = new RightPanel();
         rightPanelScroll = rightPanel.getRightPanel();

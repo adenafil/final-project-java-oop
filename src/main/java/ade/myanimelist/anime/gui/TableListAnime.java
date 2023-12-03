@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class TableListAnime {
+    private String[] columnNames = {"Id AnimeList", "Image", "Anime Title", "Score", "Type", "Total Episode"};
     JTable table;
     public JTable getTableAnimeList() {
 
@@ -33,9 +34,7 @@ public class TableListAnime {
                 },
         };
 
-        String[] columnNames = {"#", "Image", "Anime Title", "Score", "Type", "Progress"};
-
-        DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+        DefaultTableModel model = new DefaultTableModel(data, this.columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return  false;
@@ -82,5 +81,48 @@ public class TableListAnime {
 
 
         return table;
+    }
+
+    public JTable getResultOfSearch(Object[][] dataAPI) {
+
+        DefaultTableModel model = new DefaultTableModel(dataAPI, this.columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return  false;
+            }
+        };
+
+        JTable table1 = new JTable(model);
+        table1.setRowHeight(200);
+        table1.setDefaultRenderer(Object.class, new ImageRenderer());
+
+        JTableHeader header = table1.getTableHeader();
+        header.setPreferredSize(new Dimension(header.getWidth(), 60));
+
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = table1.rowAtPoint(e.getPoint());
+                int col = table1.columnAtPoint(e.getPoint());
+
+                if (row >= 0 && col >= 0) {
+                    Object value = table1.getValueAt(row, col);
+                    System.out.println("Clicked on row  " + row + " adn column "
+                            + col + ". Value : " + value
+                    );
+                }
+            }
+        });
+
+        table1.getColumnModel().getColumn(1).setCellRenderer(new ImageRenderer());
+
+        // set width table by column index
+        table1.getColumnModel().getColumn(0).setPreferredWidth(1);
+        table1.getColumnModel().getColumn(1).setPreferredWidth(40);
+        table1.getColumnModel().getColumn(3).setPreferredWidth(1);
+        table1.getColumnModel().getColumn(4).setPreferredWidth(1);
+        table1.getColumnModel().getColumn(5).setPreferredWidth(1);
+
+        return table1;
     }
 }
