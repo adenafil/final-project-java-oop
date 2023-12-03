@@ -1,8 +1,11 @@
 package ade.myanimelist.anime.gui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.io.IOException;
+import java.net.URL;
 
 public class ImageRenderer extends DefaultTableCellRenderer {
     @Override
@@ -32,6 +35,14 @@ public class ImageRenderer extends DefaultTableCellRenderer {
 
         return renderer;
     }
+
+    public static ImageIcon createImageIconByURL(String imgaeURL) throws IOException {
+        Image image = ImageIO.read(new URL(imgaeURL));
+        if (image != null) return new ImageIcon(image);
+        return null;
+    }
+
+
 
 
 }

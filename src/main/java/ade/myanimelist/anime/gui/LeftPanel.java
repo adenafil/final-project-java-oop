@@ -15,11 +15,15 @@ public class LeftPanel {
     private JPanel filterPanelComboBox;
     private RightSearchPanel rightSearchPanel;
     private JPanel searchAnime;
+    private JPanel profilePnl;
+    private ProfilePanel panelProfile;
     private static ImageIcon profileImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profile.png");
     private static ImageIcon listImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/list.png");
     private static ImageIcon searchImg = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/search.png");
 
     public JPanel getPanelLeft(JFrame frame) {
+        panelProfile = new ProfilePanel();
+        profilePnl = panelProfile.getProgilePanel();
         rightSearchPanel = new RightSearchPanel();
         filterPanel = new FilterPanel();
         searchAnime = rightSearchPanel.getRIghtSearchPanel();
@@ -32,6 +36,7 @@ public class LeftPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("okay");
+                frame.add(profilePnl);
                 frame.remove(searchAnime);
                 frame.remove(rightPanelScroll);
                 frame.remove(filterPanelComboBox);
@@ -54,6 +59,7 @@ public class LeftPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                frame.remove(profilePnl);
                 frame.add(rightPanelScroll);
                 frame.add(filterPanelComboBox);
                 frame.remove(searchAnime);
@@ -77,6 +83,7 @@ public class LeftPanel {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         super.mouseClicked(e);
+                        frame.remove(profilePnl);
                         frame.add(searchAnime);
                         frame.remove(rightPanelScroll);
                         frame.remove(filterPanelComboBox);

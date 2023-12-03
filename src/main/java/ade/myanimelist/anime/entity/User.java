@@ -1,5 +1,6 @@
 package ade.myanimelist.anime.entity;
 
+import java.util.Date;
 import java.util.List;
 
 public class User {
@@ -7,6 +8,8 @@ public class User {
     private String password;
     private int idTele;
     private String userNameTele;
+    private Date joined;
+
     List<AnimeStatsUser> statsUsers;
 
     public String getUsername() {
@@ -48,4 +51,9 @@ public class User {
     public void setStatsUsers(List<AnimeStatsUser> statsUsers) {
         this.statsUsers = statsUsers;
     }
+
+    public Date getJoined() {
+        return joined;
+    }
+
 }

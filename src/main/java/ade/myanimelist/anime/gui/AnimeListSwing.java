@@ -1,10 +1,14 @@
 package ade.myanimelist.anime.gui;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.io.File;
 
 public class AnimeListSwing extends JFrame {
 
     public AnimeListSwing() {
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setSize(1920, 1080);
