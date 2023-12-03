@@ -5,6 +5,7 @@ the following text is what i have to do in my project;
 - Design GUI(Ongoing);
 - DESIGN LOGIN USER(ONGOING);
 - FIX table search to be JScrollpane tomorrow (DONE);
+- add not null in query database and do unit test in code with gui and non-gui' (homework tomorrow);
 - Design a database (ONGOING);
 - Make a database (ONGOING):
 - Write Some Unit Test For Entity And Database;
