@@ -1,18 +1,19 @@
 package ade.myanimelist.anime.gui.login;
 
-import ade.myanimelist.anime.gui.home.AnimeListSwing;
-import ade.myanimelist.anime.gui.home.LeftPanel;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginMAL extends JFrame {
+public class signUpMAL extends JFrame {
     Font tableFont = new Font(null, Font.PLAIN, 15);
-    public LoginMAL() {
+    public signUpMAL() {
         JPanel loginPanel = new JPanel();
         loginPanel.setBounds(450, 0, 1000, 1080);
         loginPanel.setBackground(Color.BLUE);
         loginPanel.setLayout(null);
+
+        JLabel loginLabel = new JLabel("LOGIN");
+        loginLabel.setBounds(450, 0, 1000, 100);
+        loginLabel.setFont(new Font(null, Font.PLAIN, 40));
 
         JLabel username = new JLabel("username");
         username.setBounds(150, 30, 400, 100);
@@ -57,6 +58,7 @@ public class LoginMAL extends JFrame {
         divContainer.setLayout(null);
         divContainer.setBackground(Color.BLUE);
 
+        divContainer.add(loginLabel);
         divContainer.add(hasAccount);
         divContainer.add(loginBtn);
         divContainer.add(createAccount);
@@ -80,7 +82,7 @@ public class LoginMAL extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new LoginMAL();
+            new signUpMAL();
         });
     }
 }
