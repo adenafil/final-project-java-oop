@@ -1,4 +1,4 @@
-package ade.myanimelist.anime.gui;
+package ade.myanimelist.anime.gui.home;
 
 import ade.myanimelist.anime.api.JikanAPI;
 import net.sandrohc.jikan.exception.JikanQueryException;

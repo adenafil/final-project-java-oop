@@ -1,9 +1,6 @@
-package ade.myanimelist.anime.gui;
+package ade.myanimelist.anime.gui.home;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
-import java.io.File;
 
 public class AnimeListSwing extends JFrame {
 

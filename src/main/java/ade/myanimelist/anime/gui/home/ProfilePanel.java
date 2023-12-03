@@ -1,4 +1,4 @@
-package ade.myanimelist.anime.gui;
+package ade.myanimelist.anime.gui.home;
 
 import javax.swing.*;
 
