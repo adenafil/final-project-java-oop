@@ -3,7 +3,8 @@ the following text is what i have to do in my project;
 - API (DONE);
 - Test API(DONE);
 - Design GUI(Ongoing);
-- FIX table search to be JScrollpane tomorrow;
-- Design a database
-- Make a database;
+- DESIGN LOGIN USER(ONGOING);
+- FIX table search to be JScrollpane tomorrow (DONE);
+- Design a database (ONGOING);
+- Make a database (ONGOING):
 - Write Some Unit Test For Entity And Database;
