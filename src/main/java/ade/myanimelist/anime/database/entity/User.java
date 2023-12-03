@@ -1,6 +1,6 @@
 package ade.myanimelist.anime.database.entity;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class User {
@@ -56,4 +56,7 @@ public class User {
         return joined;
     }
 
+    public void setJoined(Date joined) {
+        this.joined = joined;
+    }
 }
