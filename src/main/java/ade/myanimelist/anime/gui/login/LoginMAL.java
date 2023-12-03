@@ -3,9 +3,9 @@ package ade.myanimelist.anime.gui.login;
 import javax.swing.*;
 import java.awt.*;
 
-public class signUpMAL extends JFrame {
+public class LoginMAL extends JFrame {
     Font tableFont = new Font(null, Font.PLAIN, 15);
-    public signUpMAL() {
+    public LoginMAL() {
         JPanel loginPanel = new JPanel();
         loginPanel.setBounds(450, 0, 1000, 1080);
         loginPanel.setBackground(Color.BLUE);
@@ -29,43 +29,24 @@ public class signUpMAL extends JFrame {
         JTextField passTextField = new JTextField();
         passTextField.setBounds(150, 200, 700, 60);
 
-        JLabel idTele = new JLabel("Id Telegram");
-        idTele.setBounds(150, 230, 400, 100);
-        idTele.setFont(tableFont);
-
-        JTextField idTextField = new JTextField();
-        idTextField.setBounds(150, 300, 700, 60);
-
-        JLabel usernameTele = new JLabel("Username Telegram");
-        usernameTele.setBounds(150, 330, 400, 100);
-        usernameTele.setFont(tableFont);
-
-        JTextField userTeleTextField = new JTextField();
-        userTeleTextField.setBounds(150, 400, 700, 60);
-
-        JButton createAccount = new JButton("Create Account");
-        createAccount.setBounds(400, 500, 200, 50);
-
         JButton loginBtn = new JButton("Login");
-        loginBtn.setBounds(400, 600, 200, 50);
+        loginBtn.setBounds(400, 300, 200, 50);
 
-        JLabel hasAccount = new JLabel("Already have an account ?");
-        hasAccount.setBounds(420, 570, 200, 20);
-        hasAccount.setBackground(Color.YELLOW);
+        JLabel forgetPw = new JLabel("Click Here IF You Forget Password");
+        forgetPw.setBounds(400, 350, 1000, 40);
+
+        JButton signUpBtn = new JButton("Sing Up");
+        signUpBtn.setBounds(400, 390, 200, 50);
 
         JPanel divContainer = new JPanel();
-        divContainer.setBounds(0, 200 ,1000, 1080);
+        divContainer.setBounds(0, 250 ,1000, 1080);
         divContainer.setLayout(null);
         divContainer.setBackground(Color.BLUE);
 
+        divContainer.add(forgetPw);
+        divContainer.add(signUpBtn);
         divContainer.add(loginLabel);
-        divContainer.add(hasAccount);
         divContainer.add(loginBtn);
-        divContainer.add(createAccount);
-        divContainer.add(usernameTele);
-        divContainer.add(userTeleTextField);
-        divContainer.add(idTele);
-        divContainer.add(idTextField);
         divContainer.add(password);
         divContainer.add(passTextField);
         divContainer.add(username);
@@ -82,7 +63,7 @@ public class signUpMAL extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new signUpMAL();
+            new LoginMAL();
         });
     }
 }
