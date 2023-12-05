@@ -5,12 +5,15 @@ the following text is what i have to do in my project;
 - Design GUI(Ongoing);
 - DESIGN LOGIN USER, SIGN UP, FORGET Password (ONGOING);
 - FIX table search to be JScrollpane tomorrow (DONE);
-- Add default value on date (Ongoing)
-- add not null in query database and do unit test in code with gui and non-gui (homework tomorrow);
+- Add default value on date (DONE)
+- add not null in query database and do unit test in code "with gui" and non-gui (still ongoing);
 - Design a database (ONGOING);
 - Make a database (ONGOING):
-- Handle database user_animelist in entity(ONGOING)
-- Write Some Unit Test For Entity And Database;
+- Handle database user_animelist in entity(DONE)
+- add constraint check on table user_animelist(DONE)
+- Write Some Unit Test For Entity And Database(ONGOING)
+- when login or signup succeed then switch to home and
+  adding up some JOptionPane(ONGOING);
 
 
 // notes

@@ -1,14 +1,15 @@
 package ade.myanimelist.anime.database.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class User {
+    int id;
     private String username;
     private String password;
-    private int idTele;
+    private String idTele;
     private String userNameTele;
-    private Date joined;
+    private Timestamp joined;
 
     List<AnimeStatsUser> statsUsers;
 
@@ -28,11 +29,11 @@ public class User {
         this.password = password;
     }
 
-    public int getIdTele() {
+    public String getIdTele() {
         return idTele;
     }
 
-    public void setIdTele(int idTele) {
+    public void setIdTele(String idTele) {
         this.idTele = idTele;
     }
 
@@ -52,11 +53,19 @@ public class User {
         this.statsUsers = statsUsers;
     }
 
-    public Date getJoined() {
+    public Timestamp getJoined() {
         return joined;
     }
 
-    public void setJoined(Date joined) {
+    public void setJoined(Timestamp joined) {
         this.joined = joined;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

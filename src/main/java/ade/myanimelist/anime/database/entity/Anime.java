@@ -2,6 +2,7 @@ package ade.myanimelist.anime.database.entity;
 
 import java.util.List;
 
+@Deprecated
 public class Anime {
     private double score;
     private int rank;
