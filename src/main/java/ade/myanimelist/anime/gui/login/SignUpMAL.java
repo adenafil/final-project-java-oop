@@ -1,5 +1,9 @@
 package ade.myanimelist.anime.gui.login;
 
+import ade.myanimelist.anime.database.entity.User;
+import ade.myanimelist.anime.database.repository.SignUpRepository;
+import ade.myanimelist.anime.database.repository.SignUpRepositoryImpl;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -77,6 +81,29 @@ public class SignUpMAL extends JFrame {
         divContainer.add(username);
         divContainer.add(usernameTextField);
 
+        // event or listener
+        createAccount.addActionListener(e -> {
+            SignUpRepository signUp = new SignUpRepositoryImpl();
+            String usernameListener = usernameTextField.getText();
+            String passwordListener = passTextField.getText();
+            String idTeleListener = idTextField.getText();
+            String usernameTeleListener = userTeleTextField.getText();
+            User newUser = new User();
+            newUser.setUsername(usernameListener);
+            newUser.setPassword(passwordListener);
+            newUser.setIdTele(idTeleListener);
+            newUser.setUserNameTele(usernameTeleListener);
+
+            if (usernameListener.isBlank() || passwordListener.isBlank() || idTeleListener.isBlank()
+                || usernameListener.isBlank()
+            ) {
+                System.out.println("kosong");
+                JOptionPane.showMessageDialog(null, "field have to be filled", "notification", JOptionPane.WARNING_MESSAGE);
+            } else {
+                signUp.insert(newUser);
+            }
+        });
+
         loginPanel.add(divContainer);
         add(loginPanel);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,4 +118,6 @@ public class SignUpMAL extends JFrame {
             new SignUpMAL();
         });
     }
+
+
 }

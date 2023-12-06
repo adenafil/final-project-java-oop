@@ -1,5 +1,9 @@
 package ade.myanimelist.anime.gui.login;
 
+import ade.myanimelist.anime.database.repository.LoginRepository;
+import ade.myanimelist.anime.database.repository.LoginRepositoryImpl;
+import ade.myanimelist.anime.gui.home.AnimeListSwing;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -57,6 +61,24 @@ public class LoginMAL extends JFrame {
         divContainer.add(passTextField);
         divContainer.add(username);
         divContainer.add(usernameTextField);
+
+        // listener or event
+        loginBtn.addActionListener(e -> {
+            LoginRepository login = new LoginRepositoryImpl();
+            String usernameListener = usernameTextField.getText();
+            String passwordListener = passTextField.getText();
+            boolean isValid = login.isUsernameAndPasswordValid(
+              usernameListener, passwordListener
+            );
+            System.out.println("login is valid = " + isValid);
+            if (isValid) {
+                JOptionPane.showMessageDialog(null, "succees login", "notification", JOptionPane.PLAIN_MESSAGE);
+                dispose();
+                new AnimeListSwing();
+            } else {
+                JOptionPane.showMessageDialog(null, "invalid username or password", "notification", JOptionPane.WARNING_MESSAGE);
+            }
+        });
 
         loginPanel.add(divContainer);
         add(loginPanel);
