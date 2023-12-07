@@ -1,11 +1,16 @@
 package ade.myanimelist.anime.gui.home;
 
+import ade.myanimelist.anime.api.JikanAPI;
+import net.sandrohc.jikan.exception.JikanQueryException;
+import net.sandrohc.jikan.model.anime.Anime;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class TableListAnime {
     private String[] columnNames = {"Id AnimeList", "Image", "Anime Title", "Score", "Type", "Total Episode"};
@@ -110,7 +115,17 @@ public class TableListAnime {
                     System.out.println("Clicked on row  " + row + " adn column "
                             + col + ". Value : " + value
                     );
+                    try {
+                        Anime anime = JikanAPI.getAnimeById((Integer) table1.getValueAt(row, 0));
+                        new AnimeClicked(anime);
+                        System.out.println(anime.title);
+                    } catch (JikanQueryException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
+
             }
         });
 

@@ -42,6 +42,13 @@ public class ImageRenderer extends DefaultTableCellRenderer {
         return null;
     }
 
+    public ImageIcon createImageIconByURLNonStatic(String imgaeURL) throws IOException {
+        Image image = ImageIO.read(new URL(imgaeURL));
+        if (image != null) return new ImageIcon(image);
+        return null;
+    }
+
+
 
 
 

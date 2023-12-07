@@ -82,4 +82,15 @@ public class APITest {
             System.out.println(character.character.images.getJpg().imageUrl);
         }
     }
+
+    @Test
+    void getAnimeById() throws JikanQueryException {
+//        Jikan jikan = new Jikan();
+//
+//        Anime anime = jikan.query().anime().get(52991).execute().block();
+//        System.out.println(anime.titleEnglish);
+        Anime anime = JikanAPI.getAnimeById(20);
+        System.out.println(anime.title);
+
+    }
 }

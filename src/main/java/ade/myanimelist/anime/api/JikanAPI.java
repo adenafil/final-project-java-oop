@@ -53,6 +53,11 @@ public class JikanAPI {
         return null;
     }
 
+    public static Anime getAnimeById(int id) throws JikanQueryException {
+        jikan = new Jikan();
+        return jikan.query().anime().get(id).execute().block();
+    }
+
 //    public static void main(String[] args) throws JikanQueryException {
 //        List<Anime> animeList = searchAnimeByTitle("naruto");
 //

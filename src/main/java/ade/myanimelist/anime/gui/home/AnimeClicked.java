@@ -1,12 +1,17 @@
 package ade.myanimelist.anime.gui.home;
 
 import ade.myanimelist.anime.database.entity.StatusWatching;
+import net.sandrohc.jikan.model.anime.Anime;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.Objects;
 
 public class AnimeClicked extends JFrame {
-    String filterList[] = {
+    Anime anime;
+
+    private String filterList[] = {
             StatusWatching.WATCHING.getDescription(),
             StatusWatching.PLANTOWATCH.getDescription(),
             StatusWatching.COMPLETED.getDescription(),
@@ -14,15 +19,26 @@ public class AnimeClicked extends JFrame {
     };
 
 
-    public AnimeClicked() {
+    public AnimeClicked(Anime anime) throws IOException {
+        this.anime = anime;
+        add(getPanelRight());
+        add(getPanelLeft());
+        add(getPanelTitle());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+        setSize(1920, 1080);
+        setResizable(false);
+        setVisible(true);
+    }
 
+    public JPanel getPanelRight() {
         JButton addToList = new JButton("add to List");
         addToList.setBounds(20, 30, 100, 40);
 
         JComboBox boxStatus = new JComboBox(filterList);
         boxStatus.setBounds(20, 30, 100, 40);
 
-        JLabel episode = new JLabel("Episodes : 0/ 12");
+        JLabel episode = new JLabel("Episodes : 0/ " + anime.episodes);
         episode.setFont(new Font(null, Font.BOLD, 15));
         episode.setBounds(160, 20, 200, 60);
 
@@ -56,11 +72,7 @@ public class AnimeClicked extends JFrame {
 
         JLabel isiSynopsis = new JLabel();
         isiSynopsis.setText(
-                "<html>During their decade-long quest to defeat the Demon King, the members of the hero's party—Himmel himself, the priest Heiter, the dwarf warrior Eisen, and the elven mage Frieren—forge bonds through adventures and battles, creating unforgettable precious memories for most of them.<br>" +
-                        "\n" +
-                        "However, the time that Frieren spends with her comrades is equivalent to merely a fraction of her life, which has lasted over a thousand years. When the party disbands after their victory, Frieren casually returns to her \"usual\" routine of collecting spells across the continent. Due to her different sense of time, she seemingly holds no strong feelings toward the experiences she went through.<br>" +
-                        "\n" +
-                        "As the years pass, Frieren gradually realizes how her days in the hero's party truly impacted her. Witnessing the deaths of two of her former companions, Frieren begins to regret having taken their presence for granted; she vows to better understand humans and create real personal connections. Although the story of that once memorable journey has long ended, a new tale is about to begin.<html>"
+                anime.synopsis
         );
         isiSynopsis.setBounds(20, 100, 1000, 400);
 
@@ -73,17 +85,10 @@ public class AnimeClicked extends JFrame {
         rightPanel.add(synopsis);
         rightPanel.add(isiSynopsis);
 
-        add(rightPanel);
-        add(getPanelLeft());
-        add(getPanelTitle());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
-        setSize(1920, 1080);
-        setResizable(false);
-        setVisible(true);
+        return rightPanel;
     }
 
-    public JPanel getPanelLeft() {
+    public JPanel getPanelLeft() throws IOException {
         JLabel information = new JLabel("Information");
         information.setBounds(40, 340, 300, 25);
         information.setFont(new Font(null, Font.BOLD, 20));
@@ -92,7 +97,7 @@ public class AnimeClicked extends JFrame {
         type.setBounds(40, 370, 300, 25);
         type.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansType = new JLabel("TV");
+        JLabel ansType = new JLabel(anime.type.toString());
         ansType.setBounds(85, 370, 300, 25);
         ansType.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -100,7 +105,7 @@ public class AnimeClicked extends JFrame {
         episode.setBounds(40, 400, 300, 25);
         episode.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansEpisode = new JLabel("12");
+        JLabel ansEpisode = new JLabel(anime.episodes.toString());
         ansEpisode.setBounds(115, 400, 300, 25);
         ansEpisode.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -108,7 +113,7 @@ public class AnimeClicked extends JFrame {
         status.setBounds(40, 430, 300, 25);
         status.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansStatus = new JLabel("Currently Watching");
+        JLabel ansStatus = new JLabel(anime.status.toString());
         ansStatus.setBounds(95, 430, 300, 25);
         ansStatus.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -116,7 +121,7 @@ public class AnimeClicked extends JFrame {
         aired.setBounds(40, 460, 300, 25);
         aired.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansAired = new JLabel("Oct 6, 2023 to ?");
+        JLabel ansAired = new JLabel(anime.aired.from + " to " + anime.aired.to);
         ansAired.setBounds(85, 460, 300, 25);
         ansAired.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -124,7 +129,7 @@ public class AnimeClicked extends JFrame {
         premiered.setBounds(40, 490, 300, 25);
         premiered.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansPremiered = new JLabel("Fall 2023");
+        JLabel ansPremiered = new JLabel("Fall 2023" + anime.season);
         ansPremiered.setBounds(125, 490, 300, 25);
         ansPremiered.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -132,7 +137,7 @@ public class AnimeClicked extends JFrame {
         broadcast.setBounds(40, 520, 300, 25);
         broadcast.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansBroadcast = new JLabel("Friday at 22:00 (JST)");
+        JLabel ansBroadcast = new JLabel(anime.broadcast.toString());
         ansBroadcast.setBounds(125, 520, 300, 25);
         ansBroadcast.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -140,7 +145,7 @@ public class AnimeClicked extends JFrame {
         studios.setBounds(40, 550, 300, 25);
         studios.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansStudios = new JLabel("LIDENFILMS");
+        JLabel ansStudios = new JLabel(anime.studios.toString());
         ansStudios.setBounds(105, 550, 300, 25);
         ansStudios.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -148,7 +153,7 @@ public class AnimeClicked extends JFrame {
         source.setBounds(40, 580, 300, 25);
         source.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansSource = new JLabel("Light novel");
+        JLabel ansSource = new JLabel(anime.source);
         ansSource.setBounds(105, 580, 300, 25);
         ansSource.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -156,7 +161,7 @@ public class AnimeClicked extends JFrame {
         genres.setBounds(40, 610, 300, 25);
         genres.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansGenres = new JLabel("Action, Adventure, Fantasy");
+        JLabel ansGenres = new JLabel(anime.genres.toString());
         ansGenres.setBounds(105, 610, 300, 25);
         ansGenres.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -164,7 +169,7 @@ public class AnimeClicked extends JFrame {
         theme.setBounds(40, 640, 300, 25);
         theme.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansTheme = new JLabel("Gore");
+        JLabel ansTheme = new JLabel(anime.themes.toString());
         ansTheme.setBounds(100, 640, 300, 25);
         ansTheme.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -172,7 +177,7 @@ public class AnimeClicked extends JFrame {
         duration.setBounds(40, 670, 300, 25);
         duration.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansDuration = new JLabel("23 min. per ep.");
+        JLabel ansDuration = new JLabel(anime.duration.toMinutes() + " min. per ep.");
         ansDuration.setBounds(115, 670, 300, 25);
         ansDuration.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -180,7 +185,7 @@ public class AnimeClicked extends JFrame {
         rating.setBounds(40, 700, 300, 25);
         rating.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansRating = new JLabel("R - 17+");
+        JLabel ansRating = new JLabel(anime.rating.toString());
         ansRating.setBounds(100, 700, 300, 25);
         ansRating.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -188,7 +193,7 @@ public class AnimeClicked extends JFrame {
         score.setBounds(40, 730, 300, 25);
         score.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansScore = new JLabel("9.23");
+        JLabel ansScore = new JLabel(anime.score + "");
         ansScore.setBounds(95, 730, 300, 25);
         ansScore.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -196,7 +201,7 @@ public class AnimeClicked extends JFrame {
         ranked.setBounds(40, 760, 300, 25);
         ranked.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansRanked = new JLabel("#1");
+        JLabel ansRanked = new JLabel(anime.rank + "");
         ansRanked.setBounds(105, 760, 300, 25);
         ansRanked.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -204,7 +209,7 @@ public class AnimeClicked extends JFrame {
         popularity.setBounds(40, 790, 300, 25);
         popularity.setFont(new Font(null, Font.BOLD, 15));
 
-        JLabel ansPopularity = new JLabel("#646");
+        JLabel ansPopularity = new JLabel(anime.popularity + "");
         ansPopularity.setBounds(120, 790, 300, 25);
         ansPopularity.setFont(new Font(null, Font.PLAIN, 15));
 
@@ -251,18 +256,23 @@ public class AnimeClicked extends JFrame {
     }
 
 
-    public static JLabel getImageAnime() {
+    public JLabel getImageAnime() throws IOException {
         JLabel image = new JLabel("");
 //        image.setSize(400, 300);
         image.setBounds(40, 30, 300, 300);
-        image.setIcon(ResizeImageIcon.setImageIconSize(new ImageIcon("src/main/java/ade/myanimelist/anime/gui/home/assets/dummyData.jpg"), 300, 300));
-
+        String url = anime.images.jpg.largeImageUrl;
+        System.out.println(url + anime.images.jpg.largeImageUrl);
+        Image getImageByUrl = ImageRenderer.createImageIconByURL(url).getImage();
+        ImageIcon gambar = new ImageIcon(getImageByUrl);
+//
+        image.setIcon(ResizeImageIcon.setImageIconSize(gambar, 300, 300));
+//        System.out.println(anime.images.getJpg().largeImageUrl);
         return image;
     }
 
     public JPanel getPanelTitle() {
         JLabel title = new JLabel();
-        title.setText("Sengoku Basara");
+        title.setText(anime.title);
         title.setBounds(10, 5, 1920, 40);
         title.setFont(new Font(null, Font.PLAIN, 30));
 
@@ -276,7 +286,15 @@ public class AnimeClicked extends JFrame {
     }
 
     public static void main(String[] args) {
-        new AnimeClicked();
+//        new AnimeClicked();
+    }
+
+    public Anime getAnime() {
+        return this.anime;
+    }
+
+    public void setAnime(Anime anime) {
+        this.anime = anime;
     }
 
 }
