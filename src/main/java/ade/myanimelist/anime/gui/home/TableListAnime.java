@@ -14,22 +14,22 @@ public class TableListAnime {
 
         // make table and dummy data for a developing need
         Object[][] data = {
-                {1, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                {1, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/home/assets/dummyData.jpg"),
                         "Sousou No Frieren", 9.12, "PG13", "10/28"
                 },
-                {2, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                {2, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/home/assets/dummyData.jpg"),
                         "Sousou No Frieren", 9.12, "PG13", "10/28"
                 },
-                {3, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                {3, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/home/assets/dummyData.jpg"),
                         "Sousou No Frieren", 9.12, "PG13", "10/28"
                 },
-                {4, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                {4, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/home/assets/dummyData.jpg"),
                         "Sousou No Frieren", 9.12, "PG13", "10/28"
                 },
-                {5, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                {5, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/home/assets/dummyData.jpg"),
                         "Sousou No Frieren", 9.12, "PG13", "10/28"
                 },
-                {6, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/dummyData.jpg"),
+                {6, new ImageIcon("src/main/java/ade/myanimelist/anime/gui/home/assets/dummyData.jpg"),
                         "Sousou No Frieren", 9.12, "PG13", "10/28"
                 },
         };

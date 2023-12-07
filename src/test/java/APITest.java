@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public class Main {
+public class APITest {
     @Test
     void testAPI() {
         Jikan jikan = new Jikan();
@@ -38,6 +38,7 @@ public class Main {
                 .block();
 
         for (Anime anime : animes) {
+            System.out.println(anime.duration.toMinutes());
             System.out.println(anime.titleEnglish);
             System.out.println(anime.images.getJpg().largeImageUrl);
             System.out.println(anime.episodes);
@@ -54,6 +55,7 @@ public class Main {
             System.out.println(anime.aired);
             System.out.println(anime.rating);
             System.out.println(anime.demographics.toString());
+            System.out.println("producers" + anime.producers);
 
             anime.genres.forEach(e -> System.out.println(e.name));
             anime.genres.forEach(e -> System.out.println(e.malId));

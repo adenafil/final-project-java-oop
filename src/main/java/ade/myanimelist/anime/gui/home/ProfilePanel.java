@@ -9,7 +9,7 @@ public class ProfilePanel {
         profilePanel.setBounds(600, 10, 1000, 1070);
 //        profilePanel.setBackground(Color.YELLOW);
 
-        ImageIcon myProfile = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/assets/profileDummy.jpg");
+        ImageIcon myProfile = new ImageIcon("src/main/java/ade/myanimelist/anime/gui/home/assets/profileDummy.jpg");
         JLabel profileIcon = new JLabel(myProfile);
         profileIcon.setBounds(300, 10, 400, 400);
 

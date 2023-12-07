@@ -1,10 +1,89 @@
 package ade.myanimelist.anime.gui.home;
 
+import ade.myanimelist.anime.database.entity.StatusWatching;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class Tes {
-    public static void main(String[] args) {
+public class AnimeClicked extends JFrame {
+    String filterList[] = {
+            StatusWatching.WATCHING.getDescription(),
+            StatusWatching.PLANTOWATCH.getDescription(),
+            StatusWatching.COMPLETED.getDescription(),
+            StatusWatching.DROPPED.getDescription()
+    };
+
+
+    public AnimeClicked() {
+
+        JButton addToList = new JButton("add to List");
+        addToList.setBounds(20, 30, 100, 40);
+
+        JComboBox boxStatus = new JComboBox(filterList);
+        boxStatus.setBounds(20, 30, 100, 40);
+
+        JLabel episode = new JLabel("Episodes : 0/ 12");
+        episode.setFont(new Font(null, Font.BOLD, 15));
+        episode.setBounds(160, 20, 200, 60);
+
+        JButton addEps = new JButton("+");
+        addEps.setBounds(280, 35, 50, 30);
+
+        JButton dropEps = new JButton("-");
+        dropEps.setBounds(340, 35, 50, 30);
+
+        JPanel panelKotak = new JPanel();
+        panelKotak.setLayout(null);
+//        panelKotak.setBackground(Color.decode("#f8f8f8"));
+        panelKotak.setBounds(0, 60, 800, 100);
+        panelKotak.add(addToList);
+        panelKotak.add(episode);
+        panelKotak.add(addEps);
+        panelKotak.add(dropEps);
+//        panelKotak.add(boxStatus);
+
+        // listener or event
+        addToList.addActionListener(e -> {
+            panelKotak.remove(addToList);
+            panelKotak.add(boxStatus);
+            panelKotak.revalidate();
+            panelKotak.repaint();
+        });
+
+        JLabel synopsis = new JLabel("Synopsis : ");
+        synopsis.setFont(new Font(null, Font.BOLD, 20));
+        synopsis.setBounds(20, 200, 200, 30);
+
+        JLabel isiSynopsis = new JLabel();
+        isiSynopsis.setText(
+                "<html>During their decade-long quest to defeat the Demon King, the members of the hero's party—Himmel himself, the priest Heiter, the dwarf warrior Eisen, and the elven mage Frieren—forge bonds through adventures and battles, creating unforgettable precious memories for most of them.<br>" +
+                        "\n" +
+                        "However, the time that Frieren spends with her comrades is equivalent to merely a fraction of her life, which has lasted over a thousand years. When the party disbands after their victory, Frieren casually returns to her \"usual\" routine of collecting spells across the continent. Due to her different sense of time, she seemingly holds no strong feelings toward the experiences she went through.<br>" +
+                        "\n" +
+                        "As the years pass, Frieren gradually realizes how her days in the hero's party truly impacted her. Witnessing the deaths of two of her former companions, Frieren begins to regret having taken their presence for granted; she vows to better understand humans and create real personal connections. Although the story of that once memorable journey has long ended, a new tale is about to begin.<html>"
+        );
+        isiSynopsis.setBounds(20, 100, 1000, 400);
+
+
+        JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(null);
+        rightPanel.setBounds(350, 60, 1500, 1000);
+//        rightPanel.setBackground(Color.blue);
+        rightPanel.add(panelKotak);
+        rightPanel.add(synopsis);
+        rightPanel.add(isiSynopsis);
+
+        add(rightPanel);
+        add(getPanelLeft());
+        add(getPanelTitle());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+        setSize(1920, 1080);
+        setResizable(false);
+        setVisible(true);
+    }
+
+    public JPanel getPanelLeft() {
         JLabel information = new JLabel("Information");
         information.setBounds(40, 340, 300, 25);
         information.setFont(new Font(null, Font.BOLD, 20));
@@ -133,7 +212,7 @@ public class Tes {
         JPanel panelLeft = new JPanel();
         panelLeft.setLayout(null);
         panelLeft.setBounds(0, 50, 300, 1080);
-        panelLeft.setBackground(Color.decode("#ffffff"));
+        panelLeft.setBackground(Color.decode("#f8f8f8"));
 
         panelLeft.add(popularity);
         panelLeft.add(ansPopularity);
@@ -168,18 +247,20 @@ public class Tes {
         panelLeft.add(type);
         panelLeft.add(getImageAnime());
 
-        JFrame frame = new JFrame();
-
-        frame.add(panelLeft);
-        frame.add(getTitle());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(null);
-        frame.setSize(1920, 1080);
-        frame.setResizable(false);
-        frame.setVisible(true);
+        return panelLeft;
     }
 
-    public static JPanel getTitle() {
+
+    public static JLabel getImageAnime() {
+        JLabel image = new JLabel("");
+//        image.setSize(400, 300);
+        image.setBounds(40, 30, 300, 300);
+        image.setIcon(ResizeImageIcon.setImageIconSize(new ImageIcon("src/main/java/ade/myanimelist/anime/gui/home/assets/dummyData.jpg"), 300, 300));
+
+        return image;
+    }
+
+    public JPanel getPanelTitle() {
         JLabel title = new JLabel();
         title.setText("Sengoku Basara");
         title.setBounds(10, 5, 1920, 40);
@@ -194,12 +275,8 @@ public class Tes {
         return panelTitle;
     }
 
-    public static JLabel getImageAnime() {
-        JLabel image = new JLabel("");
-//        image.setSize(400, 300);
-        image.setBounds(40, 30, 300, 300);
-        image.setIcon(ResizeImageIcon.setImageIconSize(new ImageIcon("src/main/java/ade/myanimelist/anime/gui/home/assets/dummyData.jpg"), 300, 300));
-
-        return image;
+    public static void main(String[] args) {
+        new AnimeClicked();
     }
+
 }

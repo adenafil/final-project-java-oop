@@ -14,6 +14,7 @@ the following text is what i have to do in my project;
 - Write Some Unit Test For Entity And Database(ONGOING)
 - when login or signup succeed then switch to home and
   adding up some JOptionPane(ONGOING);
+- add profile path in database(ONGOING);
 
 
 // notes
