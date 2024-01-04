@@ -112,6 +112,15 @@ public class TestAPI {
                 .verifyComplete();
     }
 
+    @Test
+    void tesAdaAnimeApaEnggak() throws JikanQueryException {
+//        System.out.println(JikanAPI.searchAnimeByTitle("Neymar").size());
+
+        if (JikanAPI.searchAnimeByTitle("Neymar").size() == 0) {
+            System.out.println("masuk pak eko");
+        }
+    }
+
 //    @Test
 //    void testAnimeInDatabase() {
 //        int index[] = {20, 20, 20, 20, 20, 20, 20, 20, 20, 20};

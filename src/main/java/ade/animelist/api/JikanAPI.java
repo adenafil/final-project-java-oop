@@ -11,6 +11,8 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.cache.JikanCache;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.model.anime.Anime;
+import net.sandrohc.jikan.model.anime.AnimeStatus;
+import net.sandrohc.jikan.model.common.Genre;
 import net.sandrohc.jikan.model.enums.AgeRating;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -93,7 +95,7 @@ public class JikanAPI {
 
 //        List<Anime> searchResult = jikan.query().anime().search().query(title).execute().collectList().block();
 
-        return jikan.query().anime().search().query(title).execute().collectList().block();
+        return jikan.query().anime().search().rating(AgeRating.PG13).query(title).execute().collectList().block();
     }
 
     /**
@@ -213,18 +215,20 @@ public class JikanAPI {
     }
 
     public static List<Anime> getTitleAndImageAnimeBySearch(String title) throws JikanQueryException {
-        List<Anime> results = jikan.query().anime().search()
+        List<Anime> results = jikan.query().anime().search().rating(AgeRating.PG13)
                 .query(title)
-                .limit(10)
+                .limit(1)
                 .execute()
                 .collectList()
                 .block();
+
+//        jikan.query().anime().search().rating(AgeRating.PG13).query()
 
         return results;
     }
 
     public static Mono<List<Anime>> getTitleAndImageAnimeBySearchAsync(String title) throws JikanQueryException {
-        return jikan.query().anime().search()
+        return jikan.query().anime().search().rating(AgeRating.PG13)
                 .query(title)
                 .execute()
                 .collectList();

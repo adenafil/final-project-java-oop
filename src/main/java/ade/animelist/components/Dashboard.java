@@ -49,6 +49,8 @@ public class Dashboard {
         name.setForeground(Color.WHITE);
         name.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 60));
 
+
+
         containerName.add(name);
 
         containerFeat.add(containerName);
@@ -117,111 +119,82 @@ public class Dashboard {
             dashboardDiv.removeAll();
             Controller.removeComponent(dashboardDiv);
 
-            JPanel card = CardCollection.getCard();
+            JPanel card = CardCollection.getCardPanel();
 
-
+            System.out.println("index collect " + indexListenerCollection);
             AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
-//            ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(listAnimeuser.getAllAnimeListUser());
-//            imageLoaderWorker.execute();
-
-//            SwingUtilities.invokeLater(() -> {
-//                ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(listAnimeuser.getAllAnimeListUser());
-//                imageLoaderWorker.execute();
-//            });
-
             if (indexListenerCollection  == 0) {
+//                indexListenerCollection++;
+                CardCollection.totalAnime = 0;
                 listAnimeuser.getAllAnimeListInDatabaseUser().forEach(
                         maguire -> {
+                            System.out.println();
                             CardCollection.addCard(
                                     maguire.title,
                                     null,
                                     maguire.malId
                             );
+                            ++CardCollection.totalAnime;
                         }
                 );
             }
-//            else {
-//                listAnimeuser.getAllAnimeListUser().forEach(
-//                        luAsikBang -> {
-//                            ImageIcon ade = ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) != null ? ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) : null;
-//                            System.out.println("is image null ? " + ade);
-//                            CardCollection.addCard(
-//                                    luAsikBang.title,
-//                                    ade,
-//                                    luAsikBang.malId
-//                            );
-//                        }
-//                );
-//            }
 
-
-            CardCollection.setIndex(0);
-////            for (int i = 0; i < 20; i++) {
-////                ImageIcon imgTes = ImageRenderer.createImageIconByURL("https://cdn.myanimelist.net/images/anime/13/17405.jpg");
-////                CardCollection.addCard("naruto", imgTes, 20);
-////            }
-//
             Controller.addComponent(card);
+
+            if (indexListenerCollection != 0) {
+                List<CompletableFuture<Anime>> animeFutures = listAnimeuser.getAllAnimeListUserAsync();
+                AnimeListWorker animeListWorker = new AnimeListWorker(animeFutures);
+                animeListWorker.execute();
+            }
+
+            ++indexListenerCollection;
+
+//            CardCollection.setIndex(0);
 //
 //            CardCollection.setIndex(0);
-            SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-
-                @Override
-                protected Void doInBackground() throws Exception {
-                    ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(listAnimeuser.getAllAnimeListUser());
-                    imageLoaderWorker.execute();
-
-                    listAnimeuser.getAllAnimeListUser().forEach(
-                            luAsikBang -> {
-//                                CardCollection.addCard(
-//                                        luAsikBang.title,
-                                        ImageRenderer.createImageIconByURL(luAsikBang.images.getJpg().largeImageUrl);
-//                                        luAsikBang.malId
-//                                );
-                            }
-                    );
-
-                    if (indexListenerCollection == 0) {
-                        indexListenerCollection++;
-                    } else {
-                        listAnimeuser.getAllAnimeListUser().forEach(
-                                luAsikBang -> {
-                                CardCollection.addCard(
-                                        luAsikBang.title,
-                                    ImageRenderer.createImageIconByURL(luAsikBang.images.getJpg().largeImageUrl),
-                                        luAsikBang.malId
-                                );
-                                }
-                        );
-                        Controller.addComponent(card);
-                    }
-
-                    CardCollection.setIndex(0);
-
-                    Thread.sleep(5000);
-
-                    return null;
-                }
+//            SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
 //
 //                @Override
-//                protected void done() {
-////                    JOptionPane.showMessageDialog(null, "Image Renderer is successful", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-//                    CardCollection.cardPanel.removeAll();
-//                    CardCollection.cardPanel = new JPanel();
+//                protected Void doInBackground() throws Exception {
+//                    System.out.println("masih 0 kah ?" + indexListenerCollection);
+//                    ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(listAnimeuser.getAllAnimeListUser());
+//                    imageLoaderWorker.execute();
+//
 //                    listAnimeuser.getAllAnimeListUser().forEach(
 //                            luAsikBang -> {
-//                                CardCollection.addCard(
-//                                        luAsikBang.title,
-//                                ImageRenderer.createImageIconByURL(luAsikBang.images.getJpg().largeImageUrl),
-//                                        luAsikBang.malId
-//                                );
+////                                CardCollection.addCard(
+////                                        luAsikBang.title,
+//                                        ImageRenderer.createImageIconByURL(luAsikBang.images.getJpg().largeImageUrl);
+////                                        luAsikBang.malId
+////                                );
 //                            }
 //                    );
 //
+//                    if (indexListenerCollection == 0) {
+//                        ++indexListenerCollection;
+//                        return null;
+//                    } else {
+//                        listAnimeuser.getAllAnimeListUser().forEach(
+//                                luAsikBang -> {
+//                                CardCollection.addCard(
+//                                        luAsikBang.title,
+//                                    ImageRenderer.createImageIconByURL(luAsikBang.images.getJpg().largeImageUrl),
+//                                        luAsikBang.malId
+//                                );
+//                                }
+//                        );
+//                        Controller.addComponent(card);
+//                    }
+//
+//                    CardCollection.setIndex(0);
+//
+////                    Thread.sleep(5000);
+//
+//                    return null;
 //                }
-            };
-
-            worker.execute();
+//            };
+//
+//            worker.execute();
 
 
         });
@@ -236,6 +209,21 @@ public class Dashboard {
         signOutBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
         signOutBtn.setBorder(BorderFactory.createEmptyBorder());
         signOutBtn.setFocusable(false);
+
+        signOutBtn.addActionListener(e -> {
+            Dashboard.isOpened = false;
+//            dashboardDiv.removeAll();
+//            dashboardDiv.repaint();
+//            dashboardDiv.revalidate();
+            Controller.removeComponent(dashboardDiv);
+            Controller.createLogin();
+//            Controller.removeComponent(Controller.navbar.getNavbar());
+            Controller.removeDashboard();
+            Controller.removeComponent(Navbar.navbar);
+            Navbar.removeNavbar();
+//            Controller.navbar.removeAll();
+
+        });
 
         JButton settingBtn = new JButton("Setting");
         settingBtn.setOpaque(true);

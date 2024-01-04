@@ -86,7 +86,7 @@ public class CardSearchAnime {
         JLabel img = new JLabel();
         img.setOpaque(true);
         img.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 100));
-        img.setBackground(Color.gray);
+        img.setBackground(Color.decode("#333b48"));
         img.setIcon(imgAnime);
 
         JLabel title = new JLabel("<html><p> " + tileAnime + " </p></html>");
@@ -144,10 +144,10 @@ public class CardSearchAnime {
                         try {
 //                            Controller.navbar.getRecomendationAnimeDiv().removeAll();
 //                            Controller.navbar.getTopAnime().removeAll();
-                            Controller.navbar.syncDelete();
+                            Navbar.syncDelete();
                             AnimePage.isOpened = true;
                             isOpened = false;
-                            Controller.navbar.removeSearchAnimeCard();
+                            Navbar.removeSearchAnimeCard();
                             Controller.addComponent(AnimePage.getAnimePageById(id));
                             Controller.doScync();
 

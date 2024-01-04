@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class Controller {
-    public static Navbar navbar = new Navbar();
+//    public static Navbar navbar = new Navbar();
     public static JFrame frame =  new JFrame();
 
 //    static {
@@ -67,9 +67,9 @@ public class Controller {
     }
 
     public static void createAdeAnimeList() {
-        addComponent(navbar.getNavbar());
-        navbar.addTopCardAnime();
-        navbar.addRecomendationAnime();
+        addComponent(Navbar.navbar);
+        Navbar.addTopCardAnime();
+        Navbar.addRecomendationAnime();
     }
 
     public static void removeSignUp() {
@@ -83,6 +83,8 @@ public class Controller {
 
     public static void removeLogin() {
         Login.container.removeAll();
+        Login.container.repaint();
+        Login.container.revalidate();
         removeComponent(Login.container);
     }
 
@@ -91,7 +93,9 @@ public class Controller {
     }
 
     public static void createDasshboard() {
-        addComponent(navbar.getNavbar());
+        Navbar.addNavbar();
+//        System.out.println((Navbar.navbar == null) + " navbar log");
+        addComponent(Navbar.navbar);
         Dashboard.isOpened = true;
         addComponent(Dashboard.getDashboard());
     }

@@ -9,6 +9,7 @@ import ade.animelist.database.repository.ConfigRepositoryImpl;
 import ade.animelist.util.ImageRenderer;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.model.anime.Anime;
+import net.sandrohc.jikan.model.anime.AnimeStatus;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -22,6 +23,12 @@ public class AnimePage {
     public static JPanel getAnimePageById(int id) throws JikanQueryException {
         // anime
         Anime anime = JikanAPI.getAnimeById(id);
+
+        if (anime.episodes == null && anime.synopsis == null) {
+            anime.episodes = 0;
+            anime.synopsis = "Maaf Anime Ini Masih Belum Tayang Sehingga Kami Tidak Bisa Mendapatkan Synopsis Dari Anime Tersebut";
+        }
+
         AddAnimeToDbRepository addAnimeToDbRepository = new AddAnimeToDbRepositoryImpl();
         boolean didThisAnimeExistInDatabase = addAnimeToDbRepository.doesThisAnimeExistInDatabase(id);
         ConfigRepository configRepository = new ConfigRepositoryImpl();

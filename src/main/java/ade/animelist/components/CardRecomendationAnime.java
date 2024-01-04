@@ -143,7 +143,7 @@ public class CardRecomendationAnime {
         JLabel img = new JLabel();
         img.setOpaque(true);
         img.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 100));
-        img.setBackground(Color.gray);
+        img.setBackground(Color.decode("#333b48"));
         img.setIcon(imgAnime);
 
         JLabel title = new JLabel("<html><p> " + titleAnime + " </p></html>");
@@ -195,9 +195,9 @@ public class CardRecomendationAnime {
                         try {
 //                            Controller.navbar.getRecomendationAnimeDiv().removeAll();
 //                            Controller.navbar.getTopAnime().removeAll();
-                            Controller.navbar.syncDelete();
-                            Controller.navbar.removeRecomdendationCardComponent();
-                            Controller.navbar.removeTopCardComponent();
+                            Navbar.syncDelete();
+                            Navbar.removeRecomdendationCardComponent();
+                            Navbar.removeTopCardComponent();
                             AnimePage.isOpened = true;
                             isOpened = false;
                             Controller.addComponent(AnimePage.getAnimePageById(id));

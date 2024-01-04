@@ -18,7 +18,7 @@ public class ImageLoaderWorker extends SwingWorker<List<ImageIcon>, Void> {
     @Override
     protected List<ImageIcon> doInBackground() throws Exception {
         return animeCollection.parallelStream()
-                .map(adebayor -> ImageRenderer.createImageIconByUrl(adebayor.images.getJpg().largeImageUrl))
+                .map(adebayor -> ImageRenderer.createImageIconByURL(adebayor.images.getJpg().largeImageUrl))
                 .collect(Collectors.toList());
     }
 

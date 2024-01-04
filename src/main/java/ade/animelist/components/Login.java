@@ -184,11 +184,11 @@ public class Login {
             // login logic
             LoginRepository loginRepository = new LoginRepositoryImpl();
             if (loginRepository.doesUsernameAndPasswordExist(textFieldUsername.getText(), textPasswordField.getText())) {
-                JOptionPane.showMessageDialog(null, "Login Berhasil", "Informasi", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("Login success 200");
                 Controller.removeLogin();
                 Controller.createDasshboard();
-                ImageRenderer.runConfig();
+                JOptionPane.showMessageDialog(null, "Login Berhasil", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+//                ImageRenderer.runConfig();
             } else {
                 JOptionPane.showMessageDialog(null, "Username Atau Password Anda Salah", "Informasi", JOptionPane.INFORMATION_MESSAGE);
                 System.out.println("Gagal login");
@@ -221,6 +221,16 @@ public class Login {
                 super.mouseClicked(e);
                 Controller.removeLogin();
                 Controller.createSignUp();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                clickHere.setForeground(Color.decode("#799ef3"));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                clickHere.setForeground(Color.decode("#ffffff"));
             }
         });
 

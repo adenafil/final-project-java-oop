@@ -227,6 +227,16 @@ public class SignUp {
                 Controller.removeSignUp();
                 Controller.createLogin();
             }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                clickHere.setForeground(Color.decode("#799ef3"));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                clickHere.setForeground(Color.decode("#ffffff"));
+            }
         });
 
         havenAccountContainer.add(already);

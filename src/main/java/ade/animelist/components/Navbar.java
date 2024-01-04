@@ -1,6 +1,7 @@
 package ade.animelist.components;
 import ade.animelist.api.JikanAPI;
 import ade.animelist.controller.Controller;
+import ade.animelist.database.entity.CardCollectionEntity;
 import ade.animelist.database.repository.AddAnimeToDbRepository;
 import ade.animelist.database.repository.AddAnimeToDbRepositoryImpl;
 import ade.animelist.util.AnimeListWorker;
@@ -15,26 +16,45 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
-public class Navbar extends JFrame {
-    JLabel logo;
-    JTextField search;
-    private String searchByUser;
-    private CardSearchAnime cardSearchAnime = new CardSearchAnime();
-    private CardTopAnime cardTopAnime = new CardTopAnime();
-    private JPanel topAnimeDiv = cardTopAnime.getCard();
-    private JPanel searchAnimeDiv = cardSearchAnime.getCard();
-    private CardRecomendationAnime cardRecomendationAnime = new CardRecomendationAnime();
+public class Navbar {
+    static JLabel logo;
+    static JTextField search;
+    static private String searchByUser;
+    static private CardSearchAnime cardSearchAnime = new CardSearchAnime();
+    static private CardTopAnime cardTopAnime = new CardTopAnime();
+    static private JPanel topAnimeDiv = cardTopAnime.getCard();
+    static private JPanel searchAnimeDiv = cardSearchAnime.getCard();
+    static private CardRecomendationAnime cardRecomendationAnime = new CardRecomendationAnime();
 
-    private JPanel recomendationAnimeDiv = cardRecomendationAnime.getCard();
-    int bingung = 0;
+    private static JPanel recomendationAnimeDiv = cardRecomendationAnime.getCard();
+    static int bingung = 0;
 
-    public JPanel getNavbar() {
+    public static JPanel navbar = null;
+
+    public static void addNavbar() {
+        navbar = getNavbar();
+        navbar.repaint();
+        navbar.revalidate();
+        Controller.addComponent(navbar);
+    }
+
+    public static void removeNavbar() {
+        Controller.removeComponent(navbar);
+        navbar.revalidate();
+        navbar.repaint();
+        navbar = null;
+//        navbar.removeAll();
+
+    }
+
+    public static JPanel getNavbar() {
         // div
         JPanel divContainer = new JPanel();
         divContainer.setLayout(new BoxLayout(divContainer, BoxLayout.Y_AXIS));
@@ -201,80 +221,26 @@ public class Navbar extends JFrame {
             }
         });
 
-        CardCollection.refresh.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
-                CardCollection.panel.removeAll();
-                Controller.removeComponent(CardCollection.panel);
-
-                CardCollection.panel = CardCollection.getCard();
-//                ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(listAnimeuser.getAllAnimeListUser());
-//                imageLoaderWorker.execute();
-
-//                SwingUtilities.invokeLater(() -> listAnimeuser.getAllAnimeListUser().parallelStream().forEach(
-//                        luAsikBang -> {
-//                            ImageIcon ade = ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) != null ? ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) : null;
-//                            System.out.println("is image null ? " + ade);
-//                            CardCollection.addCard(
-//                                    luAsikBang.title,
-//                                    ImageRenderer.createImageIconByURL(luAsikBang.images.getJpg().largeImageUrl),
-//                                    luAsikBang.malId
-//                            );
-//                        }
-//                ));
-//                listAnimeuser.getAllAnimeListUserAsync().parallelStream().forEach(b -> {
-//                    try {
-//                        ImageIcon tes = ImageRenderer.createImageIconByURL(b.join().images.getJpg().largeImageUrl);
-//                        System.out.println(tes.getIconWidth());
-//                        System.out.println(b.join().title);
-//                        SwingUtilities.invokeLater(() -> {
-//                            CardCollection.addCard(
-//                                    b.join().title,
-//                                    tes,
-//                                    b.join().malId
-//                            );
-//                        });
-//                    } catch (Exception ex) {
-//                        throw new RuntimeException(ex);
-//                    }
-//                });
-
-                List<CompletableFuture<Anime>> animeFutures = listAnimeuser.getAllAnimeListUserAsync();
-                AnimeListWorker animeListWorker = new AnimeListWorker(animeFutures);
-                animeListWorker.execute();
-
-                CardCollection.setIndex(0);
-//                listAnimeuser.getAllAnimeListUser().forEach(
-//                        luAsikBang -> {
-//                            ImageIcon ade = ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) != null ? ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) : null;
-//                            System.out.println("is image null ? " + ade);
-//                            CardCollection.addCard(
-//                                    luAsikBang.title,
-//                                    ade,
-//                                    luAsikBang.malId
-//                            );
-//                        }
-//                );
+//        CardCollection.refresh.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                super.mouseClicked(e);
+//                AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
+//                CardCollection.panel.removeAll();
+//                Controller.removeComponent(CardCollection.panel);
 //
-//                listAnimeuser.getAllAnimeListUser().parallelStream().forEach(
-//                        luAsikBang -> {
-//                            ImageIcon ade = ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) != null ? ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) : null;
-//                            System.out.println("is image null ? " + ade);
-//                            CardCollection.addCard(
-//                                    luAsikBang.title,
-//                                    ade,
-//                                    luAsikBang.malId
-//                            );
-//                        }
-//                );
-
-                Controller.addComponent(CardCollection.panel);
-
-                System.out.println("difarina");
-            }
-        });
+//                CardCollection.panel = CardCollection.getCard();
+//
+//                List<CompletableFuture<Anime>> animeFutures = listAnimeuser.getAllAnimeListUserAsync();
+//                AnimeListWorker animeListWorker = new AnimeListWorker(animeFutures);
+//                animeListWorker.execute();
+//
+//                CardCollection.setIndex(0);
+//                Controller.addComponent(CardCollection.panel);
+//
+//                System.out.println("difarina");
+//            }
+//        });
 
 
         // listener logo
@@ -475,24 +441,72 @@ public class Navbar extends JFrame {
                 System.out.println(search.getText());
                 setSearchByUser(search.getText());
 
-                try {
-                    JikanAPI.getTitleAndImageAnimeBySearchAsync(search.getText())
-                            .subscribeOn(Schedulers.parallel())
-                            .subscribe(
-                                    animeList -> {
-                                        CardRecomendationAnime.index = 0;
-                                        ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(animeList);
-                                        imageLoaderWorker.execute();
-                                        animeList.stream().parallel().forEach(bayor -> addAnime(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId));
-                                    },
-                                    throwable -> {
-                                        System.out.println("error : " + throwable.getMessage());
-                                    }
-                            );
-                } catch (JikanQueryException ex) {
-                    throw new RuntimeException(ex);
-                }
+//                try {
+//                    JikanAPI.getTitleAndImageAnimeBySearchAsync(search.getText())
+//                            .subscribeOn(Schedulers.parallel())
+//                            .subscribe(
+//                                    animeList -> {
+//                                        CardRecomendationAnime.index = 0;
+//                                        ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(animeList);
+//                                        imageLoaderWorker.execute();
+//                                        animeList.stream().parallel().forEach(bayor -> {
+//                                            addAnime(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId);
+//                                        });
+//                                    },
+//                                    throwable -> {
+//                                        System.out.println("error : " + throwable.getMessage());
+//                                    }
+//                            );
+//                } catch (JikanQueryException ex) {
+//                    throw new RuntimeException(ex);
+//                }
+//
+                SwingWorker<Void, Void> addSearchCollection = new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        try {
+                            System.out.println("search log " + JikanAPI.searchAnimeByTitle(search.getText()).get(0).title.isBlank());
+                            JikanAPI.getTitleAndImageAnimeBySearchAsync(search.getText())
+                                    .subscribeOn(Schedulers.parallel())
+                                    .subscribe(
+                                            animeList -> {
+                                                CardRecomendationAnime.index = 0;
+                                                ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(animeList);
+                                                imageLoaderWorker.execute();
+                                                animeList.stream().parallel().forEach(bayor -> {
+                                                    addAnime(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId);
+                                                    System.out.println("Apakah anime ini ada ? " + bayor.title);
+                                                });
+                                            },
+                                            throwable -> {
+                                                System.out.println("error : " + throwable.getMessage());
+                                            }
+                                    );
+                        } catch (JikanQueryException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            if (JikanAPI.searchAnimeByTitle(search.getText()).size() == 0) {
+                                JOptionPane.showMessageDialog(null, "Anime Tersebut Tidak Dapat Di Temukan", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Anime Berhasil Di Temukan", "Informasi", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } catch (JikanQueryException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    };
+
+                };
+
+                addSearchCollection.execute();
+
             }
+
         });
 
 
@@ -530,22 +544,22 @@ public class Navbar extends JFrame {
         return divContainer;
     }
 
-    public String getSearchByUser() {
+    public static String getSearchByUser() {
         return searchByUser;
     }
 
-    public void setSearchByUser(String search) {
-        this.searchByUser = search;
+    public static void setSearchByUser(String search) {
+        searchByUser = search;
     }
 
 
-    public static void main(String[] args) {
-        Navbar navbar = new Navbar();
-        navbar.add(navbar.getNavbar());
-        navbar.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        Navbar navbar = new Navbar();
+//        navbar.add(navbar.getNavbar());
+//        navbar.setVisible(true);
+//    }
 
-    public void addTopCardAnime() {
+    public static void addTopCardAnime() {
         System.out.println("log add top card");
         try {
             JikanAPI.getTopAnime()
@@ -566,8 +580,8 @@ public class Navbar extends JFrame {
         }
     }
 
-    AtomicInteger index = new AtomicInteger();
-    public void addRecomendationAnime() {
+    static AtomicInteger index = new AtomicInteger();
+    public static void addRecomendationAnime() {
         JikanAPI.getRecommendationAnimeAsync()
                 .subscribeOn(Schedulers.parallel())
                 .subscribe(
@@ -605,7 +619,7 @@ public class Navbar extends JFrame {
         Controller.addComponent(recomendationAnimeDiv);
     }
 
-    private boolean isHalalAnime(Anime anime) {
+    private static boolean isHalalAnime(Anime anime) {
         return anime.rating == AgeRating.PG13;
     }
 
@@ -626,56 +640,56 @@ public class Navbar extends JFrame {
 
         Controller.addComponent(home);
     }
-    public void addSearchAnimeCard() {
+    public static void addSearchAnimeCard() {
         Controller.addComponent(searchAnimeDiv);
     }
 
-    public void removeSearchAnimeCard() {
+    public static void removeSearchAnimeCard() {
 //        searchAnimeDiv.removeAll();
         Controller.removeComponent(searchAnimeDiv);
     }
 
-    public void removeTopCardComponent() {
+    public static void removeTopCardComponent() {
         Controller.removeComponent(topAnimeDiv);
     }
 
-    public void removeRecomdendationCardComponent() {
+    public static void removeRecomdendationCardComponent() {
         Controller.removeComponent(recomendationAnimeDiv);
     }
 
-    public CardSearchAnime getCardSearch() {
+    public static CardSearchAnime getCardSearch() {
         return cardSearchAnime;
     }
 
 
-    public CardTopAnime getCardTopAnime() {
+    public static CardTopAnime getCardTopAnime() {
         if (cardTopAnime.getCard() == null) {
             System.out.println("okay");
         }
         return cardTopAnime;
     }
 
-    public void setCardTopAnime() {
+    public static void setCardTopAnime() {
 
     }
 
-    public void setCardSearchAnime(CardSearchAnime cardSearchAnime) {
-        this.cardSearchAnime = cardSearchAnime;
+    public static void setCardSearchAnime(CardSearchAnime cardSearchAnime) {
+        cardSearchAnime = cardSearchAnime;
     }
 
-    public void addAnime(String title,ImageIcon image, int id) {
+    public static void addAnime(String title,ImageIcon image, int id) {
         getCardSearch().addCard(title, image, id);
     }
 
-    public JPanel getTopAnime() {
+    public static JPanel getTopAnime() {
         return topAnimeDiv;
     }
 
-    public JPanel getRecomendationAnimeDiv() {
+    public static JPanel getRecomendationAnimeDiv() {
         return  recomendationAnimeDiv;
     }
 
-    public void syncDelete() {
+    public static void syncDelete() {
         cardTopAnime.removePanel();
         cardRecomendationAnime.removePanel();
 
@@ -686,36 +700,36 @@ public class Navbar extends JFrame {
 
 }
 
-class MyThread extends Thread {
-    public void run() {
-        AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
-        ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(listAnimeuser.getAllAnimeListUser());
-        imageLoaderWorker.execute();
-//                listAnimeuser.getAllAnimeListUser().forEach(
-//                        luAsikBang -> {
-//                            ImageIcon ade = ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) != null ? ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) : null;
-//                            System.out.println("is image null ? " + ade);
-//                            CardCollection.addCard(
-//                                    luAsikBang.title,
-//                                    ade,
-//                                    luAsikBang.malId
-//                            );
-//                        }
-//                );
-//
-        listAnimeuser.getAllAnimeListUser().parallelStream().forEach(
-                luAsikBang -> {
-                    ImageIcon ade = ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) != null ? ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) : null;
-                    System.out.println("is image null ? " + ade);
-                    CardCollection.addCard(
-                            luAsikBang.title,
-                            ade,
-                            luAsikBang.malId
-                    );
-                }
-        );
-    }
-}
+//class MyThread extends Thread {
+//    public void run() {
+//        AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
+//        ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(listAnimeuser.getAllAnimeListUser());
+//        imageLoaderWorker.execute();
+////                listAnimeuser.getAllAnimeListUser().forEach(
+////                        luAsikBang -> {
+////                            ImageIcon ade = ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) != null ? ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) : null;
+////                            System.out.println("is image null ? " + ade);
+////                            CardCollection.addCard(
+////                                    luAsikBang.title,
+////                                    ade,
+////                                    luAsikBang.malId
+////                            );
+////                        }
+////                );
+////
+//        listAnimeuser.getAllAnimeListUser().parallelStream().forEach(
+//                luAsikBang -> {
+//                    ImageIcon ade = ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) != null ? ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) : null;
+//                    System.out.println("is image null ? " + ade);
+//                    CardCollection.addCard(
+//                            luAsikBang.title,
+//                            ade,
+//                            luAsikBang.malId
+//                    );
+//                }
+//        );
+//    }
+//}
 
 
 

@@ -1,17 +1,24 @@
 package ade.animelist.components;
 
 import ade.animelist.controller.Controller;
+import ade.animelist.database.repository.AddAnimeToDbRepository;
+import ade.animelist.database.repository.AddAnimeToDbRepositoryImpl;
+import ade.animelist.util.AnimeListWorker;
 import ade.animelist.util.ImageRenderer;
 import net.sandrohc.jikan.exception.JikanQueryException;
+import net.sandrohc.jikan.model.anime.Anime;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class CardCollection {
     public static boolean isOpened = false;
     private static int indexAddUpAnime;
+    public static int totalAnime = -1;
 
 //    public static AnimePage animePage = new AnimePage();
 
@@ -26,6 +33,7 @@ public class CardCollection {
     static ImageIcon refreshImg = ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL("https://img.icons8.com/ios-filled/50/ffffff/refresh--v1.png"), 20, 20);
     static ImageIcon hoverRefresh = ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL("https://img.icons8.com/ios-filled/50/FFBF00/refresh--v1.png"), 20, 20);
     public static JLabel refresh = new JLabel("refresh");
+    public static int countRefreshClicked = 0;
 
 
 
@@ -38,8 +46,72 @@ public class CardCollection {
         refresh.setPreferredSize(new Dimension(1600, 30));
         refresh.setAlignmentX(JLabel.LEFT);
         refresh.setIcon(refreshImg);
+        CardCollection.setIndex(0);
 
         refresh.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
+//                Controller.removeComponent(CardCollection.panel);
+//                removeCardPanel();
+//
+//                System.out.println("APakah ke hapus");
+//
+//                CardCollection.panel = CardCollection.getCardPanel();
+
+                if (countRefreshClicked != 3) {
+                    List<CompletableFuture<Anime>> animeFutures = listAnimeuser.getAllAnimeListUserAsync();
+                    AnimeListWorker animeListWorker = new AnimeListWorker(animeFutures);
+                    animeListWorker.execute();
+                    ++countRefreshClicked;
+                }
+
+//                SwingWorker<Void, Anime> doRefreshAnime = new SwingWorker<Void, Anime>() {
+////                    private final List<CompletableFuture<Anime>> animeFutures;
+////
+////                    public AnimeListWorker(List<CompletableFuture<Anime>> animeFutures) {
+////                        this.animeFutures = animeFutures;
+////                    }
+//
+//                    @Override
+//                    protected Void doInBackground() {
+//                        animeFutures.forEach(future -> {
+//                            try {
+//                                Anime anime = future.join();
+//                                publish(anime);
+//                            } catch (Exception ex) {
+//                                ex.printStackTrace(); // Handle exceptions appropriately
+//                            }
+//                        });
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    protected void process(List<Anime> chunks) {
+//                        // This method is invoked on the EDT
+//                        for (Anime anime : chunks) {
+//                            // Update GUI components here
+//                            ImageIcon tes = ImageRenderer.createImageIconByURL(anime.images.getJpg().largeImageUrl);
+//                            System.out.println(tes.getIconWidth());
+//                            System.out.println(anime.title);
+//
+//                            CardCollection.addCard(anime.title, tes, anime.malId);
+//                        }
+//                        CardCollection.setIndex(0);
+//                    }
+//                };
+//
+//                doRefreshAnime.execute();
+//                AnimeListWorker animeListWorker = new AnimeListWorker(animeFutures);
+//                animeListWorker.execute();
+
+//                CardCollection.setIndex(0);
+//                Controller.addComponent(CardCollection.panel);
+
+                System.out.println("difarina");
+            }
+
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
@@ -62,6 +134,15 @@ public class CardCollection {
         return refresh;
     }
 
+    public static JPanel getCardPanel() {
+        return panel = getCard();
+    }
+
+    public static void removeCardPanel() {
+        panel.removeAll();
+        panel.repaint();
+        panel.revalidate();
+    }
 
     public static JPanel getCard() {
         cardPanel = new JPanel();
@@ -126,7 +207,7 @@ public class CardCollection {
         JLabel img = new JLabel();
         img.setOpaque(true);
         img.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 100));
-        img.setBackground(Color.gray);
+        img.setBackground(Color.decode("#333b48"));
         img.setIcon(imgAnime);
         img.setVerticalAlignment(SwingConstants.CENTER);
         img.setHorizontalAlignment(SwingConstants.CENTER);
@@ -184,7 +265,7 @@ public class CardCollection {
 //                            Controller.navbar.getTopAnime().removeAll();
 
                             // PR
-                            Controller.navbar.syncDelete();
+                            Navbar.syncDelete();
 
                             Controller.removeComponent(panel);
                             panel.removeAll();
