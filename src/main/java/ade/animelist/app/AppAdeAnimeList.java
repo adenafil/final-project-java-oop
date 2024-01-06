@@ -1,6 +1,5 @@
 package ade.animelist.app;
 
-import ade.animelist.components.Navbar;
 import ade.animelist.controller.Controller;
 
 public class AppAdeAnimeList {

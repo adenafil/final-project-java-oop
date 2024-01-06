@@ -1,21 +1,18 @@
 package ade.animelist.controller;
 
-import ade.animelist.components.*;
-import ade.animelist.database.repository.AddAnimeToDbRepository;
-import ade.animelist.database.repository.AddAnimeToDbRepositoryImpl;
-import ade.animelist.util.ImageLoaderWorker;
-import ade.animelist.util.ImageRenderer;
-import net.sandrohc.jikan.exception.JikanQueryException;
-import net.sandrohc.jikan.model.anime.Anime;
+import ade.animelist.components.fhd.Dashboard;
+import ade.animelist.components.fhd.Login;
+import ade.animelist.components.fhd.Navbar;
+import ade.animelist.components.fhd.SignUp;
+import ade.animelist.components.utilcomponent.ImageRenderer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 public class Controller {
 //    public static Navbar navbar = new Navbar();
     public static JFrame frame =  new JFrame();
+    private static ImageIcon imageIcon = new ImageIcon("src/main/resources/assets/icon.jpg");
 
 //    static {
 //        ImageRenderer.runConfig();
@@ -27,13 +24,14 @@ public class Controller {
     }
 
     public static void createAndShowGUI() {
-
+        frame.setIconImage(ImageRenderer.setImageIconSize(imageIcon, 32, 32).getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new FlowLayout(FlowLayout.LEADING, -8, 0));
-        frame.setSize(1920, 1080);
+//        frame.setSize(1920, 1080);
+        frame.setSize(1366, 768);
         frame.getContentPane().setBackground(Color.ORANGE);
         frame.setResizable(false);
-        createLogin();
+        createLoginHD();
 
 //        addComponent(navbar.getNavbar());
 //        navbar.addTopCardAnime();
@@ -90,6 +88,10 @@ public class Controller {
 
     public static void createLogin() {
         addComponent(Login.getLogin());
+    }
+
+    public static void createLoginHD() {
+        addComponent(ade.animelist.components.hd.Login.getLogin());
     }
 
     public static void createDasshboard() {

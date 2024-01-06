@@ -1,9 +1,6 @@
 package ade.animelist.api;
 
-import ade.animelist.database.DatabaseConnection;
-import ade.animelist.database.repository.ConfigRepository;
-import ade.animelist.database.repository.ConfigRepositoryImpl;
-import ade.animelist.util.ImageRenderer;
+import ade.animelist.components.utilcomponent.ImageRenderer;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.Expiry;
@@ -11,28 +8,18 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.cache.JikanCache;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.model.anime.Anime;
-import net.sandrohc.jikan.model.anime.AnimeStatus;
-import net.sandrohc.jikan.model.common.Genre;
 import net.sandrohc.jikan.model.enums.AgeRating;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class JikanAPI {

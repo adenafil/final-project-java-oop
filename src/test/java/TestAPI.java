@@ -1,13 +1,10 @@
 ;
 import ade.animelist.api.JikanAPI;
-import ade.animelist.controller.Controller;
-import ade.animelist.util.ImageLoaderWorker;
-import ade.animelist.util.ImageRenderer;
+import ade.animelist.components.utilcomponent.ImageLoaderWorker;
+import ade.animelist.components.utilcomponent.ImageRenderer;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.model.anime.Anime;
-import net.sandrohc.jikan.model.common.Recommendation;
-import net.sandrohc.jikan.model.common.RecommendationSimple;
 import net.sandrohc.jikan.model.enums.AgeRating;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
@@ -15,9 +12,7 @@ import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 
 import javax.swing.*;
-import java.time.Duration;
 import java.util.*;
-import java.util.concurrent.CountDownLatch;
 
 public class TestAPI {
     static Jikan jikan;

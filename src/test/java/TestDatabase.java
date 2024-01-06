@@ -1,12 +1,9 @@
-import ade.animelist.api.JikanAPI;
-import ade.animelist.components.Setting;
 import ade.animelist.database.DatabaseConnection;
 import ade.animelist.database.entity.User;
 import ade.animelist.database.repository.*;
-import ade.animelist.util.AnimeListWorker;
-import ade.animelist.util.ImageRenderer;
+import ade.animelist.components.utilcomponent.AnimeListWorker;
+import ade.animelist.components.utilcomponent.ImageRenderer;
 import net.sandrohc.jikan.model.anime.Anime;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
@@ -15,7 +12,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class TestDatabase {
 
