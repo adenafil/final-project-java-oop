@@ -121,8 +121,6 @@ public class CardSearchAnime {
 
 
 
-
-
         card.addMouseListener(
                 new MouseAdapter() {
                     @Override

@@ -13,8 +13,8 @@ public class CardTopAnime {
     JPanel cardPanel;
 //    public AnimePage animePage = new AnimePage();
 
-    private static final int CARD_WIDTH = 300;
-    private static final int CARD_HEIGHT = 400;
+    private static final int CARD_WIDTH = 240;
+    private static final int CARD_HEIGHT = 300;
     private static int[] x = {0, 350, 700, 1050, 1400};
     private static int index = 0;
     // will up constantly when index ==4 do 20 + 300;
@@ -29,12 +29,14 @@ public class CardTopAnime {
 
 
         JScrollPane scrollPane = new JScrollPane(cardPanel);
-        scrollPane.setPreferredSize(new Dimension(1920, 400));
+        scrollPane.setPreferredSize(new Dimension(1366, 300));
         scrollPane.setOpaque(true);
         scrollPane.getViewport().getView().setBackground(Color.decode("#333b48"));
+//        scrollPane.getViewport().getView().setBackground(Color.GREEN);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getVerticalScrollBar().setBackground(Color.decode("#333b48"));
         scrollPane.getVerticalScrollBar().setUnitIncrement(30);
+        scrollPane.getHorizontalScrollBar().setUnitIncrement(30);
 //        scrollPane.setBackground(Color.BLACK);
 //        scrollPane.setForeground(Color.YELLOW);
 //        scrollPane.setBackground(Color.RED);
@@ -45,13 +47,14 @@ public class CardTopAnime {
         JLabel topAnime = new JLabel("Top Anime");
         topAnime.setOpaque(true);
         topAnime.setBackground(Color.decode("#333b48"));
+//        topAnime.setBackground(Color.PINK);
         topAnime.setForeground(Color.WHITE);
-        topAnime.setFont(new Font(Font.SERIF, Font.BOLD, 30));
-        topAnime.setPreferredSize(new Dimension(1600, 30));
+        topAnime.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+        topAnime.setPreferredSize(new Dimension(1300, 20));
         topAnime.setAlignmentX(JLabel.LEFT);
 
         panel.add(topAnime);
-        panel.setPreferredSize(new Dimension(1920, 500));
+        panel.setPreferredSize(new Dimension(1366, 350));
         panel.setBackground(Color.decode("#333b48"));
         panel.setLayout(new FlowLayout());
 //        panel.setLayout(null);
@@ -85,11 +88,11 @@ public class CardTopAnime {
         this.cardPanel.removeAll();
     }
 
-    public void addCard(String titleAnime, ImageIcon imgAnime, int id) {
+    public void addCard(String titleAnime, ImageIcon imgAnime, int id, int count) {
 
-        if (titleAnime.length() > 40) {
+        if (titleAnime.length() > 30) {
             String temp = "";
-            for (int i = 0; i < 40; i++) {
+            for (int i = 0; i < 30; i++) {
                 temp += titleAnime.charAt(i);
             }
 
@@ -101,7 +104,11 @@ public class CardTopAnime {
 
 
         JPanel card = new JPanel();
-        card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
+        if (count <= 5) {
+            System.out.println("count " + count);
+            card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 20));
+        }
+        if (count >= 6) card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
         card.setBackground(Color.decode("#333b48"));
 
         JLabel img = new JLabel();

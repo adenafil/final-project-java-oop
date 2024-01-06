@@ -237,7 +237,7 @@ public class JikanAPI {
 
     public static Mono<List<Anime>> getRecommendationAnimeAsync() {
         Jikan noCachingDek = new Jikan();
-        return Flux.range(0, 15)
+        return Flux.range(0, 40)
                 .flatMap(i -> Mono.defer(() -> {
                     try {
                         return Mono.justOrEmpty(noCachingDek.query().random().anime().execute());

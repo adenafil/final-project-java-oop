@@ -1,6 +1,7 @@
 package ade.animelist.components.hd;
 
 import ade.animelist.components.utilcomponent.AnimeListWorker;
+import ade.animelist.components.utilcomponent.AnimeListWorkerHD;
 import ade.animelist.components.utilcomponent.Counter;
 import ade.animelist.components.utilcomponent.ImageRenderer;
 import ade.animelist.controller.Controller;
@@ -19,16 +20,16 @@ public class Dashboard {
     public static boolean isOpened = false;
     public static JPanel getDashboard() {
         dashboardDiv.setOpaque(true);
-        dashboardDiv.setPreferredSize(new Dimension(1920, 980));
-        dashboardDiv.setMaximumSize(new Dimension(1920, 980));
+        dashboardDiv.setPreferredSize(new Dimension(1366, 768));
+        dashboardDiv.setMaximumSize(new Dimension(1366, 768));
         dashboardDiv.setBackground(Color.decode("#333b48"));
 
         // container for welcoming name
         JPanel containerFeat = new JPanel();
         containerFeat.setOpaque(true);
         containerFeat.setLayout(new BoxLayout(containerFeat, BoxLayout.Y_AXIS));
-        containerFeat.setPreferredSize(new Dimension(1920, 600));
-        containerFeat.setMaximumSize(new Dimension(1920, 600));
+        containerFeat.setPreferredSize(new Dimension(1366, 600));
+        containerFeat.setMaximumSize(new Dimension(1366, 600));
         containerFeat.setBackground(Color.decode("#333b48"));
 
         // add to container bg below navbar
@@ -37,14 +38,14 @@ public class Dashboard {
         // logic name
         JPanel containerName = new JPanel();
         containerName.setOpaque(true);
-        containerName.setPreferredSize(new Dimension(1920, 100));
-        containerName.setMaximumSize(new Dimension(1920, 100));
+        containerName.setPreferredSize(new Dimension(1366, 50));
+        containerName.setMaximumSize(new Dimension(1366, 50));
         containerName.setBackground(Color.decode("#333b48"));
 
         JLabel name = new JLabel("Hello " + configRepository.getCurrentUsername());
         SettingRepository settingRepository = new SettingRepositoryImpl();
         name.setForeground(Color.WHITE);
-        name.setFont(new Font(Font.SERIF, Font.BOLD, 60));
+        name.setFont(new Font(Font.SERIF, Font.BOLD, 30));
 
 
 
@@ -55,14 +56,14 @@ public class Dashboard {
         // logic profile
         JPanel containerProfile = new JPanel();
         containerProfile.setOpaque(true);
-        containerProfile.setPreferredSize(new Dimension(1920, 350));
-        containerProfile.setMaximumSize(new Dimension(1920, 350));
+        containerProfile.setPreferredSize(new Dimension(1366, 200));
+        containerProfile.setMaximumSize(new Dimension(1366, 200));
         containerProfile.setBackground(Color.decode("#333b48"));
 
         JPanel profile = new JPanel();
         profile.setOpaque(true);
-        profile.setPreferredSize(new Dimension(350, 350));
-        profile.setMaximumSize(new Dimension(350, 350));
+        profile.setPreferredSize(new Dimension(200, 200));
+        profile.setMaximumSize(new Dimension(200, 200));
         profile.setBackground(Color.decode("#" + getHexaColor(configRepository.getCurrentUsername())));
         ImageIcon img = new ImageIcon(settingRepository.getPath());
 
@@ -96,17 +97,17 @@ public class Dashboard {
         JPanel containerButton = new JPanel();
         containerButton.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 25));
         containerButton.setOpaque(true);
-        containerButton.setPreferredSize(new Dimension(1920, 150));
-        containerButton.setMaximumSize(new Dimension(1920, 150));
+        containerButton.setPreferredSize(new Dimension(1366, 150));
+        containerButton.setMaximumSize(new Dimension(1366, 150));
         containerButton.setBackground(Color.decode("#333b48"));
 
         JButton myCollectionBtn = new JButton("My Collection");
         myCollectionBtn.setOpaque(true);
         myCollectionBtn.setBackground(Color.ORANGE);
         myCollectionBtn.setForeground(Color.decode("#333b48"));
-        myCollectionBtn.setPreferredSize(new Dimension(300, 70));
-        myCollectionBtn.setMaximumSize(new Dimension(300, 70));
-        myCollectionBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+        myCollectionBtn.setPreferredSize(new Dimension(150, 40));
+        myCollectionBtn.setMaximumSize(new Dimension(150, 40));
+        myCollectionBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         myCollectionBtn.setBorder(BorderFactory.createEmptyBorder());
         myCollectionBtn.setFocusable(false);
 
@@ -135,14 +136,14 @@ public class Dashboard {
 //                                CardCollection.scrollPane.repaint();
 //                                CardCollection.scrollPane.revalidate();
                                 System.out.println("masuk sini");
-                                CardCollection.panel.getComponent(2).setPreferredSize(new Dimension(1920, 400));
+                                CardCollection.panel.getComponent(2).setPreferredSize(new Dimension(1366, 300));
                                 CardCollection.cardPanel.repaint();
                                 CardCollection.cardPanel.revalidate();
                                 CardCollection.panel.revalidate();
                                 CardCollection.panel.repaint();
                             } else {
                                 System.out.println("masuk sana");
-                                CardCollection.panel.getComponent(2).setPreferredSize(new Dimension(1920, 840));
+                                CardCollection.panel.getComponent(2).setPreferredSize(new Dimension(1366, 600));
                                 CardCollection.panel.revalidate();
                                 CardCollection.panel.repaint();
                             }
@@ -163,7 +164,7 @@ public class Dashboard {
 
             if (indexListenerCollection != 0) {
                 List<CompletableFuture<Anime>> animeFutures = listAnimeuser.getAllAnimeListUserAsync();
-                AnimeListWorker animeListWorker = new AnimeListWorker(animeFutures);
+                AnimeListWorkerHD animeListWorker = new AnimeListWorkerHD(animeFutures);
                 animeListWorker.execute();
             }
 
@@ -224,9 +225,9 @@ public class Dashboard {
         signOutBtn.setOpaque(true);
         signOutBtn.setBackground(Color.ORANGE);
         signOutBtn.setForeground(Color.decode("#333b48"));
-        signOutBtn.setPreferredSize(new Dimension(200, 70));
-        signOutBtn.setMaximumSize(new Dimension(200, 70));
-        signOutBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+        signOutBtn.setPreferredSize(new Dimension(120, 40));
+        signOutBtn.setMaximumSize(new Dimension(120, 40));
+        signOutBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         signOutBtn.setBorder(BorderFactory.createEmptyBorder());
         signOutBtn.setFocusable(false);
 
@@ -236,9 +237,9 @@ public class Dashboard {
 //            dashboardDiv.repaint();
 //            dashboardDiv.revalidate();
             Controller.removeComponent(dashboardDiv);
-            Controller.createLogin();
+            Controller.createLoginHD();
 //            Controller.removeComponent(Controller.navbar.getNavbar());
-            Controller.removeDashboard();
+            Controller.removeDashboardHD();
             Controller.removeComponent(Navbar.navbar);
             Navbar.removeNavbar();
 //            Controller.navbar.removeAll();
@@ -249,9 +250,9 @@ public class Dashboard {
         settingBtn.setOpaque(true);
         settingBtn.setBackground(Color.ORANGE);
         settingBtn.setForeground(Color.decode("#333b48"));
-        settingBtn.setPreferredSize(new Dimension(200, 70));
-        settingBtn.setMaximumSize(new Dimension(200, 70));
-        settingBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+        settingBtn.setPreferredSize(new Dimension(100, 40));
+        settingBtn.setMaximumSize(new Dimension(100, 40));
+        settingBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
         settingBtn.setBorder(BorderFactory.createEmptyBorder());
         settingBtn.setFocusable(false);
 

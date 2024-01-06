@@ -590,6 +590,7 @@ public class Navbar {
     }
 
     static AtomicInteger index = new AtomicInteger();
+    static int stopWhenTen = 1;
     public static void addRecomendationAnime() {
         JikanAPI.getRecommendationAnimeAsync()
                 .subscribeOn(Schedulers.parallel())
@@ -601,12 +602,14 @@ public class Navbar {
                             CardRecomendationAnime.index = 0;
                             animeList.forEach(
                                     (bayor) -> {
-                                        if (isHalalAnime(bayor)) {
+                                        if (isHalalAnime(bayor) && stopWhenTen <= 10) {
 //                                            ImageIcon imgReco = ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl);
 //                                            System.out.println("log width " + imgReco.getIconWidth());
                                             System.out.println("log name " + bayor.title);
-                                                    cardRecomendationAnime.addCard(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId);
+                                            cardRecomendationAnime.addCard(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId);
+                                            ++stopWhenTen;
                                         }
+                                        if (stopWhenTen == 10) return;
                                     }
                             );
                         },
@@ -626,6 +629,7 @@ public class Navbar {
             return;
         }
         Controller.addComponent(recomendationAnimeDiv);
+        stopWhenTen = 1;
     }
 
     private static boolean isHalalAnime(Anime anime) {

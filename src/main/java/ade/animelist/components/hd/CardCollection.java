@@ -1,6 +1,7 @@
 package ade.animelist.components.hd;
 
 import ade.animelist.components.utilcomponent.AnimeListWorker;
+import ade.animelist.components.utilcomponent.AnimeListWorkerHD;
 import ade.animelist.components.utilcomponent.ImageRenderer;
 import ade.animelist.controller.Controller;
 import ade.animelist.database.repository.AddAnimeToDbRepository;
@@ -24,14 +25,14 @@ public class CardCollection {
 
     public static JPanel cardPanel;
     public static JPanel panel = new JPanel();
-    private static final int CARD_WIDTH = 300;
-    private static final int CARD_HEIGHT = 400;
+    private static final int CARD_WIDTH = 240;
+    private static final int CARD_HEIGHT = 300;
     private static int[] x = {0, 350, 700, 1050, 1400};
     private static int index = 0;
     // will up constantly when index ==4 do 20 + 300;
     private static int normalY = 0;
-    static ImageIcon refreshImg = ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL("https://img.icons8.com/ios-filled/50/ffffff/refresh--v1.png"), 20, 20);
-    static ImageIcon hoverRefresh = ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL("https://img.icons8.com/ios-filled/50/FFBF00/refresh--v1.png"), 20, 20);
+    static ImageIcon refreshImg = ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL("https://img.icons8.com/ios-filled/50/ffffff/refresh--v1.png"), 15, 15);
+    static ImageIcon hoverRefresh = ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL("https://img.icons8.com/ios-filled/50/FFBF00/refresh--v1.png"), 15, 15);
     public static JLabel refresh = new JLabel("refresh");
     public static int countRefreshClicked = 0;
 
@@ -44,7 +45,7 @@ public class CardCollection {
         refresh.setBackground(Color.decode("#333b48"));
         refresh.setForeground(Color.WHITE);
         refresh.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
-        refresh.setPreferredSize(new Dimension(1600, 30));
+        refresh.setPreferredSize(new Dimension(1300, 20));
         refresh.setAlignmentX(JLabel.LEFT);
         refresh.setIcon(refreshImg);
         CardCollection.setIndex(0);
@@ -63,7 +64,7 @@ public class CardCollection {
 
                 if (countRefreshClicked != 3) {
                     List<CompletableFuture<Anime>> animeFutures = listAnimeuser.getAllAnimeListUserAsync();
-                    AnimeListWorker animeListWorker = new AnimeListWorker(animeFutures);
+                    AnimeListWorkerHD animeListWorker = new AnimeListWorkerHD(animeFutures);
                     animeListWorker.execute();
                     ++countRefreshClicked;
                 }
@@ -151,7 +152,7 @@ public class CardCollection {
         cardPanel.setLayout(new GridBagLayout());
 
         JScrollPane scrollPane = new JScrollPane(cardPanel);
-        scrollPane.setPreferredSize(new Dimension(1920, 940));
+        scrollPane.setPreferredSize(new Dimension(1366, 768));
         scrollPane.setOpaque(true);
 //        scrollPane.getViewport().getView().setBackground(Color.decode("#333b48"));
         scrollPane.getViewport().getView().setBackground(Color.decode("#333b48"));
@@ -170,8 +171,8 @@ public class CardCollection {
         topAnime.setOpaque(true);
         topAnime.setBackground(Color.decode("#333b48"));
         topAnime.setForeground(Color.WHITE);
-        topAnime.setFont(new Font(Font.SERIF, Font.BOLD, 30));
-        topAnime.setPreferredSize(new Dimension(1600, 30));
+        topAnime.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+        topAnime.setPreferredSize(new Dimension(1300, 25));
         topAnime.setAlignmentX(JLabel.LEFT);
 
 //        JPanel filterContainer = new JPanel();
@@ -184,7 +185,7 @@ public class CardCollection {
         panel.add(topAnime);
         panel.add(getLabelRefresh());
 //        panel.add(filterContainer);
-        panel.setPreferredSize(new Dimension(1920, 960));
+        panel.setPreferredSize(new Dimension(1366, 800));
         panel.setBackground(Color.decode("#333b48"));
         panel.setLayout(new FlowLayout());
 //        panel.setBackground(Color.PINK);
@@ -199,9 +200,9 @@ public class CardCollection {
     public static void addCard(String tileAnime, ImageIcon imgAnime, int id) {
         indexAddUpAnime++;
 
-        if (tileAnime.length() > 40) {
+        if (tileAnime.length() > 25) {
             String temp = "";
-            for (int i = 0; i < 40; i++) {
+            for (int i = 0; i < 25; i++) {
                 temp += tileAnime.charAt(i);
             }
 
@@ -212,12 +213,12 @@ public class CardCollection {
         }
 
         JPanel card = new JPanel();
-        card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
+        card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 50));
         card.setBackground(Color.decode("#333b48"));
 
         JLabel img = new JLabel();
         img.setOpaque(true);
-        img.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 100));
+        img.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 150));
         img.setBackground(Color.decode("#333b48"));
         img.setIcon(imgAnime);
         img.setVerticalAlignment(SwingConstants.CENTER);

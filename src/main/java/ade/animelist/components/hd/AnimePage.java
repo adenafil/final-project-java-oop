@@ -39,13 +39,13 @@ public class AnimePage {
         contaienrDiv.setOpaque(true);
         contaienrDiv.setLayout(new BoxLayout(contaienrDiv, BoxLayout.Y_AXIS));
 //        contaienrDiv.setLayout(new FlowLayout(FlowLayout.LEADING, -8, 0));
-        contaienrDiv.setPreferredSize(new Dimension(1920, 1000));
+        contaienrDiv.setPreferredSize(new Dimension(1366, 768));
         contaienrDiv.setBackground(Color.decode("#333b48"));
 
         JPanel pelengkapBg = new JPanel();
         pelengkapBg.setOpaque(true);
-        pelengkapBg.setPreferredSize(new Dimension(1920, 50));
-        pelengkapBg.setMaximumSize(new Dimension(1920, 50));
+        pelengkapBg.setPreferredSize(new Dimension(1366, 10));
+        pelengkapBg.setMaximumSize(new Dimension(1366, 10));
         pelengkapBg.setBackground(Color.decode("#333b48"));
 
         contaienrDiv.add(pelengkapBg);
@@ -54,7 +54,7 @@ public class AnimePage {
         JLabel judul = new JLabel(anime.title);
         judul.setOpaque(true);
 //        judul.setPreferredSize(new Dimension(1920, 30));
-        judul.setMaximumSize(new Dimension(1920, 30));
+        judul.setMaximumSize(new Dimension(1366, 30));
         judul.setBackground(Color.decode("#333b48"));
         judul.setForeground(Color.WHITE);
         judul.setFont(new Font(Font.MONOSPACED, Font.BOLD, 24));
@@ -68,7 +68,7 @@ public class AnimePage {
         JPanel kotakAnimeDesc = new JPanel();
         kotakAnimeDesc.setLayout(new GridBagLayout());
         kotakAnimeDesc.setOpaque(true);
-        kotakAnimeDesc.setMaximumSize(new Dimension(1920, 100));
+        kotakAnimeDesc.setMaximumSize(new Dimension(1366, 100));
         kotakAnimeDesc.setBackground(Color.decode("#333b48"));
 //        anAnime.setForeground(Color.BLUE);
 //
@@ -99,9 +99,10 @@ public class AnimePage {
         // container
         JPanel imageAndSynopsis = new JPanel();
         imageAndSynopsis.setLayout(new BoxLayout(imageAndSynopsis, BoxLayout.X_AXIS));
-        imageAndSynopsis.setMaximumSize(new Dimension(1920, 500));
+        imageAndSynopsis.setMaximumSize(new Dimension(1366, 300));
         imageAndSynopsis.setOpaque(true);
-        imageAndSynopsis.setBackground(Color.RED);
+//        imageAndSynopsis.setBackground(Color.RED);
+        imageAndSynopsis.setBackground(Color.decode("#333b48"));
 
         // imageIcon
 
@@ -109,19 +110,24 @@ public class AnimePage {
 
         JLabel imageAnime = new JLabel();
         imageAnime.setOpaque(true);
-        imageAnime.setPreferredSize(new Dimension(450, 500));
-        imageAnime.setMaximumSize(new Dimension(450, 1000));
+        imageAnime.setPreferredSize(new Dimension(450, 300));
+        imageAnime.setMaximumSize(new Dimension(450, 300));
         imageAnime.setBackground(Color.decode("#333b48"));
+//        imageAnime.setBackground(Color.GREEN);
         imageAnime.setHorizontalAlignment(JLabel.CENTER);
-        imageAnime.setIcon(ImageRenderer.setImageIconSize(animeIcon, 450, 500));
-        imageAnime.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        imageAnime.setIcon(ImageRenderer.setImageIconSize(animeIcon, 450, 300));
+        imageAnime.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, 0));
 
         // the synopsis
         JLabel synopsis = new JLabel();
         synopsis.setOpaque(true);
-        synopsis.setPreferredSize(new Dimension(1500, 500));
-        synopsis.setMaximumSize(new Dimension(1500, 1000));
+        synopsis.setPreferredSize(new Dimension(700, 280));
+        synopsis.setMaximumSize(new Dimension(700, 280));
         synopsis.setBackground(Color.decode("#333b48"));
+//        synopsis.setBackground(Color.PINK);
+        synopsis.setVerticalTextPosition(SwingConstants.TOP);
+//        synopsis.setHorizontalTextPosition(SwingConstants.TOP);
+        synopsis.setBorder(new LineBorder(Color.WHITE, 2));
 //        synopsis.setText(
 //                "<html>" +
 //                        "<p> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>"
@@ -131,7 +137,7 @@ public class AnimePage {
         synopsis.setText(
                 "<html>" + "<p>" + anime.synopsis + "</p>" + "</html>"
         );
-        synopsis.setFont(new Font(Font.MONOSPACED, Font.TYPE1_FONT, 20));
+        synopsis.setFont(new Font(Font.MONOSPACED, Font.TYPE1_FONT, 14));
         synopsis.setForeground(Color.WHITE);
         synopsis.setVerticalAlignment(SwingConstants.TOP);
         synopsis.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -155,8 +161,8 @@ public class AnimePage {
         JPanel sectionUserInterface = new JPanel();
         sectionUserInterface.setLayout(new GridBagLayout());
         sectionUserInterface.setOpaque(true);
-        sectionUserInterface.setPreferredSize(new Dimension(1920, 80));
-        sectionUserInterface.setMaximumSize(new Dimension(1920, 80));
+        sectionUserInterface.setPreferredSize(new Dimension(1366, 80));
+        sectionUserInterface.setMaximumSize(new Dimension(1366, 80));
         sectionUserInterface.setBackground(Color.decode("#333b48"));
 
         // button add to collection
@@ -402,26 +408,26 @@ public class AnimePage {
     public static JPanel createKotak(String field, String value) {
         JPanel kotak = new JPanel();
         kotak.setOpaque(true);
-        kotak.setPreferredSize(new Dimension(250, 80));
-        kotak.setMaximumSize(new Dimension(Short.MAX_VALUE, 80)); // Menetapkan tinggi maksimum agar tidak dapat melebihi 80 piksel
+        kotak.setPreferredSize(new Dimension(180, 50));
+        kotak.setMaximumSize(new Dimension(180, 50)); // Menetapkan tinggi maksimum agar tidak dapat melebihi 80 piksel
         kotak.setBackground(Color.decode("#333b48"));
         kotak.setBorder(new LineBorder(Color.WHITE, 1));
 
         JLabel peringkatText = new JLabel(field);
         peringkatText.setOpaque(true);
-        peringkatText.setPreferredSize(new Dimension(230, 25));
+        peringkatText.setPreferredSize(new Dimension(170, 15));
         peringkatText.setForeground(Color.WHITE);
         peringkatText.setBackground(Color.decode("#333b48"));
-        peringkatText.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+        peringkatText.setFont(new Font(Font.MONOSPACED, Font.BOLD, 16));
         peringkatText.setHorizontalAlignment(SwingConstants.CENTER);
 //        peringkatText.setVerticalAlignment(SwingConstants.CENTER);
 
         JLabel valuePeringkat = new JLabel(value);
         valuePeringkat.setOpaque(true);
-        valuePeringkat.setPreferredSize(new Dimension(230, 25));
+        valuePeringkat.setPreferredSize(new Dimension(170, 15));
         valuePeringkat.setForeground(Color.WHITE);
         valuePeringkat.setBackground(Color.decode("#333b48"));
-        valuePeringkat.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+        valuePeringkat.setFont(new Font(Font.MONOSPACED, Font.BOLD, 16));
         valuePeringkat.setHorizontalAlignment(SwingConstants.CENTER);
 
         kotak.add(peringkatText);

@@ -14,8 +14,8 @@ public class CardRecomendationAnime {
     JPanel cardPanel;
 
 //    AnimePage animePage = new AnimePage();
-    private static final int CARD_WIDTH = 300;
-    private static final int CARD_HEIGHT = 400;
+    private static final int CARD_WIDTH = 240;
+    private static final int CARD_HEIGHT = 350;
     private static int[] x = {0, 350, 700, 1050, 1400};
     public static int index = 0;
     // will up constantly when index ==4 do 20 + 300;
@@ -30,9 +30,10 @@ public class CardRecomendationAnime {
         refresh = new JLabel("refresh");
         refresh.setOpaque(true);
         refresh.setBackground(Color.decode("#333b48"));
+//        refresh.setBackground(Color.CYAN);
         refresh.setForeground(Color.WHITE);
         refresh.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
-        refresh.setPreferredSize(new Dimension(1600, 30));
+        refresh.setPreferredSize(new Dimension(1300, 30));
         refresh.setAlignmentX(JLabel.LEFT);
         refresh.setIcon(refreshImg);
 
@@ -68,12 +69,14 @@ public class CardRecomendationAnime {
 
 
         JScrollPane scrollPane = new JScrollPane(cardPanel);
-        scrollPane.setPreferredSize(new Dimension(1920, 400));
+        scrollPane.setPreferredSize(new Dimension(1366, 370));
         scrollPane.setOpaque(true);
         scrollPane.getViewport().getView().setBackground(Color.decode("#333b48"));
+//        scrollPane.getViewport().getView().setBackground(Color.GREEN);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getVerticalScrollBar().setBackground(Color.decode("#333b48"));
         scrollPane.getVerticalScrollBar().setUnitIncrement(30);
+        scrollPane.getHorizontalScrollBar().setUnitIncrement(30);
 //        scrollPane.setBackground(Color.BLACK);
 //        scrollPane.setForeground(Color.YELLOW);
 //        scrollPane.setBackground(Color.RED);
@@ -84,9 +87,10 @@ public class CardRecomendationAnime {
         JLabel topAnime = new JLabel("Rekomendasi Anime");
         topAnime.setOpaque(true);
         topAnime.setBackground(Color.decode("#333b48"));
+//        topAnime.setBackground(Color.PINK);
         topAnime.setForeground(Color.WHITE);
-        topAnime.setFont(new Font(Font.SERIF, Font.BOLD, 30));
-        topAnime.setPreferredSize(new Dimension(1600, 30));
+        topAnime.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+        topAnime.setPreferredSize(new Dimension(1300, 20));
         topAnime.setAlignmentX(JLabel.LEFT);
 
         // bikin getter refresh sehingga ntar lu bisa add Event Listener di sini
@@ -103,8 +107,9 @@ public class CardRecomendationAnime {
         JPanel panel = new JPanel();
         panel.add(topAnime);
         panel.add(refresh);
-        panel.setPreferredSize(new Dimension(1920, 500));
+        panel.setPreferredSize(new Dimension(1366, 370));
         panel.setBackground(Color.decode("#333b48"));
+//        panel.setBackground(Color.LIGHT_GRAY);
         panel.setLayout(new FlowLayout());
 //        panel.setLayout(null);
 //        panel.setBounds(20, 20, 1000, 1000);
@@ -119,11 +124,11 @@ public class CardRecomendationAnime {
     }
 
 
-    public void addCard(String titleAnime, ImageIcon imgAnime, int id) {
+    public void addCard(String titleAnime, ImageIcon imgAnime, int id, int count) {
 
-        if (titleAnime.length() > 40) {
+        if (titleAnime.length() > 25) {
             String temp = "";
-            for (int i = 0; i < 40; i++) {
+            for (int i = 0; i < 25; i++) {
                 temp += titleAnime.charAt(i);
             }
 
@@ -137,12 +142,19 @@ public class CardRecomendationAnime {
 //        System.out.println("debug : " + x[index]);
 
         JPanel card = new JPanel();
-        card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
+        if (count <= 10) {
+            System.out.println("count " + count);
+            card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 55));
+        }
+        if (count >= 6) card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 30));
         card.setBackground(Color.decode("#333b48"));
 
         JLabel img = new JLabel();
         img.setOpaque(true);
-        img.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 100));
+
+        if (count <= 5)  img.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 150));
+        else if (count >= 6) img.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 200));
+
         img.setBackground(Color.decode("#333b48"));
         img.setIcon(imgAnime);
 
@@ -161,6 +173,7 @@ public class CardRecomendationAnime {
         gbc.gridx = x[index];
         gbc.gridy = normalY;
         gbc.insets = new Insets(10, 10, 10, 10);
+//        gbc.fill = GridBagConstraints.BOTH;
         cardPanel.add(card, gbc);
 
         JLabel idAnime = new JLabel(id + "");

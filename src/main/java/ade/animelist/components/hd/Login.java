@@ -185,8 +185,8 @@ public class Login {
             LoginRepository loginRepository = new LoginRepositoryImpl();
             if (loginRepository.doesUsernameAndPasswordExist(textFieldUsername.getText(), textPasswordField.getText())) {
                 System.out.println("Login success 200");
-                Controller.removeLogin();
-                Controller.createDasshboard();
+                Controller.removeLoginHD();
+                Controller.createDasshboardHD();
                 JOptionPane.showMessageDialog(null, "Login Berhasil", "Informasi", JOptionPane.INFORMATION_MESSAGE);
 //                ImageRenderer.runConfig();
             } else {
@@ -219,8 +219,8 @@ public class Login {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                Controller.removeLogin();
-                Controller.createSignUp();
+                Controller.removeLoginHD();
+                Controller.createSignUpHD();
             }
 
             @Override

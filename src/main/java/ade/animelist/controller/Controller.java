@@ -13,6 +13,8 @@ public class Controller {
 //    public static Navbar navbar = new Navbar();
     public static JFrame frame =  new JFrame();
     private static ImageIcon imageIcon = new ImageIcon("src/main/resources/assets/icon.jpg");
+    private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
 
 //    static {
 //        ImageRenderer.runConfig();
@@ -28,10 +30,16 @@ public class Controller {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new FlowLayout(FlowLayout.LEADING, -8, 0));
 //        frame.setSize(1920, 1080);
-        frame.setSize(1366, 768);
+        frame.setSize((int) screenSize.getWidth(),(int) screenSize.getHeight());
         frame.getContentPane().setBackground(Color.ORANGE);
         frame.setResizable(false);
-        createLoginHD();
+
+        if (screenSize.getWidth() == 1366 && screenSize.getHeight() == 768) {
+            createLoginHD();
+        }
+        if (screenSize.getWidth() == 1920 && screenSize.getHeight() == 1080) {
+            createLogin();
+        }
 
 //        addComponent(navbar.getNavbar());
 //        navbar.addTopCardAnime();
@@ -75,8 +83,16 @@ public class Controller {
         removeComponent(SignUp.container);
     }
 
+    public static void removeSignUpHD() {
+        ade.animelist.components.hd.SignUp.container.removeAll();
+        removeComponent(ade.animelist.components.hd.SignUp.container);
+    }
+
     public static void createSignUp() {
         addComponent(SignUp.getSignUp());
+    }
+    public static void createSignUpHD() {
+        addComponent(ade.animelist.components.hd.SignUp.getSignUp());
     }
 
     public static void removeLogin() {
@@ -84,6 +100,13 @@ public class Controller {
         Login.container.repaint();
         Login.container.revalidate();
         removeComponent(Login.container);
+    }
+
+    public static void removeLoginHD() {
+        ade.animelist.components.hd.Login.container.removeAll();
+        ade.animelist.components.hd.Login.container.repaint();
+        ade.animelist.components.hd.Login.container.revalidate();
+        removeComponent(ade.animelist.components.hd.Login.container);
     }
 
     public static void createLogin() {
@@ -102,9 +125,23 @@ public class Controller {
         addComponent(Dashboard.getDashboard());
     }
 
+    public static void createDasshboardHD() {
+        ade.animelist.components.hd.Navbar.addNavbar();
+//        System.out.println((Navbar.navbar == null) + " navbar log");
+        addComponent(ade.animelist.components.hd.Navbar.navbar);
+        ade.animelist.components.hd.Dashboard.isOpened = true;
+        addComponent(ade.animelist.components.hd.Dashboard.getDashboard());
+    }
+
+
     public static void removeDashboard() {
         Dashboard.dashboardDiv.removeAll();
         removeComponent(Dashboard.dashboardDiv);
+    }
+
+    public static void removeDashboardHD() {
+        ade.animelist.components.hd.Dashboard.dashboardDiv.removeAll();
+        removeComponent(ade.animelist.components.hd.Dashboard.dashboardDiv);
     }
 
 

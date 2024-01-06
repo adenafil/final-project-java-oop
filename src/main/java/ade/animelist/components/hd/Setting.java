@@ -40,21 +40,22 @@ public class Setting {
 
         JPanel settingContainer = new JPanel();
         settingContainer.setOpaque(true);
-        settingContainer.setPreferredSize(new Dimension(1920, 1000));
-        settingContainer.setMaximumSize(new Dimension(1920, 1000));
+        settingContainer.setPreferredSize(new Dimension(1366, 1000));
+        settingContainer.setMaximumSize(new Dimension(1366, 1000));
         settingContainer.setBackground(Color.decode("#333b48"));
 
-        JPanel nganggur = new JPanel();
-        nganggur.setOpaque(true);
-        nganggur.setPreferredSize(new Dimension(1920, 50));
-        nganggur.setMaximumSize(new Dimension(1920, 50));
-        nganggur.setBackground(Color.decode("#333b48"));
+//        JPanel nganggur = new JPanel();
+//        nganggur.setOpaque(true);
+//        nganggur.setPreferredSize(new Dimension(1366, 10));
+//        nganggur.setMaximumSize(new Dimension(1366, 10));
+//        nganggur.setBackground(Color.decode("#333b48"));
 
         JPanel kotak = new JPanel();
         kotak.setOpaque(true);
         kotak.setPreferredSize(new Dimension(1000, 700));
         kotak.setMaximumSize(new Dimension(1000, 700));
         kotak.setBackground(Color.decode("#333b48"));
+//        kotak.setBackground(Color.RED);
 //        kotak.setBorder(BorderFactory.createLineBorder(Color.BLUE, 20));
 
         JLabel setting = new JLabel("Setting Profile");
@@ -70,56 +71,57 @@ public class Setting {
 
         JPanel usernameContainer = new JPanel();
         usernameContainer.setOpaque(true);
-        usernameContainer.setPreferredSize(new Dimension(1000, 170));
-        usernameContainer.setMaximumSize(new Dimension(1000, 170));
+        usernameContainer.setPreferredSize(new Dimension(1000, 110));
+        usernameContainer.setMaximumSize(new Dimension(1000, 110));
         usernameContainer.setBackground(Color.decode("#333b48"));
 
         JLabel username = new JLabel("Username");
         username.setOpaque(true);
-        username.setPreferredSize(new Dimension(900, 50));
-        username.setMaximumSize(new Dimension(900, 50));
+        username.setPreferredSize(new Dimension(900, 40));
+        username.setMaximumSize(new Dimension(900, 40));
         username.setBackground(Color.decode("#333b48"));
+//        username.setBackground(Color.PINK);
         username.setForeground(Color.WHITE);
-        username.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+        username.setFont(new Font(Font.SERIF, Font.BOLD, 22));
         username.setHorizontalAlignment(SwingConstants.LEFT);
 
         usernameContainer.add(username);
 
         JTextField userNameField = new JTextField();
         userNameField.setOpaque(true);
-        userNameField.setPreferredSize(new Dimension(900, 80));
-        userNameField.setMaximumSize(new Dimension(900, 80));
+        userNameField.setPreferredSize(new Dimension(900, 50));
+        userNameField.setMaximumSize(new Dimension(900, 50));
         userNameField.setBackground(Color.decode("#333b48"));
         userNameField.setBackground(Color.WHITE);
-        userNameField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 28));
+        userNameField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         userNameField.setText(configRepository.getCurrentUsername());
 
         usernameContainer.add(userNameField);
 
         JPanel passwordContainer = new JPanel();
         passwordContainer.setOpaque(true);
-        passwordContainer.setPreferredSize(new Dimension(1000, 190));
-        passwordContainer.setMaximumSize(new Dimension(1000, 190));
+        passwordContainer.setPreferredSize(new Dimension(1000, 130));
+        passwordContainer.setMaximumSize(new Dimension(1000, 130));
         passwordContainer.setBackground(Color.decode("#333b48"));
 
         JLabel password = new JLabel("Password");
         password.setOpaque(true);
-        password.setPreferredSize(new Dimension(900, 50));
-        password.setMaximumSize(new Dimension(900, 50));
+        password.setPreferredSize(new Dimension(900, 30));
+        password.setMaximumSize(new Dimension(900, 30));
         password.setBackground(Color.decode("#333b48"));
         password.setForeground(Color.WHITE);
-        password.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+        password.setFont(new Font(Font.SERIF, Font.BOLD, 22));
         password.setHorizontalAlignment(SwingConstants.LEFT);
 
         passwordContainer.add(password);
 
         JPasswordField passwordTextField = new JPasswordField();
         passwordTextField.setOpaque(true);
-        passwordTextField.setPreferredSize(new Dimension(900, 80));
-        passwordTextField.setMaximumSize(new Dimension(900, 80));
+        passwordTextField.setPreferredSize(new Dimension(900, 50));
+        passwordTextField.setMaximumSize(new Dimension(900, 50));
         passwordTextField.setBackground(Color.decode("#333b48"));
         passwordTextField.setBackground(Color.WHITE);
-        passwordTextField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 28));
+        passwordTextField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         passwordTextField.setText(settingRepository.getPassword());
 
         passwordContainer.add(passwordTextField);
@@ -141,18 +143,18 @@ public class Setting {
 
         JPanel profileContainer = new JPanel();
         profileContainer.setOpaque(true);
-        profileContainer.setPreferredSize(new Dimension(1000, 120));
-        profileContainer.setMaximumSize(new Dimension(1000, 120));
+        profileContainer.setPreferredSize(new Dimension(1000, 110));
+        profileContainer.setMaximumSize(new Dimension(1000, 110));
         profileContainer.setBackground(Color.decode("#333b48"));
 //        profileContainer.setBackground(Color.PINK);
 
         JLabel profile = new JLabel("Set Your Profile PATH");
         profile.setOpaque(true);
-        profile.setPreferredSize(new Dimension(900, 50));
-        profile.setMaximumSize(new Dimension(900, 50));
+        profile.setPreferredSize(new Dimension(900, 30));
+        profile.setMaximumSize(new Dimension(900, 30));
         profile.setBackground(Color.decode("#333b48"));
         profile.setForeground(Color.WHITE);
-        profile.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+        profile.setFont(new Font(Font.SERIF, Font.BOLD, 22));
         profile.setHorizontalAlignment(SwingConstants.LEFT);
 
         profileContainer.add(profile);
@@ -176,7 +178,7 @@ public class Setting {
         pathTextField.setOpaque(true);
         pathTextField.setPreferredSize(new Dimension(790, 50));
         pathTextField.setMaximumSize(new Dimension(790, 50));
-        pathTextField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+        pathTextField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 18));
         pathTextField.setText(settingRepository.getPath());
 
         browseProfile.addActionListener(e -> {
@@ -204,19 +206,19 @@ public class Setting {
 
         JPanel nganggurProfile = new JPanel();
         nganggurProfile.setOpaque(true);
-        nganggurProfile.setPreferredSize(new Dimension(1000, 30));
-        nganggurProfile.setMaximumSize(new Dimension(1000, 30));
+        nganggurProfile.setPreferredSize(new Dimension(1000, 10));
+        nganggurProfile.setMaximumSize(new Dimension(1000, 10));
         nganggurProfile.setBackground(Color.decode("#333b48"));
 
         JButton saveChangesBtn = new JButton("Save Changes");
         saveChangesBtn.setOpaque(true);
-        saveChangesBtn.setPreferredSize(new Dimension(200, 50));
-        saveChangesBtn.setMaximumSize(new Dimension(200, 50));
+        saveChangesBtn.setPreferredSize(new Dimension(150, 40));
+        saveChangesBtn.setMaximumSize(new Dimension(150, 40));
         saveChangesBtn.setForeground(Color.WHITE);
         saveChangesBtn.setBackground(Color.ORANGE);
         saveChangesBtn.setFocusable(false);
         saveChangesBtn.setBorderPainted(false);
-        saveChangesBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+        saveChangesBtn.setFont(new Font(Font.SERIF, Font.BOLD, 18));
 
         saveChangesBtn.addActionListener(e -> {
 
@@ -241,7 +243,7 @@ public class Setting {
         kotak.add(profileContainer);
         kotak.add(buttonContainer);
 
-        settingContainer.add(nganggur);
+//        settingContainer.add(nganggur);
 
         settingContainer.add(kotak);
 

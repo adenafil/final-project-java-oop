@@ -52,9 +52,10 @@ public class Navbar {
         // div
         JPanel divContainer = new JPanel();
         divContainer.setLayout(new BoxLayout(divContainer, BoxLayout.Y_AXIS));
-        divContainer.setSize(1920, 100);
+        divContainer.setSize(1366, 50);
         divContainer.setOpaque(true);
         divContainer.setBackground(Color.ORANGE);
+//        divContainer.setBackground(Color.BLUE);
 
         // div
         JPanel divNav = new JPanel();
@@ -70,36 +71,37 @@ public class Navbar {
 //        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         // Component Logo
-        logo = new JLabel("AdeAnimeList");
+        logo = new JLabel("Home");
         logo.setOpaque(true);
 //        logo.setPreferredSize(new Dimension(200, 200));
 //        logo.setLayout(null);
-        logo.setPreferredSize(new Dimension(300, 40));
-        logo.setMaximumSize(new Dimension(300, 40));
+        logo.setPreferredSize(new Dimension(150, 40));
+        logo.setMaximumSize(new Dimension(150, 40));
         logo.setForeground(Color.decode("#333b48"));
         logo.setBackground(Color.ORANGE);
-        logo.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+//        logo.setBackground(Color.RED);
+        logo.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         logo.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Component JTextField
 
         search = new JTextField();
 //        search.setBounds(500, 0, 1000, 40);
-        search.setPreferredSize(new Dimension(500, 40));
+        search.setPreferredSize(new Dimension(500, 30));
         search.setText("Cari anime...");
-        search.setFont(new Font(null, Font.BOLD, 20));
+        search.setFont(new Font(null, Font.BOLD, 14));
 //        search.setFocusable(false);
         search.setBorder(BorderFactory.createEmptyBorder());
 
         // Component Dasboard
         JLabel dashboard = new JLabel("Dashbsoard");
         dashboard.setOpaque(true);
-        dashboard.setPreferredSize(new Dimension(300, 40));
-        dashboard.setMaximumSize(new Dimension(300, 40));
-//        dashboard.setBounds(400, 0, 120, 100);
-        dashboard.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+        dashboard.setPreferredSize(new Dimension(200, 40));
+        dashboard.setMaximumSize(new Dimension(200, 40));
+        dashboard.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         dashboard.setForeground(Color.decode("#333b48"));
         dashboard.setBackground(Color.ORANGE);
+//        dashboard.setBackground(Color.RED);
         dashboard.setHorizontalAlignment(SwingConstants.CENTER);
 
 
@@ -471,16 +473,24 @@ public class Navbar {
                                                 animeList.stream().parallel().forEach(bayor -> {
 
                                                     if (Counter.incremennt() - 1 <= 5) {
-                                                        cardSearchAnime.panel.getComponent(1).setPreferredSize(new Dimension(1920, 400));
+                                                        cardSearchAnime.panel.getComponent(1).setPreferredSize(new Dimension(1366, 300));
+                                                        cardSearchAnime.panel.repaint();
+                                                        cardSearchAnime.panel.revalidate();
+                                                        System.out.println(Counter.a);
+                                                    } else if (Counter.incremennt() - 1 <= 20) {
+                                                        cardSearchAnime.panel.getComponent(1).setPreferredSize(new Dimension(1366, 500));
+                                                        cardSearchAnime.panel.getComponent(1).setBackground(Color.YELLOW);
                                                         cardSearchAnime.panel.repaint();
                                                         cardSearchAnime.panel.revalidate();
                                                         System.out.println(Counter.a);
                                                     } else {
-                                                        cardSearchAnime.panel.getComponent(1).setPreferredSize(new Dimension(1920, 940));
+                                                        cardSearchAnime.panel.getComponent(1).setPreferredSize(new Dimension(1366, 650));
+                                                        cardSearchAnime.panel.getComponent(1).setBackground(Color.YELLOW);
                                                         cardSearchAnime.panel.repaint();
                                                         cardSearchAnime.panel.revalidate();
                                                         System.out.println(Counter.a);
                                                     }
+
 
                                                     index.incrementAndGet();
                                                     addAnime(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId);
@@ -495,6 +505,9 @@ public class Navbar {
                         } catch (JikanQueryException ex) {
                             throw new RuntimeException(ex);
                         }
+//                        cardSearchAnime.panel.getComponent(1).repaint();
+//                        cardSearchAnime.panel.getComponent(1).revalidate();
+//                        System.out.println(cardSearchAnime.panel.getComponentCount());
                         return null;
                     }
 
@@ -524,23 +537,25 @@ public class Navbar {
 //        add(search);
 //        add(logo);
 //
-        divNav.add(Box.createVerticalStrut(80));
+//        divNav.add(Box.createVerticalStrut(80));
         divNav.add(logo);
 
         JLabel margin = new JLabel();
         margin.setOpaque(true);
-        margin.setPreferredSize(new Dimension(400, 20));
-        margin.setMaximumSize(new Dimension(400, 20));
+        margin.setPreferredSize(new Dimension(280, 30));
+        margin.setMaximumSize(new Dimension(280, 30));
         margin.setBackground(Color.ORANGE);
+//        margin.setBackground(Color.PINK);
 
         divNav.add(margin);
 //        divNav.add(Box.createHorizontalStrut(500));
 
         JLabel margin2 = new JLabel();
         margin2.setOpaque(true);
-        margin2.setPreferredSize(new Dimension(400, 20));
-        margin2.setMaximumSize(new Dimension(400, 20));
+        margin2.setPreferredSize(new Dimension(210, 30));
+        margin2.setMaximumSize(new Dimension(210, 30));
         margin2.setBackground(Color.ORANGE);
+//        margin2.setBackground(Color.PINK);
 
         divNav.add(search);
         divNav.add(margin2);
@@ -569,6 +584,7 @@ public class Navbar {
 //        navbar.setVisible(true);
 //    }
 
+    static int stopWhenTenTop = 1;
     public static void addTopCardAnime() {
         System.out.println("log add top card");
         try {
@@ -578,7 +594,10 @@ public class Navbar {
                             animeList -> {
                                 ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(animeList);
                                 imageLoaderWorker.execute();
-                                animeList.forEach(bayor -> cardTopAnime.addCard(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId));
+                                animeList.forEach(bayor -> {
+                                    if (stopWhenTenTop <= 10) cardTopAnime.addCard(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId, stopWhenTenTop);
+                                });
+                                if (stopWhenTenTop == 10) return;
                             },
                             throwable -> {
                                 System.out.println("error : " + throwable.getMessage());
@@ -588,9 +607,11 @@ public class Navbar {
         } catch (JikanQueryException ex) {
             throw new RuntimeException(ex);
         }
+        stopWhenTenTop = 1;
     }
 
     static AtomicInteger index = new AtomicInteger();
+    static int stopWhenTen = 1;
     public static void addRecomendationAnime() {
         JikanAPI.getRecommendationAnimeAsync()
                 .subscribeOn(Schedulers.parallel())
@@ -602,12 +623,15 @@ public class Navbar {
                             CardRecomendationAnime.index = 0;
                             animeList.forEach(
                                     (bayor) -> {
-                                        if (isHalalAnime(bayor)) {
+                                        System.out.println("halal : " + isHalalAnime(bayor));
+                                        if (isHalalAnime(bayor) && stopWhenTen <= 10) {
 //                                            ImageIcon imgReco = ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl);
 //                                            System.out.println("log width " + imgReco.getIconWidth());
                                             System.out.println("log name " + bayor.title);
-                                                    cardRecomendationAnime.addCard(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId);
+                                            cardRecomendationAnime.addCard(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId, stopWhenTen);
+                                            ++stopWhenTen;
                                         }
+                                        if (stopWhenTen == 10) return;
                                     }
                             );
                         },
@@ -627,6 +651,7 @@ public class Navbar {
             return;
         }
         Controller.addComponent(recomendationAnimeDiv);
+        stopWhenTen = 1;
     }
 
     private static boolean isHalalAnime(Anime anime) {
@@ -637,7 +662,7 @@ public class Navbar {
         GridBagConstraints gbc = new GridBagConstraints();
 
         JPanel home = new JPanel();
-        home.setSize(1920, 1000);
+        home.setSize(1366, 1000);
         home.setLayout(new GridLayout());
 
         gbc.gridy = 1;

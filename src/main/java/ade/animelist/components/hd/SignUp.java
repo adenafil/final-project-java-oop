@@ -27,8 +27,8 @@ public class SignUp {
 
         container.setLayout(new GridBagLayout());
         container.setOpaque(true);
-        container.setPreferredSize(new Dimension(1920, 1080));
-        container.setMaximumSize(new Dimension(1920, 1080));
+        container.setPreferredSize(new Dimension(1366, 768));
+        container.setMaximumSize(new Dimension(1366, 768));
         container.setBackground(Color.decode("#121212"));
 
         // container register block
@@ -223,8 +223,8 @@ public class SignUp {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                Controller.removeSignUp();
-                Controller.createLogin();
+                Controller.removeSignUpHD();
+                Controller.createLoginHD();
             }
 
             @Override
