@@ -1,5 +1,5 @@
 import ade.animelist.database.DatabaseConnection;
-import ade.animelist.database.entity.User;
+import ade.animelist.components.entity.User;
 import ade.animelist.database.repository.*;
 import ade.animelist.components.utilcomponent.AnimeListWorker;
 import ade.animelist.components.utilcomponent.ImageRenderer;

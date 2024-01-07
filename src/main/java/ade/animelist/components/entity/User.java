@@ -1,4 +1,4 @@
-package ade.animelist.database.entity;
+package ade.animelist.components.entity;
 
 public class User {
     private int id;

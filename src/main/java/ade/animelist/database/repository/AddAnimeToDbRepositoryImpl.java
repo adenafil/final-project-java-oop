@@ -2,10 +2,7 @@ package ade.animelist.database.repository;
 
 import ade.animelist.api.JikanAPI;
 import ade.animelist.database.DatabaseConnection;
-import ade.animelist.database.entity.User;
-import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.model.anime.Anime;
-import org.checkerframework.checker.units.qual.A;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

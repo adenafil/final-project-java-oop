@@ -2,7 +2,7 @@ package ade.animelist.components.utilcomponent;
 
 import ade.animelist.components.hd.CardCollection;
 import ade.animelist.controller.Controller;
-import ade.animelist.database.entity.CardCollectionEntity;
+import ade.animelist.components.entity.CardCollectionEntity;
 import ade.animelist.database.repository.AddAnimeToDbRepository;
 import ade.animelist.database.repository.AddAnimeToDbRepositoryImpl;
 import net.sandrohc.jikan.model.anime.Anime;

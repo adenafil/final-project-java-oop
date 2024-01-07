@@ -1,8 +1,6 @@
 package ade.animelist.database.repository;
 
 import ade.animelist.database.DatabaseConnection;
-import ade.animelist.database.entity.User;
-import org.checkerframework.checker.units.qual.C;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,6 +1,6 @@
 package ade.animelist.database.repository;
 
-import ade.animelist.database.entity.User;
+import ade.animelist.components.entity.User;
 
 public interface SignUpRepository {
     boolean insert(User user);

@@ -1,11 +1,8 @@
 package ade.animelist.database.repository;
 
-import ade.animelist.database.entity.User;
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import ade.animelist.components.entity.User;
 import com.google.gson.*;
 
-import javax.crypto.spec.PSource;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
