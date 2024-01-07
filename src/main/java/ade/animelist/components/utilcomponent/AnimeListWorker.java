@@ -6,7 +6,6 @@ import ade.animelist.database.entity.CardCollectionEntity;
 import ade.animelist.database.repository.AddAnimeToDbRepository;
 import ade.animelist.database.repository.AddAnimeToDbRepositoryImpl;
 import net.sandrohc.jikan.model.anime.Anime;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
