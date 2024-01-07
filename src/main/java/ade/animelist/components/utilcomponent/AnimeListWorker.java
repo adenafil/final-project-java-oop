@@ -12,7 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Class untuk mendapakan list collection card dari database.
+ */
 public class AnimeListWorker extends SwingWorker<Void, Anime> {
+    // Membuat list dari cardCollectionEntity
     List<CardCollectionEntity> cardList = new ArrayList<>();
 
     private final List<CompletableFuture<Anime>> animeFutures;
