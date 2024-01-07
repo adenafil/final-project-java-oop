@@ -1,7 +1,7 @@
 package ade.animelist.components.hd;
 
 import ade.animelist.controller.Controller;
-import ade.animelist.components.entity.User;
+import ade.animelist.database.entity.User;
 import ade.animelist.database.repository.SignUpRepository;
 import ade.animelist.database.repository.SignUpRepositoryImpl;
 

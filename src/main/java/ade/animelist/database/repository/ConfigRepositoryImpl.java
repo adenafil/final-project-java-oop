@@ -1,6 +1,6 @@
 package ade.animelist.database.repository;
 
-import ade.animelist.components.entity.User;
+import ade.animelist.database.entity.User;
 import com.google.gson.*;
 
 import java.io.FileReader;

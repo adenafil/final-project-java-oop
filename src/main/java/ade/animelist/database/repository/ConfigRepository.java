@@ -1,6 +1,6 @@
 package ade.animelist.database.repository;
 
-import ade.animelist.components.entity.User;
+import ade.animelist.database.entity.User;
 
 public interface ConfigRepository {
     void writeConfig(User user);
