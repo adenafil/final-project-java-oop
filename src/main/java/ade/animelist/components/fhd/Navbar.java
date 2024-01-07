@@ -69,14 +69,15 @@ public class Navbar {
 //        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         // Component Logo
-        logo = new JLabel("AdeAnimeList");
+        logo = new JLabel("Home");
         logo.setOpaque(true);
 //        logo.setPreferredSize(new Dimension(200, 200));
 //        logo.setLayout(null);
-        logo.setPreferredSize(new Dimension(300, 40));
-        logo.setMaximumSize(new Dimension(300, 40));
+        logo.setPreferredSize(new Dimension(240, 40));
+        logo.setMaximumSize(new Dimension(240, 40));
         logo.setForeground(Color.decode("#333b48"));
         logo.setBackground(Color.ORANGE);
+//        logo.setBackground(Color.RED);
         logo.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         logo.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -528,9 +529,10 @@ public class Navbar {
 
         JLabel margin = new JLabel();
         margin.setOpaque(true);
-        margin.setPreferredSize(new Dimension(400, 20));
-        margin.setMaximumSize(new Dimension(400, 20));
+        margin.setPreferredSize(new Dimension(450, 20));
+        margin.setMaximumSize(new Dimension(450, 20));
         margin.setBackground(Color.ORANGE);
+//        margin.setBackground(Color.PINK);
 
         divNav.add(margin);
 //        divNav.add(Box.createHorizontalStrut(500));
@@ -561,12 +563,6 @@ public class Navbar {
         searchByUser = search;
     }
 
-
-//    public static void main(String[] args) {
-//        Navbar navbar = new Navbar();
-//        navbar.add(navbar.getNavbar());
-//        navbar.setVisible(true);
-//    }
 
     public static void addTopCardAnime() {
         System.out.println("log add top card");

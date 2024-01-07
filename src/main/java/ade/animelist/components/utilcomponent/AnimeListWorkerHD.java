@@ -51,6 +51,8 @@ public class AnimeListWorkerHD extends SwingWorker<Void, Anime> {
             CardCollection.cardPanel.removeAll();
             System.out.println("Ngehapus card panel nih");
 //        CardCollection.panel.removeAll();
+            ImageLoaderWorker mama = new ImageLoaderWorker(chunks);
+            mama.execute();
             for (Anime anime : chunks) {
                 // Update GUI components here
                 ImageIcon tes = ImageRenderer.createImageIconByURL(anime.images.getJpg().largeImageUrl);
@@ -72,6 +74,7 @@ public class AnimeListWorkerHD extends SwingWorker<Void, Anime> {
             CardCollection.totalAnime = 0;
             listAnimeuser.getAllAnimeListInDatabaseUser().forEach(
                     maguire -> {
+                        // PR JINFO REFRESH
                         System.out.println();
                         CardCollection.addCard(
                                 maguire.title,
@@ -102,7 +105,7 @@ public class AnimeListWorkerHD extends SwingWorker<Void, Anime> {
 
             Counter.getStartedUsingIncrement();
 
-            cardList.forEach(e -> {
+            cardList.parallelStream().forEach(e -> {
 
                 System.out.println(Counter.a);
                 if (Counter.a <= 5) {

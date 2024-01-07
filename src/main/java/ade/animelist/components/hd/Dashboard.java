@@ -46,6 +46,8 @@ public class Dashboard {
         SettingRepository settingRepository = new SettingRepositoryImpl();
         name.setForeground(Color.WHITE);
         name.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+//        name.setHorizontalTextPosition(SwingConstants.CENTER);
+//        name.setVerticalTextPosition(SwingConstants.CENTER);
 
 
 
@@ -72,21 +74,24 @@ public class Dashboard {
             System.out.println(img.getIconWidth());
             JLabel imgLabel = new JLabel();
             imgLabel.setOpaque(true);
-            imgLabel.setPreferredSize(new Dimension(350, 350));
-            imgLabel.setMaximumSize(new Dimension(350, 350));
-            imgLabel.setIcon(ImageRenderer.setImageIconSize(img, 350, 350));
+            imgLabel.setPreferredSize(new Dimension(200, 200));
+            imgLabel.setMaximumSize(new Dimension(200, 200));
+            imgLabel.setIcon(ImageRenderer.setImageIconSize(img, 200, 200));
             profile.add(imgLabel);
             profile.setBackground(Color.decode("#333b48"));
         }
 
         JLabel textIfProfileNotExist = new JLabel(configRepository.getCurrentUsername().toUpperCase().charAt(0) + "");
         textIfProfileNotExist.setOpaque(true);
-        textIfProfileNotExist.setPreferredSize(new Dimension(350, 350));
-        textIfProfileNotExist.setMaximumSize(new Dimension(350, 350));
+        textIfProfileNotExist.setPreferredSize(new Dimension(200, 200));
+        textIfProfileNotExist.setMaximumSize(new Dimension(200, 200));
         textIfProfileNotExist.setBackground(Color.decode("#" + getHexaColor(configRepository.getCurrentUsername())));
-        textIfProfileNotExist.setFont(new Font(Font.SERIF, Font.BOLD, 250));
-        textIfProfileNotExist.setVerticalAlignment(SwingConstants.CENTER);
-        textIfProfileNotExist.setHorizontalAlignment(SwingConstants.CENTER);
+//        textIfProfileNotExist.setBackground(Color.PINK);
+        textIfProfileNotExist.setFont(new Font(Font.SERIF, Font.BOLD, 200));
+        textIfProfileNotExist.setHorizontalAlignment(JLabel.CENTER);
+        textIfProfileNotExist.setVerticalAlignment(JLabel.CENTER);
+//        textIfProfileNotExist.setVerticalTextPosition(SwingConstants.CENTER);
+//        textIfProfileNotExist.setHorizontalTextPosition(SwingConstants.CENTER);
 
         profile.add(textIfProfileNotExist);
 
