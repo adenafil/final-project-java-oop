@@ -3,7 +3,12 @@ package ade.animelist.database;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+/**
+ * Class untuk konek ke database
+ * berisi konfigurasi hikaruConfig dan DbSQLite
+ */
 public class DatabaseConnection {
+    // Membuat variabel HikariDataSource
     private static HikariDataSource dataSource;
 
     static {
