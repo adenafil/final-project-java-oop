@@ -187,9 +187,9 @@ public class SignUp {
                 boolean isValid = signUpRepository.insert(user);
 
                 if (isValid) {
+                    Controller.removeSignUpHD();
+                    Controller.createDasshboardHD();
                     JOptionPane.showMessageDialog(null, "Akun Berhasil Dibuat", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-                    Controller.removeSignUp();
-                    Controller.createDasshboard();
 //                    ImageRenderer.runConfig();
                 } else {
                     JOptionPane.showMessageDialog(null, "Akun Gagal Dibuat Karena Username dengan nama" +
