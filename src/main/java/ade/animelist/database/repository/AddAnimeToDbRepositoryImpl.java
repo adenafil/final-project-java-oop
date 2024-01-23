@@ -15,7 +15,20 @@ import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * sebuah api untuk menambahkan anime ke databse user
+ */
 public class AddAnimeToDbRepositoryImpl implements AddAnimeToDbRepository{
+    /**
+     * Method untuk menambahkan anime list yang ditonton
+     * @param idUser => id user
+     * @param idAnime => id anime
+     * @param statusWatching => WATCHING, COMPLETED, DROP, ETC
+     * @param currentEps => eps sekarang yang ditonton
+     * @param maxEps => max episode of anime
+     * @param nama => nama anime
+     * @return true jika berhasil dan sebaliknya
+     */
     @Override
     public boolean add(int idUser, int idAnime, String statusWatching, int currentEps, int maxEps, String nama) {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
@@ -43,6 +56,14 @@ public class AddAnimeToDbRepositoryImpl implements AddAnimeToDbRepository{
         return false;
     }
 
+    /**
+     * Method untuk manambahkan progress yang sedang ditonton ke dalam database
+     * @param idUser => id user
+     * @param idAnime => id anime
+     * @param statusWatching => status watching
+     * @param currentEps => episode sekarang
+     * @return => true jika berhasil dan sebaliknya
+     */
     @Override
     public boolean addProgressWatchingAnime(int idUser, int idAnime, String statusWatching, int currentEps) {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
@@ -68,6 +89,10 @@ public class AddAnimeToDbRepositoryImpl implements AddAnimeToDbRepository{
         return false;
     }
 
+    /**
+     * Method untuk mendapakna list anime user dari database
+     * @return list anime user
+     */
     @Override
     public List<Anime> getAllAnimeListInDatabaseUser() {
         List<Anime> result = new ArrayList<>();
@@ -93,12 +118,20 @@ public class AddAnimeToDbRepositoryImpl implements AddAnimeToDbRepository{
         return result;
     }
 
+    /**
+     * Method untuk mendaptkan list anime user
+     * @return list anime user
+     */
     @Override
     public List<Anime> getAllAnimeListUser() {
         List<Anime> result = joinAllAsyncResults(getAllAnimeListUserAsync());
         return result;
     }
 
+    /**
+     * Method untuk mendapatkan anime user sekaligus fetch api untuk mengambil images
+     * @return list anime user
+     */
     @Override
     public List<CompletableFuture<Anime>> getAllAnimeListUserAsync() {
         List<CompletableFuture<Anime>> result = new ArrayList<>();
@@ -126,6 +159,11 @@ public class AddAnimeToDbRepositoryImpl implements AddAnimeToDbRepository{
         return result;
     }
 
+    /**
+     * Method untuk mengambil semua proses async yang sudah selesai
+     * @param futures sebuah variabel future yang ditunggu proses asyncnya
+     * @return list anime suer
+     */
     @Override
     public List<Anime> joinAllAsyncResults(List<CompletableFuture<Anime>> futures) {
         CompletableFuture<Void> allOf = CompletableFuture.allOf(
@@ -142,6 +180,11 @@ public class AddAnimeToDbRepositoryImpl implements AddAnimeToDbRepository{
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Method untuk mengecek apakah anime ini sudah ditambahkan user atau belum
+     * @param malid => id mal
+     * @return true jika ada dan sebaliknya
+     */
     @Override
     public boolean doesThisAnimeExistInDatabase(int malid) {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
@@ -164,6 +207,11 @@ public class AddAnimeToDbRepositoryImpl implements AddAnimeToDbRepository{
         return false;
     }
 
+    /**
+     * Mendapatkan status yang sedang ditonton berdasarkan mal id
+     * @param malId => id anime mal
+     * @return => status watching
+     */
     @Override
     public String getStatusByMalId(int malId) {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
@@ -186,6 +234,11 @@ public class AddAnimeToDbRepositoryImpl implements AddAnimeToDbRepository{
         return null;
     }
 
+    /**
+     * Method untuk mendaptakn episode sekarang dari database
+     * @param malId => mal id
+     * @return => episode
+     */
     @Override
     public int getCurrentEpsByMalId(int malId) {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
@@ -208,6 +261,11 @@ public class AddAnimeToDbRepositoryImpl implements AddAnimeToDbRepository{
         return -1;
     }
 
+    /**
+     * Method untuk menghapus anime dari list
+     * @param malId => mal id
+     * @return => true jika berhasil dan sebaliknya
+     */
     @Override
     public boolean removeDatabaseAnimeUserById(int malId) {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
