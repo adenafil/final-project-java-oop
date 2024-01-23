@@ -14,21 +14,29 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
+/**
+ * Class Component GUI animePage atau ketika sebuah block kotak diclick
+ * maka class inilah yang mengurusnya melalui method-methodnya.
+ */
 public class AnimePage {
     public static boolean isOpened = false;
     public static JPanel contaienrDiv = null;
 
+    /**
+     * Method untuk mendapatkan component based on click block kotak
+     * semua logic kotak-kotak dari sebuah gambar anime either di home atau my collection including searching
+     * semua masuk kesini sehingga menjadi anime page
+     * @param id -> id mal
+     * @return sebuah component animePage
+     * @throws JikanQueryException
+     */
     public static JPanel getAnimePageById(int id) throws JikanQueryException {
-        // anime
+        // fetching api
         Anime anime = JikanAPI.getAnimeById(id);
 
         if (anime.episodes == null && anime.synopsis == null) {
             anime.setEpisodes(0);
-            System.out.println("BElum");
-            anime.synopsis = "Maaf Anime Ini Masih Belum Tayang Sehingga Kami Tidak Bisa Mendapatkan Synopsis Dari Anime Tersebut";
         }
-
-        System.out.println("SUdah" );
 
         AddAnimeToDbRepository addAnimeToDbRepository = new AddAnimeToDbRepositoryImpl();
         boolean didThisAnimeExistInDatabase = addAnimeToDbRepository.doesThisAnimeExistInDatabase(id);
@@ -70,14 +78,8 @@ public class AnimePage {
         kotakAnimeDesc.setOpaque(true);
         kotakAnimeDesc.setMaximumSize(new Dimension(1920, 100));
         kotakAnimeDesc.setBackground(Color.decode("#333b48"));
-//        anAnime.setForeground(Color.BLUE);
-//
 
         GridBagConstraints gbcPeringkat = new GridBagConstraints();
-
-//f
-//        gbcPeringkat.anchor = GridBagConstraints.WEST;
-
 
         gbcPeringkat.insets = new Insets(10, 10, 10, 10);
 
@@ -122,12 +124,6 @@ public class AnimePage {
         synopsis.setPreferredSize(new Dimension(1500, 500));
         synopsis.setMaximumSize(new Dimension(1500, 1000));
         synopsis.setBackground(Color.decode("#333b48"));
-//        synopsis.setText(
-//                "<html>" +
-//                        "<p> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>"
-//                        +
-//                        "</html>"
-//        );
         synopsis.setText(
                 "<html>" + "<p>" + anime.synopsis + "</p>" + "</html>"
         );
@@ -135,8 +131,6 @@ public class AnimePage {
         synopsis.setForeground(Color.WHITE);
         synopsis.setVerticalAlignment(SwingConstants.TOP);
         synopsis.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-//
-//
         imageAnime.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // adding up into container
@@ -207,8 +201,6 @@ public class AnimePage {
         episodeIndex.setBackground(Color.decode("#333b48"));
         episodeIndex.setHorizontalAlignment(SwingConstants.CENTER);
         episodeIndex.setVisible(false);
-
-
 
         alignmentSection.gridx = 2;
         sectionUserInterface.add(episodeIndex, alignmentSection);
@@ -302,15 +294,8 @@ public class AnimePage {
 
         });
 
-
         alignmentSection.gridx = 4;
         sectionUserInterface.add(subtractAnime, alignmentSection);
-
-
-        // TODOS
-        // Buatlah sebuah button yang ketika add to list dan lain lain terhubung dengan database
-        // save changes akan menmapilkan notif either berhasil menyimpan atau sebaliknya
-
 
         if (addAnimeToDbRepository.doesThisAnimeExistInDatabase(id)) {
             System.out.println("check where " + didThisAnimeExistInDatabase);
@@ -384,14 +369,7 @@ public class AnimePage {
 
         contaienrDiv.add(sectionUserInterface);
 
-//        Controller.navbar.search.addActionListener(e -> {
-//            Controller.removeComponent(contaienrDiv);
-//        });
-
         return  contaienrDiv;
-//        frame.add(contaienrDiv);
-//        frame.setVisible(true);
-
     }
 
     public static void removeContainer() {

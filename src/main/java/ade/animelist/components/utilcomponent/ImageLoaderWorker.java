@@ -37,6 +37,4 @@ public class ImageLoaderWorker extends SwingWorker<List<ImageIcon>, Void> {
         }
     }
 
-    // Example of how you might use this worker in your ActionListener
-    // ...
 }

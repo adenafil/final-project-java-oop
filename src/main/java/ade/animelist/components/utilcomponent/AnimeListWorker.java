@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Class untuk mendapakan list collection card dari database.
+ * Class untuk mendapakan list collection card dari database kemudian
+ * ditampilkan ke gui secara async yang mana extends dari class SwingWorker
  */
 public class AnimeListWorker extends SwingWorker<Void, Anime> {
-    // Membuat list dari cardCollectionEntity
     List<CardCollectionEntity> cardList = new ArrayList<>();
 
     private final List<CompletableFuture<Anime>> animeFutures;
@@ -25,6 +25,10 @@ public class AnimeListWorker extends SwingWorker<Void, Anime> {
         this.animeFutures = animeFutures;
     }
 
+    /**
+     * Method untuk
+     * @return
+     */
     @Override
     protected Void doInBackground() {
         animeFutures.forEach(future -> {
@@ -32,7 +36,7 @@ public class AnimeListWorker extends SwingWorker<Void, Anime> {
                 Anime anime = future.join();
                 publish(anime);
             } catch (Exception ex) {
-                ex.printStackTrace(); // Handle exceptions appropriately
+                ex.printStackTrace();
             }
         });
         return null;
@@ -53,23 +57,17 @@ public class AnimeListWorker extends SwingWorker<Void, Anime> {
 
             CardCollection.cardPanel.removeAll();
             System.out.println("Ngehapus card panel nih");
-//        CardCollection.panel.removeAll();
             for (Anime anime : chunks) {
                 // Update GUI components here
                 ImageIcon tes = ImageRenderer.createImageIconByURL(anime.images.getJpg().largeImageUrl);
                 System.out.println(tes.getIconWidth());
                 System.out.println(anime.title);
 
-//            CardCollection.addCard(anime.title, tes, anime.malId);
                 cardList.add(new CardCollectionEntity(anime.title, tes, anime.malId));
                 ++i;
             }
             System.out.println("lagi set index ke 0 nih");
             System.out.println(i);
-//        if (CardCollection.totalAnime == i) {
-//            System.out.println("yang bener ngeset index ke 0 ? " + CardCollection.totalAnime);
-//            CardCollection.setIndex(0);
-//        }
 
             AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
             CardCollection.totalAnime = 0;
@@ -128,8 +126,5 @@ public class AnimeListWorker extends SwingWorker<Void, Anime> {
             System.out.println("Logika in done");
         }
 
-//        Dashboard.dashboardDiv.removeAll();
-//        Controller.removeComponent(Dashboard.dashboardDiv);
-//        Dashboard.isOpened = false;
     }
 }
