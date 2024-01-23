@@ -10,16 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Controller {
-//    public static Navbar navbar = new Navbar();
     public static JFrame frame =  new JFrame();
     private static ImageIcon imageIcon = new ImageIcon("src/main/resources/assets/icon.jpg");
     private static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-
-//    static {
-//        ImageRenderer.runConfig();
-//    }
-
 
     public static void run() {
         SwingUtilities.invokeLater(Controller::createAndShowGUI);
@@ -29,6 +22,7 @@ public class Controller {
         frame.setIconImage(ImageRenderer.setImageIconSize(imageIcon, 32, 32).getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new FlowLayout(FlowLayout.LEADING, -8, 0));
+        frame.setTitle("animeList");
 //        frame.setSize(1920, 1080);
         frame.setSize((int) screenSize.getWidth(),(int) screenSize.getHeight());
         frame.getContentPane().setBackground(Color.ORANGE);
@@ -40,26 +34,6 @@ public class Controller {
         if (screenSize.getWidth() == 1920 && screenSize.getHeight() == 1080) {
             createLogin();
         }
-
-//        addComponent(navbar.getNavbar());
-//        navbar.addTopCardAnime();
-//        navbar.addRecomendationAnime();
-//        try {
-//            AnimePage animePage = new AnimePage();
-//            addComponent(animePage.getAnimePageById(20));
-//        } catch (JikanQueryException e) {
-//            e.printStackTrace();
-//        }
-////        navbar.addHomeAnime();
-
-//        CardSearchAnime searchAnime = new CardSearchAnime();
-//        CardTopAnime cardTopAnime = new CardTopAnime();
-//        addComponent(cardTopAnime.getCard());
-//        frame.add(navbar.getNavbar());
-//        addComponent(navbar.getNavbar());
-//        navbar.setCardSearchAnime(searchAnime);
-//        frame.add(searchAnime.getCard());
-//        frame.add(cardTopAnime.getCard());
 
         frame.setVisible(true);
 
