@@ -34,10 +34,13 @@ public class AnimePage {
         // fetching api
         Anime anime = JikanAPI.getAnimeById(id);
 
+        // check if the value is null or not
         if (anime.episodes == null && anime.synopsis == null) {
             anime.setEpisodes(0);
         }
 
+        // create 3 object untuk menambahkan anime ke database
+        // juga mengfetching apakah anime page ini sudah ditambahkan oleh user ke database atau tidak
         AddAnimeToDbRepository addAnimeToDbRepository = new AddAnimeToDbRepositoryImpl();
         boolean didThisAnimeExistInDatabase = addAnimeToDbRepository.doesThisAnimeExistInDatabase(id);
         ConfigRepository configRepository = new ConfigRepositoryImpl();
@@ -216,7 +219,6 @@ public class AnimePage {
         addAnime.setVisible(false);
 
         statusComboBox.addActionListener(e -> {
-            System.out.println("aw aw aw aw aw");
             if (statusComboBox.getSelectedIndex() == 1) {
                 episodeIndex.setText("Your Progress Episode Is On : " + anime.episodes);
                 addAnime.setEnabled(false);
@@ -226,19 +228,13 @@ public class AnimePage {
 
         addAnime.addActionListener(e-> {
             int currentEps = getDigitInThisText(episodeIndex.getText());
-            System.out.println("hello add");
-            System.out.println(getDigitInThisText(episodeIndex.getText()) + " <" + anime.episodes);
-            System.out.println("logika " + (getDigitInThisText(episodeIndex.getText()) <= anime.episodes - 1));
             if (getDigitInThisText(episodeIndex.getText()) <= anime.episodes - 1) {
                 currentEps = getDigitInThisText(episodeIndex.getText());
                 episodeIndex.setText("Your Progress Episode Is On : " + ++currentEps);
             }
 
-            System.out.println("Eps max " + anime.episodes);
-
             if (getDigitInThisText(episodeIndex.getText()) == anime.episodes) {
                 addAnime.setEnabled(false);
-                System.out.println(episodeIndex.getText());
             } else if (getDigitInThisText(episodeIndex.getText()) < anime.episodes) {
                 addAnime.setEnabled(true);
             }
@@ -298,7 +294,6 @@ public class AnimePage {
         sectionUserInterface.add(subtractAnime, alignmentSection);
 
         if (addAnimeToDbRepository.doesThisAnimeExistInDatabase(id)) {
-            System.out.println("check where " + didThisAnimeExistInDatabase);
             button.setText("Save Changes");
             statusComboBox.setVisible(true);
             episodeIndex.setVisible(true);
@@ -308,20 +303,16 @@ public class AnimePage {
             button.setVisible(true);
 
         } else {
-            System.out.println("add to collection");
             button.setText("Add To Collection");
             button.setVisible(true);
             button.addActionListener(e -> {
-                System.out.println(button.getText());
 
-                System.out.println("difarina");
                 statusComboBox.setVisible(true);
                 episodeIndex.setVisible(true);
                 addAnime.setVisible(true);
                 subtractAnime.setVisible(true);
 
                 button.setText("Save Changes");
-                System.out.println("status : " + statusComboBox.getSelectedItem().toString());
 
                 addAnime.setVisible(true);
 
@@ -372,11 +363,19 @@ public class AnimePage {
         return  contaienrDiv;
     }
 
+    /**
+     * Method untuk menghapus panel animePage
+     */
     public static void removeContainer() {
-        System.out.println("is it null = " + contaienrDiv == null + " s");
         Controller.removeComponent(contaienrDiv);
     }
 
+    /**
+     * Method untuk membuat kotak 4 pilar
+     * @param field an field
+     * @param value value of field
+     * @return component kotak yang biasanya terletak ada 4 kotak pada anime page
+     */
     public static JPanel createKotak(String field, String value) {
         JPanel kotak = new JPanel();
         kotak.setOpaque(true);
@@ -409,6 +408,11 @@ public class AnimePage {
         return kotak;
     }
 
+    /**
+     * Method untuk mendapatkan digit pada text
+     * @param text => data dari api
+     * @return integer
+     */
     public static int getDigitInThisText(String text) {
         String digit = "";
         char[] chars = text.toCharArray();
