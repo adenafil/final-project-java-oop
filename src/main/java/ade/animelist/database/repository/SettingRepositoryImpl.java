@@ -7,7 +7,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * sebuah application programming interface class untuk melakukan setting di gui, mendapatkan password dan path image.
+ */
 public class SettingRepositoryImpl implements SettingRepository{
+
+    /**
+     * Method untu mengupdate database user baru
+     * @param username sebuah username user baru
+     * @param password sebuah password user baru
+     * @param path sebuah path profile baru
+     * @return true jika berhasil dan sebaliknyua
+     */
     @Override
     public boolean update(String username, String password, String path) {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
@@ -37,6 +48,10 @@ public class SettingRepositoryImpl implements SettingRepository{
         return false;
     }
 
+    /**
+     * Method untuk mendapatkan password
+     * @return password user
+     */
     @Override
     public String getPassword() {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
@@ -59,6 +74,10 @@ public class SettingRepositoryImpl implements SettingRepository{
         return null;
     }
 
+    /**
+     * Method untuk mendapatkan path profile pada di database
+     * @return path profile jika ada, jika tidak return null
+     */
     @Override
     public String getPath() {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
