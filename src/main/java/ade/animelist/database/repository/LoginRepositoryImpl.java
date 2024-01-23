@@ -8,8 +8,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * sebuah application programming interface class untuk melakukan login
+ */
 public class LoginRepositoryImpl implements LoginRepository{
 
+    /**
+     * Method untuk mengecek apakah user ini sudah ada di database atau tidak
+     * @param username sebauh username user
+     * @param password sebuah password user
+     * @return true jika ada dan sebaliknya
+     */
     @Override
     public boolean doesUsernameAndPasswordExist(String username, String password) {
 
