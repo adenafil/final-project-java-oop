@@ -11,6 +11,9 @@ public class DatabaseConnection {
     // Membuat variabel HikariDataSource
     private static HikariDataSource dataSource;
 
+    /**
+     * Mengkonfigurasi hikari config sekaligus memasukanya ke dalam dataSource
+     */
     static {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc:sqlite:src/main/resources/_database/_db.db");
@@ -24,5 +27,9 @@ public class DatabaseConnection {
         dataSource = new HikariDataSource(config);
     }
 
+    /**
+     * Method untuk mendapatkan data source atau driver untuk mengquerinya
+     * @return data source
+     */
     public static HikariDataSource getDataSource() {return  dataSource;}
 }
