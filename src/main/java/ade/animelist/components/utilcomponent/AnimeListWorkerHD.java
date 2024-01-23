@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Class untuk mendapakan list collection card dari database kemudian
+ * ditampilkan ke gui secara async yang mana extends dari class SwingWorker
+ */
 public class AnimeListWorkerHD extends SwingWorker<Void, Anime> {
     List<CardCollectionEntity> cardList = new ArrayList<>();
 
@@ -22,6 +26,10 @@ public class AnimeListWorkerHD extends SwingWorker<Void, Anime> {
         this.animeFutures = animeFutures;
     }
 
+    /**
+     * Method untuk mendapakan anime future
+     * @return null
+     */
     @Override
     protected Void doInBackground() {
         animeFutures.forEach(future -> {
@@ -35,47 +43,35 @@ public class AnimeListWorkerHD extends SwingWorker<Void, Anime> {
         return null;
     }
 
+    /**
+     * Method untuk mengprocess hasil do in background
+     * @param chunks intermediate results to process
+     *
+     */
     @Override
     protected void process(List<Anime> chunks) {
         if (CardCollection.isOpened) {
             int i = 1;
-            // This method is invoked on the EDT
             Controller.removeComponent(CardCollection.panel);
             CardCollection.removeCardPanel();
-
-            System.out.println("APakah ke hapus");
-
             CardCollection.panel = CardCollection.getCardPanel();
             Controller.addComponent(CardCollection.panel);
 
             CardCollection.cardPanel.removeAll();
-            System.out.println("Ngehapus card panel nih");
-//        CardCollection.panel.removeAll();
             ImageLoaderWorker mama = new ImageLoaderWorker(chunks);
             mama.execute();
             for (Anime anime : chunks) {
                 // Update GUI components here
                 ImageIcon tes = ImageRenderer.createImageIconByURL(anime.images.getJpg().largeImageUrl);
-                System.out.println(tes.getIconWidth());
-                System.out.println(anime.title);
 
-//            CardCollection.addCard(anime.title, tes, anime.malId);
                 cardList.add(new CardCollectionEntity(anime.title, tes, anime.malId));
                 ++i;
             }
-            System.out.println("lagi set index ke 0 nih");
-            System.out.println(i);
-//        if (CardCollection.totalAnime == i) {
-//            System.out.println("yang bener ngeset index ke 0 ? " + CardCollection.totalAnime);
-//            CardCollection.setIndex(0);
-//        }
 
             AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
             CardCollection.totalAnime = 0;
             listAnimeuser.getAllAnimeListInDatabaseUser().forEach(
                     maguire -> {
-                        // PR JINFO REFRESH
-                        System.out.println();
                         CardCollection.addCard(
                                 maguire.title,
                                 null,
@@ -87,16 +83,17 @@ public class AnimeListWorkerHD extends SwingWorker<Void, Anime> {
         }
     }
 
+    /**
+     * method untuk melakukan hal yang sudah diprocess
+     * Jika process sudah maka bole tampilkan gambar
+     */
+
     @Override
     protected void done() {
-        // manfaatkan ini untuk resolve and fix gambar
-        System.out.println("siuuuu");
 
         if (CardCollection.isOpened) {
             Controller.removeComponent(CardCollection.panel);
             CardCollection.removeCardPanel();
-
-            System.out.println("APakah ke hapus");
 
             CardCollection.panel = CardCollection.getCardPanel();
             Controller.addComponent(CardCollection.panel);
@@ -107,7 +104,6 @@ public class AnimeListWorkerHD extends SwingWorker<Void, Anime> {
 
             cardList.parallelStream().forEach(e -> {
 
-                System.out.println(Counter.a);
                 if (Counter.a <= 5) {
                     CardCollection.panel.getComponent(2).setPreferredSize(new Dimension(1366, 300));
                     CardCollection.panel.revalidate();
@@ -125,11 +121,7 @@ public class AnimeListWorkerHD extends SwingWorker<Void, Anime> {
             CardCollection.countRefreshClicked = 0;
             CardCollection.isOpened = true;
 
-            System.out.println("Logika in done");
         }
 
-//        Dashboard.dashboardDiv.removeAll();
-//        Controller.removeComponent(Dashboard.dashboardDiv);
-//        Dashboard.isOpened = false;
     }
 }

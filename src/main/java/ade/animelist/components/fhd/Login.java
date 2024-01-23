@@ -3,25 +3,23 @@ package ade.animelist.components.fhd;
 import ade.animelist.controller.Controller;
 import ade.animelist.database.repository.LoginRepository;
 import ade.animelist.database.repository.LoginRepositoryImpl;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Class Gui LOGIN
+ */
 public class Login {
     public static JPanel container = new JPanel();
 
+    /**
+     * Method untuk mendapatkan component login
+     * @return component login
+     */
     public static JPanel getLogin() {
-//        JFrame frame = new JFrame();
-//
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setLayout(new FlowLayout(FlowLayout.LEADING, -8, 0));
-//        frame.setSize(1920, 1080);
-//        frame.getContentPane().setBackground(Color.ORANGE);
-//        frame.setResizable(false);
-
         GridBagConstraints gbc = new GridBagConstraints();
 
         container.setLayout(new GridBagLayout());
@@ -153,11 +151,8 @@ public class Login {
 
         registerBtn.addActionListener(e -> {
 
-            System.out.println(textFieldUsername.getText().contains(" "));
-
             // handle password kosong dan username kosong
             if (textFieldUsername.getText().isBlank() && textPasswordField.getText().isBlank()) {
-                System.out.println("mama");
                 JOptionPane.showMessageDialog(null, "Username dan Password Anda Masih Kosong", "Informasi", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
@@ -183,16 +178,12 @@ public class Login {
             // login logic
             LoginRepository loginRepository = new LoginRepositoryImpl();
             if (loginRepository.doesUsernameAndPasswordExist(textFieldUsername.getText(), textPasswordField.getText())) {
-                System.out.println("Login success 200");
                 Controller.removeLogin();
                 Controller.createDasshboard();
                 JOptionPane.showMessageDialog(null, "Login Berhasil", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-//                ImageRenderer.runConfig();
             } else {
                 JOptionPane.showMessageDialog(null, "Username Atau Password Anda Salah", "Informasi", JOptionPane.INFORMATION_MESSAGE);
-                System.out.println("Gagal login");
             }
-
 
         });
 
@@ -233,11 +224,8 @@ public class Login {
             }
         });
 
-
         havenAccountContainer.add(already);
         havenAccountContainer.add(clickHere);
-
-
 
         containerRegister.add(registerTextDiv);
         containerRegister.add(usernameContainer);
@@ -245,11 +233,7 @@ public class Login {
         containerRegister.add(registerBtnContainer);
         containerRegister.add(havenAccountContainer);
 
-
         container.add(containerRegister, gbc);
-
-//        frame.add(container);
-//        frame.setVisible(true);
 
         return container;
 

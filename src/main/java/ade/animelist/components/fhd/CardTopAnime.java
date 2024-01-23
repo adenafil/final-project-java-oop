@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 public class CardTopAnime {
     public boolean isOpened = false;
     JPanel cardPanel;
-//    public AnimePage animePage = new AnimePage();
 
     private static final int CARD_WIDTH = 300;
     private static final int CARD_HEIGHT = 400;

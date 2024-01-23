@@ -127,6 +127,12 @@ public class CardCollection {
         return panel;
     }
 
+    /**
+     * Method untuk menambahkan kotak-kotak atau card
+     * @param tileAnime judul anime
+     * @param imgAnime gambar
+     * @param id -> malID
+     */
     public static void addCard(String tileAnime, ImageIcon imgAnime, int id) {
         indexAddUpAnime++;
 

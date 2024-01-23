@@ -9,11 +9,13 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Class card recomendation anime
+ */
 public class CardRecomendationAnime {
     public boolean isOpened = false;
     JPanel cardPanel;
 
-//    AnimePage animePage = new AnimePage();
     private static final int CARD_WIDTH = 300;
     private static final int CARD_HEIGHT = 400;
     private static int[] x = {0, 350, 700, 1050, 1400};
@@ -74,12 +76,6 @@ public class CardRecomendationAnime {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getVerticalScrollBar().setBackground(Color.decode("#333b48"));
         scrollPane.getVerticalScrollBar().setUnitIncrement(30);
-//        scrollPane.setBackground(Color.BLACK);
-//        scrollPane.setForeground(Color.YELLOW);
-//        scrollPane.setBackground(Color.RED);
-        System.out.println(scrollPane.getBackground());
-//        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         JLabel topAnime = new JLabel("Rekomendasi Anime");
         topAnime.setOpaque(true);
@@ -89,25 +85,12 @@ public class CardRecomendationAnime {
         topAnime.setPreferredSize(new Dimension(1600, 30));
         topAnime.setAlignmentX(JLabel.LEFT);
 
-        // bikin getter refresh sehingga ntar lu bisa add Event Listener di sini
-//        refresh = new JLabel("refresh");
-//        refresh.setOpaque(true);
-//        refresh.setBackground(Color.decode("#333b48"));
-//        refresh.setForeground(Color.WHITE);
-//        refresh.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
-//        refresh.setPreferredSize(new Dimension(1600, 30));
-//        refresh.setAlignmentX(JLabel.LEFT);
-//        refresh.setIcon(refreshImg);
-
-
         JPanel panel = new JPanel();
         panel.add(topAnime);
         panel.add(refresh);
         panel.setPreferredSize(new Dimension(1920, 500));
         panel.setBackground(Color.decode("#333b48"));
         panel.setLayout(new FlowLayout());
-//        panel.setLayout(null);
-//        panel.setBounds(20, 20, 1000, 1000);
         panel.add(scrollPane);
         panel.setBorder(BorderFactory.createEmptyBorder());
 
@@ -119,6 +102,12 @@ public class CardRecomendationAnime {
     }
 
 
+    /**
+     * Method untuk menambahkan kotak-koatk atau card
+     * @param titleAnime -> judul anime
+     * @param imgAnime -> Gambar anime
+     * @param id -> mal id
+     */
     public void addCard(String titleAnime, ImageIcon imgAnime, int id) {
 
         if (titleAnime.length() > 40) {
@@ -132,9 +121,6 @@ public class CardRecomendationAnime {
 
             titleAnime = temp;
         }
-
-
-//        System.out.println("debug : " + x[index]);
 
         JPanel card = new JPanel();
         card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT));
@@ -189,12 +175,7 @@ public class CardRecomendationAnime {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         super.mouseClicked(e);
-                        System.out.println("mama huhu");
-                        System.out.println(title.getText());
-                        System.out.println(id);
                         try {
-//                            Controller.navbar.getRecomendationAnimeDiv().removeAll();
-//                            Controller.navbar.getTopAnime().removeAll();
                             Navbar.syncDelete();
                             Navbar.removeRecomdendationCardComponent();
                             Navbar.removeTopCardComponent();
@@ -210,27 +191,6 @@ public class CardRecomendationAnime {
                 }
         );
 
-//        Controller.navbar.logo.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                if (animePage.contaienrDiv != null) {
-//                    super.mouseClicked(e);
-//                    animePage.removeContainer();
-//                    System.out.println("log in CardRecomendation");
-//                    cardPanel.revalidate();
-//                    cardPanel.repaint();
-//                }
-////                Controller.navbar.addTopCardAnime();
-////                Controller.navbar.addRecomendationAnime();
-//            }
-//        });
-
-
-    }
-
-    public JLabel getRefresh() {
-        System.out.println(refresh == null);
-        return this.refresh;
     }
 
 }

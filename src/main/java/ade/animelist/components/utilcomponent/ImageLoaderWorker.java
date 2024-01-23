@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
+/**
+ * Class unuk load ImageICon dari set anime seacara async
+ */
 public class ImageLoaderWorker extends SwingWorker<List<ImageIcon>, Void> {
     private final Collection<Anime> animeCollection;
 
