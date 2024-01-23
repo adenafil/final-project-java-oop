@@ -9,7 +9,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * class untuk melakukan write config dalam aplikasi
+ */
 public class ConfigRepositoryImpl implements ConfigRepository{
+    /**
+     * Method untuk menulis config
+     * @param user => user that currently logs in
+     */
     @Override
     public void writeConfig(User user) {
         Map<String, Object> jsonData = new HashMap<>();
@@ -26,6 +33,10 @@ public class ConfigRepositoryImpl implements ConfigRepository{
         }
     }
 
+    /**
+     * Method untuk mendapatkan user id sekarang yang login
+     * @return int (id user)
+     */
     @Override
     public int getCurrentUserId() {
         int userId = -1;
@@ -41,6 +52,10 @@ public class ConfigRepositoryImpl implements ConfigRepository{
         return userId;
     }
 
+    /**
+     * Method untuk mendapatkan username sekarang yang login
+     * @return username user
+     */
     @Override
     public String getCurrentUsername() {
         String username = null;
