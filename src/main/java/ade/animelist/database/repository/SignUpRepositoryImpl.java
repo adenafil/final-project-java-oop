@@ -7,7 +7,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * sebuah application programming interface class untuk melakukan register
+ */
 public class SignUpRepositoryImpl implements SignUpRepository{
+    /**
+     * Method untuk memasukan data user ke database user
+     * @param user => class user
+     * @return => true jika berhasil dan sebaliknya
+     */
     @Override
     public boolean insert(User user) {
 
