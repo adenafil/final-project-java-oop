@@ -7,7 +7,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * Method untuk query database user
+ */
 public class UserRepositoryImpl implements UserRepository{
+
+    /**
+     * Method untuk mengupdate username pada database user
+     * @param newUsername => username baru
+     * @return => jika berhasil return true dan sebaliknya
+     */
     @Override
     public boolean updateUsername(String newUsername) {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
@@ -32,6 +41,11 @@ public class UserRepositoryImpl implements UserRepository{
         return false;
     }
 
+    /**
+     * Method untuk merubah password
+     * @param updatePassword => password baru
+     * @return true jika berhasil dan sebaliknya
+     */
     @Override
     public boolean updatePassword(String updatePassword) {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
@@ -56,6 +70,11 @@ public class UserRepositoryImpl implements UserRepository{
         return false;
     }
 
+    /**
+     * Method untuk merubah photo profile
+     * @param newPath => path pada local storage
+     * @return => jika berhasil akan mengembalikan true dan sebaliknya
+     */
     @Override
     public boolean updateProfilePath(String newPath) {
         try (Connection connection = DatabaseConnection.getDataSource().getConnection()) {
