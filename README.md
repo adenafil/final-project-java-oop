@@ -14,7 +14,32 @@ dan menggunakan maven.
 
 ![DASHBOARD PAGE](https://raw.githubusercontent.com/adenafil/final-project-java-oop/main/src/main/resources/assets/Dashboard.png "DASHBOARD PAGE")
 
-
-
-
 # CARA INSTALL PROJECT INI
+
+1. Clone project ini atau download manual
+
+```sh
+git clone https://github.com/adenafil/final-project-java-oop
+```
+
+2. Masuk ke folder final-project-java-oop
+```sh
+cd final-project-java-oop
+```
+3. Install atau download dependency
+```sh
+mvn install
+```
+4. Buka project di idea kalian, di sini saya menggunakan intelij IDEA
+```sh
+idea .
+```
+Jika vscode gunakan perintah ini
+```sh
+code .
+```
+5. Buka main method dan run main method
+   ![DASHBOARD PAGE](https://raw.githubusercontent.com/adenafil/final-project-java-oop/main/src/main/resources/assets/mainmethod.png "DASHBOARD PAGE")
+
+
+
