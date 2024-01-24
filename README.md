@@ -44,7 +44,7 @@ code .
 
 6. Jika terjadi error karena beda versi java, kalian bisa rubah versinya di pom.xml
 
-![PENTING](https://raw.githubusercontent.com/adenafil/final-project-java-oop/main/src/main/resources/assets/penting.png "PENTING")
+![PENTING](https://github.com/adenafil/final-project-java-oop/blob/main/src/main/resources/assets/penting.png "PENTING")
 
 
 
