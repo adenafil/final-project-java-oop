@@ -15,6 +15,7 @@ public class DatabaseConnection {
      * Mengkonfigurasi hikari config sekaligus memasukanya ke dalam dataSource
      */
     static {
+
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc:sqlite:src/main/resources/_database/_db.db");
 
