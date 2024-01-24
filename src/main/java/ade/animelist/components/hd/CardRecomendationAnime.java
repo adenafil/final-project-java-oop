@@ -9,11 +9,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Class card recomendation anime
+ */
 public class CardRecomendationAnime {
     public boolean isOpened = false;
     JPanel cardPanel;
-
-//    AnimePage animePage = new AnimePage();
     private static final int CARD_WIDTH = 240;
     private static final int CARD_HEIGHT = 350;
     private static int[] x = {0, 350, 700, 1050, 1400};
@@ -23,9 +24,12 @@ public class CardRecomendationAnime {
     ImageIcon refreshImg = ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL("https://img.icons8.com/ios-filled/50/ffffff/refresh--v1.png"), 20, 20);
     ImageIcon hoverRefresh = ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL("https://img.icons8.com/ios-filled/50/FFBF00/refresh--v1.png"), 20, 20);
 
-
     JLabel refresh;
 
+    /**
+     * Method untuk mendapatkan panel refresh
+     * @return panel refresh
+     */
     public JLabel getLabelRefresh() {
         refresh = new JLabel("refresh");
         refresh.setOpaque(true);
@@ -57,6 +61,10 @@ public class CardRecomendationAnime {
         return refresh;
     }
 
+    /**
+     * Method untuk panel card
+     * @return card panel
+     */
     public JPanel getCard() {
 
         if (refresh == null) {
@@ -77,12 +85,6 @@ public class CardRecomendationAnime {
         scrollPane.getVerticalScrollBar().setBackground(Color.decode("#333b48"));
         scrollPane.getVerticalScrollBar().setUnitIncrement(30);
         scrollPane.getHorizontalScrollBar().setUnitIncrement(30);
-//        scrollPane.setBackground(Color.BLACK);
-//        scrollPane.setForeground(Color.YELLOW);
-//        scrollPane.setBackground(Color.RED);
-        System.out.println(scrollPane.getBackground());
-//        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         JLabel topAnime = new JLabel("Rekomendasi Anime");
         topAnime.setOpaque(true);
@@ -93,17 +95,6 @@ public class CardRecomendationAnime {
         topAnime.setPreferredSize(new Dimension(1300, 20));
         topAnime.setAlignmentX(JLabel.LEFT);
 
-        // bikin getter refresh sehingga ntar lu bisa add Event Listener di sini
-//        refresh = new JLabel("refresh");
-//        refresh.setOpaque(true);
-//        refresh.setBackground(Color.decode("#333b48"));
-//        refresh.setForeground(Color.WHITE);
-//        refresh.setFont(new Font(Font.SERIF, Font.PLAIN, 18));
-//        refresh.setPreferredSize(new Dimension(1600, 30));
-//        refresh.setAlignmentX(JLabel.LEFT);
-//        refresh.setIcon(refreshImg);
-
-
         JPanel panel = new JPanel();
         panel.add(topAnime);
         panel.add(refresh);
@@ -111,19 +102,25 @@ public class CardRecomendationAnime {
         panel.setBackground(Color.decode("#333b48"));
 //        panel.setBackground(Color.LIGHT_GRAY);
         panel.setLayout(new FlowLayout());
-//        panel.setLayout(null);
-//        panel.setBounds(20, 20, 1000, 1000);
         panel.add(scrollPane);
         panel.setBorder(BorderFactory.createEmptyBorder());
 
         return panel;
     }
 
+    /**
+     * Method untuk menghapus panel carde
+     */
     public void removePanel() {
         this.cardPanel.removeAll();
     }
 
-
+    /**
+     * Method untuk menambahkan kotak-koatk atau card
+     * @param titleAnime -> judul anime
+     * @param imgAnime -> Gambar anime
+     * @param id -> mal id
+     */
     public void addCard(String titleAnime, ImageIcon imgAnime, int id, int count) {
 
         if (titleAnime.length() > 25) {
@@ -139,11 +136,8 @@ public class CardRecomendationAnime {
         }
 
 
-//        System.out.println("debug : " + x[index]);
-
         JPanel card = new JPanel();
         if (count <= 10) {
-            System.out.println("count " + count);
             card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 55));
         }
         if (count >= 6) card.setPreferredSize(new Dimension(CARD_WIDTH, CARD_HEIGHT - 30));
@@ -202,12 +196,7 @@ public class CardRecomendationAnime {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         super.mouseClicked(e);
-                        System.out.println("mama huhu");
-                        System.out.println(title.getText());
-                        System.out.println(id);
                         try {
-//                            Controller.navbar.getRecomendationAnimeDiv().removeAll();
-//                            Controller.navbar.getTopAnime().removeAll();
                             Navbar.syncDelete();
                             Navbar.removeRecomdendationCardComponent();
                             Navbar.removeTopCardComponent();
@@ -223,27 +212,7 @@ public class CardRecomendationAnime {
                 }
         );
 
-//        Controller.navbar.logo.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                if (animePage.contaienrDiv != null) {
-//                    super.mouseClicked(e);
-//                    animePage.removeContainer();
-//                    System.out.println("log in CardRecomendation");
-//                    cardPanel.revalidate();
-//                    cardPanel.repaint();
-//                }
-////                Controller.navbar.addTopCardAnime();
-////                Controller.navbar.addRecomendationAnime();
-//            }
-//        });
 
-
-    }
-
-    public JLabel getRefresh() {
-        System.out.println(refresh == null);
-        return this.refresh;
     }
 
 }

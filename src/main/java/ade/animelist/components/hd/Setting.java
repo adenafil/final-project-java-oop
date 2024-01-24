@@ -9,15 +9,25 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 
+/**
+ * Class GUI setting
+ */
 public class Setting {
     public static boolean isOpened = false;
     public static JPanel panelSetting = null;
 
+    /**
+     * Method untuk mendapatkan panel setting
+     * @return
+     */
     public static JPanel getPanelSetting() {
         isOpened = true;
         return panelSetting = getSetting();
     }
 
+    /**
+     * Method untuk menghapus panel setting
+     */
     public static void removePanelSetting() {
         isOpened = false;
         panelSetting.removeAll();
@@ -25,18 +35,13 @@ public class Setting {
         panelSetting.revalidate();
     }
 
+    /**
+     * Method untuk mendapatkan panel setting
+     * @return
+     */
     public static JPanel getSetting() {
-//        JFrame frame = new JFrame();
-//        Navbar navbar = new Navbar();
         ConfigRepository configRepository = new ConfigRepositoryImpl();
         SettingRepository settingRepository = new SettingRepositoryImpl();
-
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setLayout(new FlowLayout(FlowLayout.LEADING, -8, 0));
-//        frame.setSize(1920, 1080);
-//        frame.getContentPane().setBackground(Color.ORANGE);
-//        frame.setResizable(false);
-//        frame.add(navbar.getNavbar());
 
         JPanel settingContainer = new JPanel();
         settingContainer.setOpaque(true);
@@ -44,19 +49,11 @@ public class Setting {
         settingContainer.setMaximumSize(new Dimension(1366, 1000));
         settingContainer.setBackground(Color.decode("#333b48"));
 
-//        JPanel nganggur = new JPanel();
-//        nganggur.setOpaque(true);
-//        nganggur.setPreferredSize(new Dimension(1366, 10));
-//        nganggur.setMaximumSize(new Dimension(1366, 10));
-//        nganggur.setBackground(Color.decode("#333b48"));
-
         JPanel kotak = new JPanel();
         kotak.setOpaque(true);
         kotak.setPreferredSize(new Dimension(1000, 700));
         kotak.setMaximumSize(new Dimension(1000, 700));
         kotak.setBackground(Color.decode("#333b48"));
-//        kotak.setBackground(Color.RED);
-//        kotak.setBorder(BorderFactory.createLineBorder(Color.BLUE, 20));
 
         JLabel setting = new JLabel("Setting Profile");
         setting.setOpaque(true);
@@ -243,13 +240,7 @@ public class Setting {
         kotak.add(profileContainer);
         kotak.add(buttonContainer);
 
-//        settingContainer.add(nganggur);
-
         settingContainer.add(kotak);
-
-//        frame.add(settingContainer);
-//
-//        frame.setVisible(true);
 
         return settingContainer;
     }

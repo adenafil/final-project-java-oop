@@ -1,6 +1,5 @@
 package ade.animelist.components.hd;
 
-import ade.animelist.components.utilcomponent.AnimeListWorker;
 import ade.animelist.components.utilcomponent.AnimeListWorkerHD;
 import ade.animelist.components.utilcomponent.ImageRenderer;
 import ade.animelist.controller.Controller;
@@ -16,12 +15,13 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Gui Class MyCollection
+ */
 public class CardCollection {
     public static boolean isOpened = false;
     private static int indexAddUpAnime;
     public static int totalAnime = -1;
-
-//    public static AnimePage animePage = new AnimePage();
 
     public static JPanel cardPanel;
     public static JPanel panel = new JPanel();
@@ -37,7 +37,10 @@ public class CardCollection {
     public static int countRefreshClicked = 0;
 
 
-
+    /**
+     * Method untuk mendapakan component myCollection
+     * @return myCollection Panel
+     */
     public static JLabel getLabelRefresh() {
 //        refresh = new JLabel("refresh");
         refresh.setOpaque(true);
@@ -55,12 +58,6 @@ public class CardCollection {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
-//                Controller.removeComponent(CardCollection.panel);
-//                removeCardPanel();
-//
-//                System.out.println("APakah ke hapus");
-//
-//                CardCollection.panel = CardCollection.getCardPanel();
 
                 if (countRefreshClicked != 3) {
                     List<CompletableFuture<Anime>> animeFutures = listAnimeuser.getAllAnimeListUserAsync();
@@ -69,49 +66,6 @@ public class CardCollection {
                     ++countRefreshClicked;
                 }
 
-//                SwingWorker<Void, Anime> doRefreshAnime = new SwingWorker<Void, Anime>() {
-////                    private final List<CompletableFuture<Anime>> animeFutures;
-////
-////                    public AnimeListWorker(List<CompletableFuture<Anime>> animeFutures) {
-////                        this.animeFutures = animeFutures;
-////                    }
-//
-//                    @Override
-//                    protected Void doInBackground() {
-//                        animeFutures.forEach(future -> {
-//                            try {
-//                                Anime anime = future.join();
-//                                publish(anime);
-//                            } catch (Exception ex) {
-//                                ex.printStackTrace(); // Handle exceptions appropriately
-//                            }
-//                        });
-//                        return null;
-//                    }
-//
-//                    @Override
-//                    protected void process(List<Anime> chunks) {
-//                        // This method is invoked on the EDT
-//                        for (Anime anime : chunks) {
-//                            // Update GUI components here
-//                            ImageIcon tes = ImageRenderer.createImageIconByURL(anime.images.getJpg().largeImageUrl);
-//                            System.out.println(tes.getIconWidth());
-//                            System.out.println(anime.title);
-//
-//                            CardCollection.addCard(anime.title, tes, anime.malId);
-//                        }
-//                        CardCollection.setIndex(0);
-//                    }
-//                };
-//
-//                doRefreshAnime.execute();
-//                AnimeListWorker animeListWorker = new AnimeListWorker(animeFutures);
-//                animeListWorker.execute();
-
-//                CardCollection.setIndex(0);
-//                Controller.addComponent(CardCollection.panel);
-
-                System.out.println("difarina");
             }
 
             @Override
@@ -128,25 +82,34 @@ public class CardCollection {
                 refresh.setIcon(refreshImg);
             }
 
-
-
         });
 
 
         return refresh;
     }
 
+
+    /**
+     * Method untuk mendapatkan card panel
+     * @return
+     */
     public static JPanel getCardPanel() {
         return panel = getCard();
     }
 
+    /**
+     * Method untuk merenove cardPanel
+     */
     public static void removeCardPanel() {
         panel.removeAll();
         panel.repaint();
         panel.revalidate();
     }
 
-
+    /**
+     * Method untuk mendapatkan panel card
+     * @return card panel
+     */
     public static JPanel getCard() {
         cardPanel = new JPanel();
         cardPanel.setLayout(new GridBagLayout());
@@ -154,18 +117,10 @@ public class CardCollection {
         JScrollPane scrollPane = new JScrollPane(cardPanel);
         scrollPane.setPreferredSize(new Dimension(1366, 768));
         scrollPane.setOpaque(true);
-//        scrollPane.getViewport().getView().setBackground(Color.decode("#333b48"));
         scrollPane.getViewport().getView().setBackground(Color.decode("#333b48"));
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getVerticalScrollBar().setBackground(Color.decode("#333b48"));
         scrollPane.getVerticalScrollBar().setUnitIncrement(30);
-//        scrollPane.setBackground(Color.BLACK);
-//        scrollPane.setForeground(Color.YELLOW);
-//        scrollPane.setBackground(Color.RED);
-        System.out.println(scrollPane.getBackground());
-        System.out.println(scrollPane.getBackground());
-//        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         JLabel topAnime = new JLabel("My Collection");
         topAnime.setOpaque(true);
@@ -175,28 +130,23 @@ public class CardCollection {
         topAnime.setPreferredSize(new Dimension(1300, 25));
         topAnime.setAlignmentX(JLabel.LEFT);
 
-//        JPanel filterContainer = new JPanel();
-//        filterContainer.setOpaque(true);
-//        filterContainer.setBackground(Color.PINK);
-//        filterContainer.setPreferredSize(new Dimension(1600, 30));
-//        filterContainer.setMaximumSize(new Dimension(1600, 30));
-
-
         panel.add(topAnime);
         panel.add(getLabelRefresh());
-//        panel.add(filterContainer);
         panel.setPreferredSize(new Dimension(1366, 800));
         panel.setBackground(Color.decode("#333b48"));
         panel.setLayout(new FlowLayout());
-//        panel.setBackground(Color.PINK);
-//        panel.setLayout(null);
-//        panel.setBounds(20, 20, 1000, 1000);
         panel.add(scrollPane);
         panel.setBorder(BorderFactory.createEmptyBorder());
 
         return panel;
     }
 
+    /**
+     * Method untuk menambahkan kotak-kotak atau card
+     * @param tileAnime judul anime
+     * @param imgAnime gambar
+     * @param id -> malID
+     */
     public static void addCard(String tileAnime, ImageIcon imgAnime, int id) {
         indexAddUpAnime++;
 
@@ -268,10 +218,6 @@ public class CardCollection {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         super.mouseClicked(e);
-                        System.out.println("mama huhu");
-                        System.out.println(title.getText());
-                        System.out.println(idAnime.getText());
-                        System.out.println(id);
                         try {
 //                            Controller.navbar.getRecomendationAnimeDiv().removeAll();
 //                            Controller.navbar.getTopAnime().removeAll();
@@ -297,37 +243,16 @@ public class CardCollection {
                 }
         );
 
-//        Controller.navbar.logo.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                super.mouseClicked(e);
-//                animePage.removeContainer();
-//                System.out.println("mamama");
-////                Controller.navbar.addTopCardAnime();
-////                Controller.navbar.addRecomendationAnime();
-//            }
-//        });
-//
-
         cardPanel.revalidate();
         cardPanel.repaint();
     }
 
-    public static int getIndexAddUpAnime() {
-        return indexAddUpAnime;
-    }
 
-    public static void setIndexAddUpAnime(int indexAddUpAnimee) {
-        indexAddUpAnime = indexAddUpAnimee;
-    }
-
-    public static void removeData() {
-        if (indexAddUpAnime > 0) {
-            cardPanel.removeAll();
-        }
-        setIndexAddUpAnime(0);
-    }
-
+    /**
+     * Method untuk setIndex kotak-kotak
+     * boasa digunakan untuk set index menjadi 0
+     * @param indexx no index
+     */
     public static void setIndex(int indexx) {
         index = indexx;
     }

@@ -14,21 +14,29 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
+/**
+ * Class Component GUI animePage atau ketika sebuah block kotak diclick
+ * maka class inilah yang mengurusnya melalui method-methodnya.
+ */
 public class AnimePage {
     public static boolean isOpened = false;
     public static JPanel contaienrDiv = null;
 
+    /**
+     * Method untuk mendapatkan component based on click block kotak
+     * semua logic kotak-kotak dari sebuah gambar anime either di home atau my collection including searching
+     * semua masuk kesini sehingga menjadi anime page
+     * @param id -> id mal
+     * @return sebuah component animePage
+     * @throws JikanQueryException
+     */
     public static JPanel getAnimePageById(int id) throws JikanQueryException {
         // anime
         Anime anime = JikanAPI.getAnimeById(id);
 
         if (anime.episodes == null && anime.synopsis == null) {
             anime.setEpisodes(0);
-            System.out.println("BElum");
-            anime.synopsis = "Maaf Anime Ini Masih Belum Tayang Sehingga Kami Tidak Bisa Mendapatkan Synopsis Dari Anime Tersebut";
         }
-
-        System.out.println("SUdah" );
 
         AddAnimeToDbRepository addAnimeToDbRepository = new AddAnimeToDbRepositoryImpl();
         boolean didThisAnimeExistInDatabase = addAnimeToDbRepository.doesThisAnimeExistInDatabase(id);
@@ -70,13 +78,8 @@ public class AnimePage {
         kotakAnimeDesc.setOpaque(true);
         kotakAnimeDesc.setMaximumSize(new Dimension(1366, 100));
         kotakAnimeDesc.setBackground(Color.decode("#333b48"));
-//        anAnime.setForeground(Color.BLUE);
-//
 
         GridBagConstraints gbcPeringkat = new GridBagConstraints();
-
-//f
-//        gbcPeringkat.anchor = GridBagConstraints.WEST;
 
 
         gbcPeringkat.insets = new Insets(10, 10, 10, 10);
@@ -128,12 +131,7 @@ public class AnimePage {
         synopsis.setVerticalTextPosition(SwingConstants.TOP);
 //        synopsis.setHorizontalTextPosition(SwingConstants.TOP);
         synopsis.setBorder(new LineBorder(Color.WHITE, 2));
-//        synopsis.setText(
-//                "<html>" +
-//                        "<p> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>"
-//                        +
-//                        "</html>"
-//        );
+
         synopsis.setText(
                 "<html>" + "<p>" + anime.synopsis + "</p>" + "</html>"
         );
@@ -230,7 +228,6 @@ public class AnimePage {
         addAnime.setVisible(false);
 
         statusComboBox.addActionListener(e -> {
-            System.out.println("aw aw aw aw aw");
             if (statusComboBox.getSelectedIndex() == 1) {
                 episodeIndex.setText("Your Progress Episode Is On : " + anime.episodes);
                 addAnime.setEnabled(false);
@@ -240,19 +237,13 @@ public class AnimePage {
 
         addAnime.addActionListener(e-> {
             int currentEps = getDigitInThisText(episodeIndex.getText());
-            System.out.println("hello add");
-            System.out.println(getDigitInThisText(episodeIndex.getText()) + " <" + anime.episodes);
-            System.out.println("logika " + (getDigitInThisText(episodeIndex.getText()) <= anime.episodes - 1));
             if (getDigitInThisText(episodeIndex.getText()) <= anime.episodes - 1) {
                 currentEps = getDigitInThisText(episodeIndex.getText());
                 episodeIndex.setText("Your Progress Episode Is On : " + ++currentEps);
             }
 
-            System.out.println("Eps max " + anime.episodes);
-
             if (getDigitInThisText(episodeIndex.getText()) == anime.episodes) {
                 addAnime.setEnabled(false);
-                System.out.println(episodeIndex.getText());
             } else if (getDigitInThisText(episodeIndex.getText()) < anime.episodes) {
                 addAnime.setEnabled(true);
             }
@@ -312,14 +303,7 @@ public class AnimePage {
         alignmentSection.gridx = 4;
         sectionUserInterface.add(subtractAnime, alignmentSection);
 
-
-        // TODOS
-        // Buatlah sebuah button yang ketika add to list dan lain lain terhubung dengan database
-        // save changes akan menmapilkan notif either berhasil menyimpan atau sebaliknya
-
-
         if (addAnimeToDbRepository.doesThisAnimeExistInDatabase(id)) {
-            System.out.println("check where " + didThisAnimeExistInDatabase);
             button.setText("Save Changes");
             statusComboBox.setVisible(true);
             episodeIndex.setVisible(true);
@@ -329,20 +313,15 @@ public class AnimePage {
             button.setVisible(true);
 
         } else {
-            System.out.println("add to collection");
             button.setText("Add To Collection");
             button.setVisible(true);
             button.addActionListener(e -> {
-                System.out.println(button.getText());
-
-                System.out.println("difarina");
                 statusComboBox.setVisible(true);
                 episodeIndex.setVisible(true);
                 addAnime.setVisible(true);
                 subtractAnime.setVisible(true);
 
                 button.setText("Save Changes");
-                System.out.println("status : " + statusComboBox.getSelectedItem().toString());
 
                 addAnime.setVisible(true);
 
@@ -386,25 +365,23 @@ public class AnimePage {
                 else JOptionPane.showMessageDialog(null, "Gagal Menambahkan Anime Ke Database", "Informasi", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-
-
         contaienrDiv.add(sectionUserInterface);
-
-//        Controller.navbar.search.addActionListener(e -> {
-//            Controller.removeComponent(contaienrDiv);
-//        });
-
         return  contaienrDiv;
-//        frame.add(contaienrDiv);
-//        frame.setVisible(true);
 
     }
-
+    /**
+     * Method untuk menghapus panel animePage
+     */
     public static void removeContainer() {
-        System.out.println("is it null = " + contaienrDiv == null + " s");
         Controller.removeComponent(contaienrDiv);
     }
 
+    /**
+     * Method untuk membuat kotak 4 pilar
+     * @param field an field
+     * @param value value of field
+     * @return component kotak yang biasanya terletak ada 4 kotak pada anime page
+     */
     public static JPanel createKotak(String field, String value) {
         JPanel kotak = new JPanel();
         kotak.setOpaque(true);
@@ -437,6 +414,11 @@ public class AnimePage {
         return kotak;
     }
 
+    /**
+     * Method untuk mendapatkan digit pada text
+     * @param text => data dari api
+     * @return integer
+     */
     public static int getDigitInThisText(String text) {
         String digit = "";
         char[] chars = text.toCharArray();

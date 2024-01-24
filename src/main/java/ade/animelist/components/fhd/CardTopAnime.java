@@ -8,6 +8,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * GUI Class Top Card Kotak-Kotak
+ */
 public class CardTopAnime {
     public boolean isOpened = false;
     JPanel cardPanel;
@@ -20,7 +23,10 @@ public class CardTopAnime {
     private static int normalY = 20;
     JPanel panel = new JPanel();
 
-
+    /**
+     * Method untuk mendapatkan component div panel card
+     * @return panel
+     */
     public JPanel getCard() {
 
         cardPanel = new JPanel();
@@ -34,12 +40,6 @@ public class CardTopAnime {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getVerticalScrollBar().setBackground(Color.decode("#333b48"));
         scrollPane.getVerticalScrollBar().setUnitIncrement(30);
-//        scrollPane.setBackground(Color.BLACK);
-//        scrollPane.setForeground(Color.YELLOW);
-//        scrollPane.setBackground(Color.RED);
-        System.out.println(scrollPane.getBackground());
-//        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         JLabel topAnime = new JLabel("Top Anime");
         topAnime.setOpaque(true);
@@ -53,37 +53,25 @@ public class CardTopAnime {
         panel.setPreferredSize(new Dimension(1920, 500));
         panel.setBackground(Color.decode("#333b48"));
         panel.setLayout(new FlowLayout());
-//        panel.setLayout(null);
-//        panel.setBounds(20, 20, 1000, 1000);
         panel.add(scrollPane);
         panel.setBorder(BorderFactory.createEmptyBorder());
-
-//        try {
-//            JikanAPI.getTopAnime()
-//                    .subscribeOn(Schedulers.parallel())
-//                    .subscribe(
-//                            animeList -> {
-//                                ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(animeList);
-//                                imageLoaderWorker.execute();
-//                                animeList.forEach(bayor -> addCard(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId));
-//                            },
-//                            throwable -> {
-//                                System.out.println("error : " + throwable.getMessage());
-//                            }
-//                    );
-//        } catch (JikanQueryException ex) {
-//            throw new RuntimeException(ex);
-//        }
-//
-
 
         return panel;
     }
 
+    /**
+     * Method untuk menghapus cardPanel
+     */
     public void removePanel() {
         this.cardPanel.removeAll();
     }
 
+    /**
+     * Method untuk menambahkan kartu
+     * @param titleAnime => Judul anime
+     * @param imgAnime => ImageIcon anime
+     * @param id => Mal id
+     */
     public void addCard(String titleAnime, ImageIcon imgAnime, int id) {
 
         if (titleAnime.length() > 40) {
@@ -154,23 +142,13 @@ public class CardTopAnime {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         super.mouseClicked(e);
-                        System.out.println("mama huhu");
-                        System.out.println(title.getText());
-
-                        System.out.println(id);
                         try {
-//                            Controller.navbar.getRecomendationAnimeDiv().removeAll();
-//                            Controller.navbar.getTopAnime().removeAll();
+
                             Navbar.syncDelete();
                             Navbar.removeRecomdendationCardComponent();
                             Navbar.removeTopCardComponent();
                             AnimePage.isOpened = true;
                             isOpened = false;
-//                            Controller.navbar.getTopAnime().repaint();
-//                            Controller.navbar.getTopAnime().revalidate();
-//
-//                            Controller.navbar.getRecomendationAnimeDiv().repaint();
-//                            Controller.navbar.getRecomendationAnimeDiv().revalidate();
 
                             Controller.addComponent(AnimePage.getAnimePageById(id));
                             Controller.doScync();
@@ -183,18 +161,6 @@ public class CardTopAnime {
                 }
         );
 
-//        Controller.navbar.logo.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                super.mouseClicked(e);
-//                if (animePage.contaienrDiv != null) {
-//                    animePage.removeContainer();
-//                    System.out.println("log : it is supposed to in animePage, need to be checked");
-//                }
-////                Controller.navbar.addTopCardAnime();
-////                Controller.navbar.addRecomendationAnime();
- //           }
- //       });
 
     }
 }

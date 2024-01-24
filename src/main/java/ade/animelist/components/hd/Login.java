@@ -10,18 +10,17 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Class Gui LOGIN
+ */
 public class Login {
     public static JPanel container = new JPanel();
 
+    /**
+     * Method untuk mendapatkan component login
+     * @return component login
+     */
     public static JPanel getLogin() {
-//        JFrame frame = new JFrame();
-//
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setLayout(new FlowLayout(FlowLayout.LEADING, -8, 0));
-//        frame.setSize(1920, 1080);
-//        frame.getContentPane().setBackground(Color.ORANGE);
-//        frame.setResizable(false);
-
         GridBagConstraints gbc = new GridBagConstraints();
 
         container.setLayout(new GridBagLayout());
@@ -154,11 +153,8 @@ public class Login {
 
         registerBtn.addActionListener(e -> {
 
-            System.out.println(textFieldUsername.getText().contains(" "));
-
             // handle password kosong dan username kosong
             if (textFieldUsername.getText().isBlank() && textPasswordField.getText().isBlank()) {
-                System.out.println("mama");
                 JOptionPane.showMessageDialog(null, "Username dan Password Anda Masih Kosong", "Informasi", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
@@ -248,9 +244,6 @@ public class Login {
 
 
         container.add(containerRegister, gbc);
-
-//        frame.add(container);
-//        frame.setVisible(true);
 
         return container;
 

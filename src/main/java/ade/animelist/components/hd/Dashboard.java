@@ -1,6 +1,5 @@
 package ade.animelist.components.hd;
 
-import ade.animelist.components.utilcomponent.AnimeListWorker;
 import ade.animelist.components.utilcomponent.AnimeListWorkerHD;
 import ade.animelist.components.utilcomponent.Counter;
 import ade.animelist.components.utilcomponent.ImageRenderer;
@@ -13,11 +12,19 @@ import java.awt.*;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Class untuk component dasboard
+ */
 public class Dashboard {
     private static int indexListenerCollection = 0;
     public static JPanel dashboardDiv = new JPanel();
     private static ConfigRepository configRepository = new ConfigRepositoryImpl();
     public static boolean isOpened = false;
+
+    /**
+     * Method untuk mendapatkan component dashboard
+     * @return component dashboard
+     */
     public static JPanel getDashboard() {
         dashboardDiv.setOpaque(true);
         dashboardDiv.setPreferredSize(new Dimension(1366, 768));
@@ -46,10 +53,6 @@ public class Dashboard {
         SettingRepository settingRepository = new SettingRepositoryImpl();
         name.setForeground(Color.WHITE);
         name.setFont(new Font(Font.SERIF, Font.BOLD, 30));
-//        name.setHorizontalTextPosition(SwingConstants.CENTER);
-//        name.setVerticalTextPosition(SwingConstants.CENTER);
-
-
 
         containerName.add(name);
 
@@ -71,7 +74,6 @@ public class Dashboard {
 
         if (settingRepository.getPath() != null && img.getIconWidth() != -1) {
 
-            System.out.println(img.getIconWidth());
             JLabel imgLabel = new JLabel();
             imgLabel.setOpaque(true);
             imgLabel.setPreferredSize(new Dimension(200, 200));
@@ -86,12 +88,9 @@ public class Dashboard {
         textIfProfileNotExist.setPreferredSize(new Dimension(200, 200));
         textIfProfileNotExist.setMaximumSize(new Dimension(200, 200));
         textIfProfileNotExist.setBackground(Color.decode("#" + getHexaColor(configRepository.getCurrentUsername())));
-//        textIfProfileNotExist.setBackground(Color.PINK);
         textIfProfileNotExist.setFont(new Font(Font.SERIF, Font.BOLD, 200));
         textIfProfileNotExist.setHorizontalAlignment(JLabel.CENTER);
         textIfProfileNotExist.setVerticalAlignment(JLabel.CENTER);
-//        textIfProfileNotExist.setVerticalTextPosition(SwingConstants.CENTER);
-//        textIfProfileNotExist.setHorizontalTextPosition(SwingConstants.CENTER);
 
         profile.add(textIfProfileNotExist);
 
@@ -124,7 +123,6 @@ public class Dashboard {
 
             JPanel card = CardCollection.getCardPanel();
 
-            System.out.println("index collect " + indexListenerCollection);
             AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
             if (indexListenerCollection  == 0) {
                 Counter.getStartedUsingIncrement();
@@ -133,27 +131,18 @@ public class Dashboard {
                 listAnimeuser.getAllAnimeListInDatabaseUser().forEach(
                         maguire -> {
 
-                            System.out.println(Counter.a);
                             if (Counter.a <= 5) {
-//                                Counter.incremennt();
-//                                CardCollection.scrollPane.setPreferredSize(new Dimension(1920, 450));
-//                                CardCollection.scrollPane.setBackground(Color.RED);
-//                                CardCollection.scrollPane.repaint();
-//                                CardCollection.scrollPane.revalidate();
-                                System.out.println("masuk sini");
                                 CardCollection.panel.getComponent(2).setPreferredSize(new Dimension(1366, 300));
                                 CardCollection.cardPanel.repaint();
                                 CardCollection.cardPanel.revalidate();
                                 CardCollection.panel.revalidate();
                                 CardCollection.panel.repaint();
                             } else {
-                                System.out.println("masuk sana");
                                 CardCollection.panel.getComponent(2).setPreferredSize(new Dimension(1366, 600));
                                 CardCollection.panel.revalidate();
                                 CardCollection.panel.repaint();
                             }
 
-                            System.out.println();
                             CardCollection.addCard(
                                     maguire.title,
                                     null,
@@ -175,53 +164,6 @@ public class Dashboard {
 
             ++indexListenerCollection;
 
-//            CardCollection.setIndex(0);
-//
-//            CardCollection.setIndex(0);
-//            SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-//
-//                @Override
-//                protected Void doInBackground() throws Exception {
-//                    System.out.println("masih 0 kah ?" + indexListenerCollection);
-//                    ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(listAnimeuser.getAllAnimeListUser());
-//                    imageLoaderWorker.execute();
-//
-//                    listAnimeuser.getAllAnimeListUser().forEach(
-//                            luAsikBang -> {
-////                                CardCollection.addCard(
-////                                        luAsikBang.title,
-//                                        ImageRenderer.createImageIconByURL(luAsikBang.images.getJpg().largeImageUrl);
-////                                        luAsikBang.malId
-////                                );
-//                            }
-//                    );
-//
-//                    if (indexListenerCollection == 0) {
-//                        ++indexListenerCollection;
-//                        return null;
-//                    } else {
-//                        listAnimeuser.getAllAnimeListUser().forEach(
-//                                luAsikBang -> {
-//                                CardCollection.addCard(
-//                                        luAsikBang.title,
-//                                    ImageRenderer.createImageIconByURL(luAsikBang.images.getJpg().largeImageUrl),
-//                                        luAsikBang.malId
-//                                );
-//                                }
-//                        );
-//                        Controller.addComponent(card);
-//                    }
-//
-//                    CardCollection.setIndex(0);
-//
-////                    Thread.sleep(5000);
-//
-//                    return null;
-//                }
-//            };
-//
-//            worker.execute();
-
 
         });
 
@@ -238,16 +180,11 @@ public class Dashboard {
 
         signOutBtn.addActionListener(e -> {
             Dashboard.isOpened = false;
-//            dashboardDiv.removeAll();
-//            dashboardDiv.repaint();
-//            dashboardDiv.revalidate();
             Controller.removeComponent(dashboardDiv);
             Controller.createLoginHD();
-//            Controller.removeComponent(Controller.navbar.getNavbar());
             Controller.removeDashboardHD();
             Controller.removeComponent(Navbar.navbar);
             Navbar.removeNavbar();
-//            Controller.navbar.removeAll();
 
         });
 
@@ -263,7 +200,6 @@ public class Dashboard {
 
         settingBtn.addActionListener(e -> {
             Dashboard.isOpened = false;
-//            CardCollection.isOpened = true;
             dashboardDiv.removeAll();
             Controller.removeComponent(dashboardDiv);
             Controller.addComponent(Setting.getPanelSetting());
@@ -279,6 +215,11 @@ public class Dashboard {
         return dashboardDiv;
     }
 
+    /**
+     * Mendapatkan warna based on username
+     * @param name => nama
+     * @return => warna hexacolor
+     */
     public static String getHexaColor(String name) {
         int hashCode = name.hashCode();
 

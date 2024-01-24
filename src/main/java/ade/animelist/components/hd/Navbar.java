@@ -17,6 +17,9 @@ import java.awt.event.MouseEvent;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
+/**
+ * Gui Class Navbar
+ */
 public class Navbar {
     static JLabel logo;
     static JTextField search;
@@ -32,6 +35,9 @@ public class Navbar {
 
     public static JPanel navbar = null;
 
+    /**
+     * Method untuk menambahkan navbar
+     */
     public static void addNavbar() {
         navbar = getNavbar();
         navbar.repaint();
@@ -39,15 +45,20 @@ public class Navbar {
         Controller.addComponent(navbar);
     }
 
+    /**
+     * Method untuk meremove navbar
+     */
     public static void removeNavbar() {
         Controller.removeComponent(navbar);
         navbar.revalidate();
         navbar.repaint();
         navbar = null;
-//        navbar.removeAll();
-
     }
 
+    /**
+     * Method untuk mendapakan component navbar
+     * @return component navbar
+     */
     public static JPanel getNavbar() {
         // div
         JPanel divContainer = new JPanel();
@@ -55,42 +66,28 @@ public class Navbar {
         divContainer.setSize(1366, 50);
         divContainer.setOpaque(true);
         divContainer.setBackground(Color.ORANGE);
-//        divContainer.setBackground(Color.BLUE);
 
         // div
         JPanel divNav = new JPanel();
-//        divNav.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         divNav.setOpaque(true);
         divNav.setBackground(Color.ORANGE);
-
-//
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        this.setSize(1920, 1080);
-//        this.setResizable(false);
-//        this.setLayout(null);
-//        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
         // Component Logo
         logo = new JLabel("Home");
         logo.setOpaque(true);
-//        logo.setPreferredSize(new Dimension(200, 200));
-//        logo.setLayout(null);
         logo.setPreferredSize(new Dimension(150, 40));
         logo.setMaximumSize(new Dimension(150, 40));
         logo.setForeground(Color.decode("#333b48"));
         logo.setBackground(Color.ORANGE);
-//        logo.setBackground(Color.RED);
         logo.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         logo.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Component JTextField
 
         search = new JTextField();
-//        search.setBounds(500, 0, 1000, 40);
         search.setPreferredSize(new Dimension(500, 30));
         search.setText("Cari anime...");
         search.setFont(new Font(null, Font.BOLD, 14));
-//        search.setFocusable(false);
         search.setBorder(BorderFactory.createEmptyBorder());
 
         // Component Dasboard
@@ -101,7 +98,6 @@ public class Navbar {
         dashboard.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         dashboard.setForeground(Color.decode("#333b48"));
         dashboard.setBackground(Color.ORANGE);
-//        dashboard.setBackground(Color.RED);
         dashboard.setHorizontalAlignment(SwingConstants.CENTER);
 
 
@@ -121,10 +117,6 @@ public class Navbar {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-
-//                // bad code 😎
-//                if (!Dashboard.isOpened) Dashboard.isOpened = true;
-
 
                 super.mouseClicked(e);
                 if (cardTopAnime.isOpened && cardRecomendationAnime.isOpened) {
@@ -146,38 +138,16 @@ public class Navbar {
                     Controller.addComponent(Dashboard.getDashboard());
                 }
 
-//                if (cardSearchAnime.isOpened) {
-//                    removeSearchAnimeCard();
-//                    cardSearchAnime.isOpened = false;
-//                }
-
-//                if (cardTopAnime.animePage != null) {
-//                    cardTopAnime.animePage.removeContainer();
-//                }
-//
-//                if (cardRecomendationAnime.animePage != null) {
-//                    cardRecomendationAnime.animePage.removeContainer();
-//                }
-
                 if (cardSearchAnime.isOpened) {
-//                    cardSearchAnime.animePage.removeContainer();
                     removeSearchAnimeCard();
                     Controller.addComponent(Dashboard.getDashboard());
                     cardSearchAnime.isOpened = false;
                     Dashboard.isOpened = true;
                 }
 
-//                if (CardCollection.isOpened) {
-//                    System.out.println("HEllo");
-//                    Controller.removeComponent(CardCollection.panel);
-//                    CardCollection.cardPanel.removeAll();
-//                    CardCollection.panel.removeAll();
-//
-//                }
 
                 // bug
                 if (CardCollection.isOpened) {
-                    System.out.println("IFELSE");
                     Controller.removeComponent(CardCollection.panel);
                     CardCollection.cardPanel.removeAll();
                     CardCollection.panel.removeAll();
@@ -195,10 +165,6 @@ public class Navbar {
                 }
 
 
-//                if (!Dashboard.isOpened)  {
-//                    Controller.addComponent(Dashboard.getDashboard());
-//                    Dashboard.isOpened = true;
-//                }
             }
         });
 
@@ -213,30 +179,8 @@ public class Navbar {
 
                 recomendationAnimeDiv = cardRecomendationAnime.getCard();
                 addRecomendationAnime();
-                System.out.println("difarina");
             }
         });
-
-//        CardCollection.refresh.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                super.mouseClicked(e);
-//                AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
-//                CardCollection.panel.removeAll();
-//                Controller.removeComponent(CardCollection.panel);
-//
-//                CardCollection.panel = CardCollection.getCard();
-//
-//                List<CompletableFuture<Anime>> animeFutures = listAnimeuser.getAllAnimeListUserAsync();
-//                AnimeListWorker animeListWorker = new AnimeListWorker(animeFutures);
-//                animeListWorker.execute();
-//
-//                CardCollection.setIndex(0);
-//                Controller.addComponent(CardCollection.panel);
-//
-//                System.out.println("difarina");
-//            }
-//        });
 
 
         // listener logo
@@ -256,14 +200,7 @@ public class Navbar {
             @Override
             public void mouseClicked(MouseEvent e) {
 
-//                cardTopAnime.isOpened = true;
-//                cardRecomendationAnime.isOpened = true;
                 super.mouseClicked(e);
-                System.out.println("log bingung when enter logo in : " + bingung);
-
-//                System.out.println(cardRecomendationAnime.refresh);
-
-                System.out.println("page -> " + AnimePage.isOpened);
 
                 if (AnimePage.isOpened) {
                     AnimePage.isOpened = false;
@@ -271,17 +208,13 @@ public class Navbar {
                     cardRecomendationAnime.isOpened = true;
                     AnimePage.removeContainer();
 
-                    System.out.println("masuk sini");
-
                     addTopCardAnime();
                     addRecomendationAnime();
 
                     return;
                 }
 
-                System.out.println("top && reco -> " + (cardTopAnime.isOpened && cardRecomendationAnime.isOpened));
                 if (cardTopAnime.isOpened && cardRecomendationAnime.isOpened) {
-                    System.out.println("mamamam nenene" + topAnimeDiv != null);
                     recomendationAnimeDiv.removeAll();
                     removeRecomdendationCardComponent();
 
@@ -296,23 +229,9 @@ public class Navbar {
                     return;
                 }
 
-//                if (CardCollection.isOpened) {
-//                    System.out.println("MEssi");
-//                    Controller.removeComponent(CardCollection.animePage.contaienrDiv);
-//                    CardCollection.animePage.contaienrDiv.removeAll();
-////                    addTopCardAnime();
-//                    addRecomendationAnime();
-//                    CardCollection.isOpened = false;
-//                    bingung = 0;
-//                }
-//
-
-                System.out.println("Cc -> " + CardCollection.isOpened);
                 if (CardCollection.isOpened) {
-                    System.out.println("Colection");
                     CardCollection.panel.removeAll();
                     Controller.removeComponent(CardCollection.panel);
-//                    addTopCardAnime();
                     addTopCardAnime();
                     addRecomendationAnime();
                     CardCollection.isOpened = false;
@@ -321,9 +240,7 @@ public class Navbar {
                     return;
                 }
 
-                System.out.println("search -> " + cardSearchAnime.isOpened);
                 if (cardSearchAnime.isOpened) {
-                    System.out.println("log search");
                     removeSearchAnimeCard();
                     addTopCardAnime();
                     addRecomendationAnime();
@@ -333,23 +250,11 @@ public class Navbar {
                     return;
                 }
 
-//                // ini untuk adding up
-//                if (!CardCollection.isOpened) {
-//                    System.out.println("hiihihj");
-//                    addTopCardAnime();
-//                    addRecomendationAnime();
-//                    bingung = 0;
-//                }
-
-                System.out.println("Dashboard -> " + Dashboard.isOpened);
-
                 if (Dashboard.isOpened) {
                     cardTopAnime.isOpened = true;
                     cardRecomendationAnime.isOpened = true;
-                    System.out.println("log 3939 : " + bingung);
                     addTopCardAnime();
                     addRecomendationAnime();
-                    System.out.println("Mmaamma huthuthuthut");
                     Dashboard.dashboardDiv.removeAll();
                     Controller.removeComponent(Dashboard.dashboardDiv);
                     Dashboard.isOpened = false;
@@ -365,26 +270,10 @@ public class Navbar {
                     cardRecomendationAnime.isOpened = true;
                 }
 
-
-//                if (bingung == 6767) {
-//                    System.out.println("HEllo");
-//                    Controller.removeComponent(CardCollection.panel);
-//                    CardCollection.cardPanel.removeAll();
-//                    CardCollection.panel.removeAll();
-//                    addTopCardAnime();
-//                    addRecomendationAnime();
-//                    bingung = 0;
-//                }
-
             }
         });
 
         search.addActionListener(e -> {
-//            if (cardSearchAnime.cardPanel != null) {
-//                removeSearchAnime();
-//            }
-//            cardSearchAnime.isOpened = true;
-//            addSearchAnimeCard();
             if (AnimePage.isOpened) {
                 AnimePage.isOpened = false;
                 AnimePage.removeContainer();
@@ -429,40 +318,17 @@ public class Navbar {
                 cardSearchAnime.isOpened = true;
                 addSearchAnimeCard();
             }
-//            cardSearchAnime = new CardSearchAnime();
-//            Controller.addComponent(cardSearchAnime.getCard());
+
             if (e.getSource() == search ) {
                 cardSearchAnime.removeData();
                 cardSearchAnime.setIndex(0);
-                System.out.println(search.getText());
                 setSearchByUser(search.getText());
-
-//                try {
-//                    JikanAPI.getTitleAndImageAnimeBySearchAsync(search.getText())
-//                            .subscribeOn(Schedulers.parallel())
-//                            .subscribe(
-//                                    animeList -> {
-//                                        CardRecomendationAnime.index = 0;
-//                                        ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(animeList);
-//                                        imageLoaderWorker.execute();
-//                                        animeList.stream().parallel().forEach(bayor -> {
-//                                            addAnime(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId);
-//                                        });
-//                                    },
-//                                    throwable -> {
-//                                        System.out.println("error : " + throwable.getMessage());
-//                                    }
-//                            );
-//                } catch (JikanQueryException ex) {
-//                    throw new RuntimeException(ex);
-//                }
 
                 SwingWorker<Void, Void> addSearchCollection = new SwingWorker<Void, Void>() {
                     @Override
                     protected Void doInBackground() throws Exception {
                         try {
                             Counter.getStartedUsingIncrement();
-                            System.out.println("search log " + JikanAPI.searchAnimeByTitle(search.getText()).get(0).title.isBlank());
                             JikanAPI.getTitleAndImageAnimeBySearchAsync(search.getText())
                                     .subscribeOn(Schedulers.parallel())
                                     .subscribe(
@@ -476,26 +342,21 @@ public class Navbar {
                                                         cardSearchAnime.panel.getComponent(1).setPreferredSize(new Dimension(1366, 300));
                                                         cardSearchAnime.panel.repaint();
                                                         cardSearchAnime.panel.revalidate();
-                                                        System.out.println(Counter.a);
                                                     } else if (Counter.incremennt() - 1 <= 20) {
                                                         cardSearchAnime.panel.getComponent(1).setPreferredSize(new Dimension(1366, 500));
                                                         cardSearchAnime.panel.getComponent(1).setBackground(Color.YELLOW);
                                                         cardSearchAnime.panel.repaint();
                                                         cardSearchAnime.panel.revalidate();
-                                                        System.out.println(Counter.a);
                                                     } else {
                                                         cardSearchAnime.panel.getComponent(1).setPreferredSize(new Dimension(1366, 650));
                                                         cardSearchAnime.panel.getComponent(1).setBackground(Color.YELLOW);
                                                         cardSearchAnime.panel.repaint();
                                                         cardSearchAnime.panel.revalidate();
-                                                        System.out.println(Counter.a);
                                                     }
 
 
                                                     index.incrementAndGet();
                                                     addAnime(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId);
-                                                    System.out.println("Apakah anime ini ada ? " + bayor.title);
-                                                    System.out.println("component dengan width " + cardSearchAnime.panel.getComponent(1).getHeight());
                                                 });
                                             },
                                             throwable -> {
@@ -505,9 +366,7 @@ public class Navbar {
                         } catch (JikanQueryException ex) {
                             throw new RuntimeException(ex);
                         }
-//                        cardSearchAnime.panel.getComponent(1).repaint();
-//                        cardSearchAnime.panel.getComponent(1).revalidate();
-//                        System.out.println(cardSearchAnime.panel.getComponentCount());
+
                         return null;
                     }
 
@@ -533,11 +392,6 @@ public class Navbar {
         });
 
 
-//        add(dashboard);
-//        add(search);
-//        add(logo);
-//
-//        divNav.add(Box.createVerticalStrut(80));
         divNav.add(logo);
 
         JLabel margin = new JLabel();
@@ -569,24 +423,19 @@ public class Navbar {
         return divContainer;
     }
 
-    public static String getSearchByUser() {
-        return searchByUser;
-    }
-
+    /**
+     * Method untuk mengset search user di panel search navbar
+     * @param search
+     */
     public static void setSearchByUser(String search) {
         searchByUser = search;
     }
 
-
-//    public static void main(String[] args) {
-//        Navbar navbar = new Navbar();
-//        navbar.add(navbar.getNavbar());
-//        navbar.setVisible(true);
-//    }
-
     static int stopWhenTenTop = 1;
+    /**
+     * Method untuk menambahkan top card anime
+     */
     public static void addTopCardAnime() {
-        System.out.println("log add top card");
         try {
             JikanAPI.getTopAnime()
                     .subscribeOn(Schedulers.parallel())
@@ -612,6 +461,10 @@ public class Navbar {
 
     static AtomicInteger index = new AtomicInteger();
     static int stopWhenTen = 1;
+
+    /**
+     * Method untuk menambahkan recomendation anime
+     */
     public static void addRecomendationAnime() {
         JikanAPI.getRecommendationAnimeAsync()
                 .subscribeOn(Schedulers.parallel())
@@ -623,11 +476,7 @@ public class Navbar {
                             CardRecomendationAnime.index = 0;
                             animeList.forEach(
                                     (bayor) -> {
-                                        System.out.println("halal : " + isHalalAnime(bayor));
                                         if (isHalalAnime(bayor) && stopWhenTen <= 10) {
-//                                            ImageIcon imgReco = ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl);
-//                                            System.out.println("log width " + imgReco.getIconWidth());
-                                            System.out.println("log name " + bayor.title);
                                             cardRecomendationAnime.addCard(bayor.title, ImageRenderer.setImageIconSize(ImageRenderer.createImageIconByURL(bayor.images.getJpg().largeImageUrl), 450, 450), bayor.malId, stopWhenTen);
                                             ++stopWhenTen;
                                         }
@@ -640,13 +489,10 @@ public class Navbar {
                             JOptionPane.showMessageDialog(null, "Maaf Internal Server Error, Klik Ok Untuk Mengrefresh Lagi.", "Informasi", JOptionPane.INFORMATION_MESSAGE);
                             throwable.printStackTrace();
                             index.set(1);
-                            System.out.println(index.get());
                             addRecomendationAnime();
                         }
                 );
-        System.out.println(index.get());
         if (index.get() == 1) {
-            System.out.println("masssuppk");
             index.set(0);
             return;
         }
@@ -654,114 +500,74 @@ public class Navbar {
         stopWhenTen = 1;
     }
 
+    /**
+     * Method untuk mengecek apakah animenya bukan anime 18++
+     * @param anime => anime object
+     * @return true jika anime haram dan sebaliknya
+     */
     private static boolean isHalalAnime(Anime anime) {
         return anime.rating == AgeRating.PG13;
     }
 
-    public void addHomeAnime() {
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        JPanel home = new JPanel();
-        home.setSize(1366, 1000);
-        home.setLayout(new GridLayout());
-
-        gbc.gridy = 1;
-
-        home.add(topAnimeDiv, gbc);
-
-        gbc.gridy = 2;
-
-        home.add(recomendationAnimeDiv, gbc);
-
-        Controller.addComponent(home);
-    }
+    /**
+     * Method untuk mendapatkan search panel ke main frame
+     */
     public static void addSearchAnimeCard() {
         Controller.addComponent(searchAnimeDiv);
     }
 
+    /**
+     * Method untuk menghapus search component pada main frame
+     */
     public static void removeSearchAnimeCard() {
-//        searchAnimeDiv.removeAll();
+        Controller.removeComponent(searchAnimeDiv);
         Controller.removeComponent(searchAnimeDiv);
     }
 
+    /**
+     * Method untuk menghapus top card component pada main frame
+     */
     public static void removeTopCardComponent() {
         Controller.removeComponent(topAnimeDiv);
     }
 
+    /**
+     * Method untuk menghapus recomendation panel dari main frame
+     */
     public static void removeRecomdendationCardComponent() {
         Controller.removeComponent(recomendationAnimeDiv);
     }
 
+    /**
+     * Method untuk mendapakan object cardSearchAnime
+     * @return object cardSearchAnime
+     */
     public static CardSearchAnime getCardSearch() {
         return cardSearchAnime;
     }
 
-
-    public static CardTopAnime getCardTopAnime() {
-        if (cardTopAnime.getCard() == null) {
-            System.out.println("okay");
-        }
-        return cardTopAnime;
-    }
-
-
-    public static void setCardSearchAnime(CardSearchAnime cardSearchAnime) {
-        cardSearchAnime = cardSearchAnime;
-    }
-
+    /**
+     * Method untuk menambahkan anime kotak2 pada search panel
+     * @param title
+     * @param image
+     * @param id
+     */
     public static void addAnime(String title,ImageIcon image, int id) {
         getCardSearch().addCard(title, image, id);
     }
 
-    public static JPanel getTopAnime() {
-        return topAnimeDiv;
-    }
-
-    public static JPanel getRecomendationAnimeDiv() {
-        return  recomendationAnimeDiv;
-    }
-
+    /**
+     * Method untuk mengsingkronisasi GUI ketika user mengdelete sesuatu pada component
+     */
     public static void syncDelete() {
         cardTopAnime.removePanel();
         cardRecomendationAnime.removePanel();
 
         removeTopCardComponent();
         removeRecomdendationCardComponent();
-//
     }
 
 }
-
-//class MyThread extends Thread {
-//    public void run() {
-//        AddAnimeToDbRepository listAnimeuser = new AddAnimeToDbRepositoryImpl();
-//        ImageLoaderWorker imageLoaderWorker = new ImageLoaderWorker(listAnimeuser.getAllAnimeListUser());
-//        imageLoaderWorker.execute();
-////                listAnimeuser.getAllAnimeListUser().forEach(
-////                        luAsikBang -> {
-////                            ImageIcon ade = ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) != null ? ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) : null;
-////                            System.out.println("is image null ? " + ade);
-////                            CardCollection.addCard(
-////                                    luAsikBang.title,
-////                                    ade,
-////                                    luAsikBang.malId
-////                            );
-////                        }
-////                );
-////
-//        listAnimeuser.getAllAnimeListUser().parallelStream().forEach(
-//                luAsikBang -> {
-//                    ImageIcon ade = ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) != null ? ImageRenderer.getCacheImageForCollectionPage(luAsikBang.images.getJpg().largeImageUrl) : null;
-//                    System.out.println("is image null ? " + ade);
-//                    CardCollection.addCard(
-//                            luAsikBang.title,
-//                            ade,
-//                            luAsikBang.malId
-//                    );
-//                }
-//        );
-//    }
-//}
 
 
 

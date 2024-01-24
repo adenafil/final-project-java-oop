@@ -86,10 +86,17 @@ public class CardCollection {
         return refresh;
     }
 
+    /**
+     * Method untuk mendapatkan card panel
+     * @return card panel
+     */
     public static JPanel getCardPanel() {
         return panel = getCard();
     }
 
+    /**
+     * Method untuk merenove cardPanel
+     */
     public static void removeCardPanel() {
         panel.removeAll();
         panel.repaint();
@@ -97,6 +104,10 @@ public class CardCollection {
     }
 
 
+    /**
+     * Method untuk mendapatkan panel card
+     * @return card panel
+     */
     public static JPanel getCard() {
         cardPanel = new JPanel();
         cardPanel.setLayout(new GridBagLayout());

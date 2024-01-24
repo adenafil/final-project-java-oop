@@ -28,6 +28,10 @@ public class CardRecomendationAnime {
 
     JLabel refresh;
 
+    /**
+     * Method untuk mendapatkan panel refresh
+     * @return panel refresh
+     */
     public JLabel getLabelRefresh() {
         refresh = new JLabel("refresh");
         refresh.setOpaque(true);
@@ -58,6 +62,10 @@ public class CardRecomendationAnime {
         return refresh;
     }
 
+    /**
+     * Method untuk panel card
+     * @return card panel
+     */
     public JPanel getCard() {
 
         if (refresh == null) {
@@ -97,6 +105,9 @@ public class CardRecomendationAnime {
         return panel;
     }
 
+    /**
+     * Method untuk menghapus panel carde
+     */
     public void removePanel() {
         this.cardPanel.removeAll();
     }
