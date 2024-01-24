@@ -39,7 +39,13 @@ Jika vscode gunakan perintah ini
 code .
 ```
 5. Buka main method dan run main method
-   ![DASHBOARD PAGE](https://raw.githubusercontent.com/adenafil/final-project-java-oop/main/src/main/resources/assets/mainmethod.png "DASHBOARD PAGE")
+
+![MAIN METHOD](https://raw.githubusercontent.com/adenafil/final-project-java-oop/main/src/main/resources/assets/mainmethod.png "MAIN METHOD")
+
+6. Jika terjadi error karena beda versi java, kalian bisa rubah versinya di pom.xml
+
+![PENTING](https://raw.githubusercontent.com/adenafil/final-project-java-oop/main/src/main/resources/assets/penting.png "PENTING")
+
 
 
 
