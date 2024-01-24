@@ -215,7 +215,7 @@ public class Setting {
         saveChangesBtn.setOpaque(true);
         saveChangesBtn.setPreferredSize(new Dimension(200, 50));
         saveChangesBtn.setMaximumSize(new Dimension(200, 50));
-        saveChangesBtn.setForeground(Color.WHITE);
+        saveChangesBtn.setForeground(Color.decode("#333b48"));
         saveChangesBtn.setBackground(Color.ORANGE);
         saveChangesBtn.setFocusable(false);
         saveChangesBtn.setBorderPainted(false);
